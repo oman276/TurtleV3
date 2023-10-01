@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         int newLevel = level;
         while (newLevel == level) {
-            newLevel = Random.Range(1, 7);
+            newLevel = Random.Range(1, 10);
         }
         string levelName = "Level" + newLevel;
         SceneManager.LoadScene(levelName);
