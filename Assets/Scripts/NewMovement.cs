@@ -162,9 +162,11 @@ public class NewMovement : MonoBehaviour
             {
                 GameObject nowfx = Instantiate(fx, this.transform.position, this.transform.rotation);
                 Destroy(nowfx, 1f);
-                rb.velocity = Vector2.zero;
                 direction = clampedDirection(direction);
-                if (direction != Vector2.zero) rb.AddForce(direction * speed);
+                if (direction != Vector2.zero) {
+                    rb.velocity = Vector2.zero;
+                    rb.AddForce(direction * speed);
+                }
             }
 
             //Deactivate Points

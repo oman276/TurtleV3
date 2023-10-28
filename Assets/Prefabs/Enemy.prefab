@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2317488724590019935}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 5904827051141144812, guid: 3d483024de3d4c54b904b4400a7a73ae, type: 3}
   bullet: {fileID: 2278296862372754146, guid: 8a634e1561fa7d346937eaf82b7ae68f, type: 3}
-  projectileForce: 3
+  projectileForce: 60
   projectileDelay: 1.7
   rotateSpeed: 50
   spawnPoint: {fileID: 5449132154395294377}
