@@ -391,4 +391,23 @@ public class NewMovement : MonoBehaviour
         }
         return result;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Water") {
+            rb.drag = 1.0f;
+            rb.angularDrag = 1.0f;
+            rb.velocity *= 0.5f;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+       if (collision.gameObject.tag == "Water") {
+            rb.drag = 0.0f;
+            rb.angularDrag = 0.15f;
+        } 
+    }
 }
+
+
