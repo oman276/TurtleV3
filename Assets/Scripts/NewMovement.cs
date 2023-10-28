@@ -10,7 +10,6 @@ public class NewMovement : MonoBehaviour
 
     //public int buffer = 20;
     public float speed = 2;
-    public float slowdown = 0.4f;
 
     float currentTime = 1f;
     public float timeSlowedFactor = 0.3f;
@@ -46,6 +45,8 @@ public class NewMovement : MonoBehaviour
     public float camZoomSpeed = 1.5f;
     public float camMoveSpeed = 1f;
 
+    float startOrthoSize;
+
     Vector3 originalPos = new Vector3(0f, 0f, -10f);
 
     //Direction Lines
@@ -56,6 +57,7 @@ public class NewMovement : MonoBehaviour
     GameObject[] trajCirArray;
 
     PlayerHealth ph;
+    Vector3 startMouseVec;
 
     struct DirectionVector {
         public Vector2 coordinates;
@@ -93,6 +95,7 @@ public class NewMovement : MonoBehaviour
 
         cam = FindObjectOfType<Camera>();
         camParent = GameObject.Find("Camera Main/Camera Tilt");
+        startOrthoSize = cam.orthographicSize;
 
         //Target Line
         trajCirArray = new GameObject[pointNum];
@@ -128,6 +131,7 @@ public class NewMovement : MonoBehaviour
             Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseVec.z = 0f;
             line.SetPosition(0, mouseVec);
+            startMouseVec = mouseVec;
             swiping = true;
             //Time.timeScale = timeSlowedFactor;
 
@@ -190,12 +194,19 @@ public class NewMovement : MonoBehaviour
 
             Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseVec.z = 0f;
+            
             line.SetPosition(1, mouseVec);
 
             swipeEndPos = Input.mousePosition;
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
             direction = clampedDirection(direction);
+
+            // REMOVE WHEN DONE TEST -NICOLE
+            float adjustedPercentage = (percentage - swipeBuffer) / (1 - swipeBuffer);
+            if (adjustedPercentage >= 0.5) rb.drag = 0.2f;
+            else if (adjustedPercentage >= 0.2) rb.drag = 0.4f;
+            else rb.drag = 0.9f;
 
             if (!validSwipe && percentage > swipeBuffer)
             {
@@ -248,13 +259,13 @@ public class NewMovement : MonoBehaviour
         if (percentage <= swipeBuffer) {
             return new Vector2(0, 0);
         }
-        int length;
+        float length;
         //Get the percentage 
 
         float adjustedPercentage = (percentage - swipeBuffer) / (1 - swipeBuffer);
-        if (adjustedPercentage >= 0.5) length = 3;
-        else if (adjustedPercentage >= 0.2) length = 2;
-        else length = 1;
+        if (adjustedPercentage >= 0.3) length = 3.5f;
+        else if (adjustedPercentage >= 0.1) length = 2.3f;
+        else length = 1.5f;
 
         //Group the X from 1-5, group the Y from 1-5, pick a direction based on the coordinates
         int x_cat;
@@ -306,7 +317,7 @@ public class NewMovement : MonoBehaviour
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
 
-            float size = 7 - percentage / 3;
+            float size = startOrthoSize - percentage / 3;
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, size, camZoomSpeed);
 
             
@@ -343,7 +354,7 @@ public class NewMovement : MonoBehaviour
 
             }
 
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 7f, camZoomSpeed * 0.7f);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, startOrthoSize, camZoomSpeed * 0.7f);
             camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
                 Vector3.zero, camMoveSpeed * 0.7f);
         }
@@ -395,6 +406,15 @@ public class NewMovement : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Water") {
+            Debug.Log("Water");
+
+            if(speed > 1700f) {
+                Vector2 direction = swipeEndPos - swipeStartPos;
+                direction = clampedDirection(direction);
+                if (direction != Vector2.zero) rb.AddForce(direction * (speed / 2 * -1));   
+            }
+
+            
             rb.drag = 1.0f;
             rb.angularDrag = 1.0f;
             rb.velocity *= 0.5f;
@@ -408,6 +428,7 @@ public class NewMovement : MonoBehaviour
             rb.angularDrag = 0.15f;
         } 
     }
+    
 }
 
 
