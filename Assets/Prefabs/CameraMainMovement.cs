@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMainMovement : MonoBehaviour
 {
-    public float speed = 0.5f;
+    public float speed = 5.0f;
     public Transform lowerLeft;
     public Transform upperRight;
 

@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    int lavaCount = 0;
+    public int lavaCount = 0;
     public float timeToDeath = 2.5f;
+    float healthDecayMultiplier = 3.6f;
     float health;
     public float reviveMultiplier = 0.4f;
     public Slider healthSlider;
@@ -22,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
     public int fadeState = 0;
     public float healthDelay = 2.5f;
     public bool canMove = true;
+
+    public int bridgeCount = 0;
 
     Rigidbody2D rb;
     SpriteRenderer playerSprite;
@@ -50,6 +53,13 @@ public class PlayerHealth : MonoBehaviour
 
             ++lavaCount;
         }
+
+        if (collision.gameObject.tag == "CrumbleBlock") {
+            Debug.Log("Crumble");
+            fadeState = 2;
+            StartCoroutine("WaitToRefill");
+            bridgeCount++;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -63,14 +73,19 @@ public class PlayerHealth : MonoBehaviour
                 StartCoroutine("WaitToRefill");
             }
         }
+
+        if (collision.gameObject.tag == "CrumbleBlock") {
+            --bridgeCount;
+        }
+
     }
 
     private void FixedUpdate()
     {
         //Reduce or increase health
-        if (lavaCount > 0 && canMove)
+        if ((lavaCount > 0 && canMove) && bridgeCount <= 0)
         {
-            health -= Time.deltaTime;
+            health -= Time.deltaTime * healthDecayMultiplier;
             healthSlider.value = health;
             if (health <= 0)
             {

@@ -6,11 +6,15 @@ TagManager:
   tags:
   - OOB
   - Enemy
+  - World Boundary
+  - Water
+  - CrumbleBlock
+  - Catapult
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bridges
   - Water
   - UI
   - World Boundaries
@@ -54,4 +58,7 @@ TagManager:
     locked: 0
   - name: TrajectoryDots
     uniqueID: 1049753439
+    locked: 0
+  - name: Bridges
+    uniqueID: 1446048985
     locked: 0
