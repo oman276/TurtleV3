@@ -34,9 +34,11 @@ public class CrumblingBlock : MonoBehaviour
             //Shake Loop
             if (Time.time - timer <= shakeDuration)
             {
-                spriteObj.transform.localPosition = originalPosition +
+                Vector3 shakePos = originalPosition +
                     (Random.insideUnitSphere * shakeIntensity *
                     (shakeDuration - (shakeDuration - (Time.time - timer))));
+                shakePos.z = originalPosition.z;
+                spriteObj.transform.localPosition = shakePos;
             }
             //End Loop
             else {
