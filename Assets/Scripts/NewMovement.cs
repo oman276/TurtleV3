@@ -58,6 +58,7 @@ public class NewMovement : MonoBehaviour
 
     PlayerHealth ph;
     Vector3 startMouseVec;
+    AudioManager am;
 
     // ANIMATION START
     public GameObject playerSprite;
@@ -134,10 +135,9 @@ public class NewMovement : MonoBehaviour
         directions[7] = new DirectionVector(new Vector2(4, 2), (new Vector2(-0.707f, 0.707f)).normalized); //Northwest
 
         ph = GetComponent<PlayerHealth>();
-
-
         saveHeadPos = head.transform.localPosition;
         saveTailPos = tail.transform.localPosition;
+        am = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -186,6 +186,7 @@ public class NewMovement : MonoBehaviour
                 Destroy(nowfx, 1f);
                 direction = clampedDirection(direction);
                 if (direction != Vector2.zero) {
+                    am.Play("player_release");
                     rb.velocity = Vector2.zero;
                     rb.AddForce(direction * speed);
                 }
@@ -491,7 +492,12 @@ public class NewMovement : MonoBehaviour
             rb.angularDrag = 0.15f;
         } 
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        am.Play("player_impact");
+    }
+
 }
 
 
