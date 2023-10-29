@@ -10,6 +10,7 @@ public class Catapult : MonoBehaviour
     Rigidbody2D rb;
     NewMovement nm;
     PlayerHealth ph;
+    public float addedSlingPower = 1.1f;
 
     void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject.tag == "Player") {
@@ -29,6 +30,6 @@ public class Catapult : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         ph.canMove = true;
         Vector2 direction = (target.position - this.transform.position).normalized;
-        rb.AddForce(direction * nm.speed * 1.1f);
+        rb.AddForce(direction * nm.speed * addedSlingPower);
     }
 }
