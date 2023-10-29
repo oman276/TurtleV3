@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public Transform spawnPoint;
     GameObject player;
     Rigidbody2D rb_player;
+    AudioManager am;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
 
         player = GameObject.Find("Player");
         rb_player = player.GetComponent<Rigidbody2D>();
+        am = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -49,14 +51,19 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             Instantiate(explosion, this.transform.position, this.transform.rotation);
             FindObjectOfType<GameManager>().EnemyDestroyed();
+            am.Play("enemy_destroy");
             Destroy(this.gameObject);
         }
     }
 
     void FireProjectile() {
-        GameObject currentProj = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
-        //Vector3 direction = player.transform.position - this.transform.position;
-        Vector3 direction = -this.transform.up;
-        currentProj.GetComponent<Rigidbody2D>().velocity = projectileForce * direction.normalized;
+        if (Vector3.Distance(player.transform.position, this.transform.position) <= 25f)
+        {
+            GameObject currentProj = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
+            //Vector3 direction = player.transform.position - this.transform.position;
+            Vector3 direction = -this.transform.up;
+            currentProj.GetComponent<Rigidbody2D>().velocity = projectileForce * direction.normalized;
+            am.Play("enemy_release");
+        }
     }
 }

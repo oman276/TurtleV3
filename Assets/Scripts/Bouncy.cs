@@ -8,6 +8,12 @@ public class Bouncy : MonoBehaviour
     public bool isMoving = false;
     public float movingMultiplier = 1f;
 
+    AudioManager am;
+    private void Start()
+    {
+        am = FindObjectOfType<AudioManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -24,6 +30,7 @@ public class Bouncy : MonoBehaviour
 
             if (!isMoving)
             {
+                am.Play("boing");
                 rb.velocity = Vector2.zero;
                 rb.velocity = newVector * multiply * oldMag;
             }
