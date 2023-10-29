@@ -48,8 +48,7 @@ public class CameraMainMovement : MonoBehaviour
                 Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
                     zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
                 this.transform.position = temp;
-                if(Vector3.Distance(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                lowerLeft.transform.position.y, -10f)) <= 0.1f){
+                if(this.transform.position.y >= lowerLeft.transform.position.y){
                     transitioning = false;
                 }
             }
@@ -57,8 +56,7 @@ public class CameraMainMovement : MonoBehaviour
                 Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
                     zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
                 this.transform.position = temp;
-                if(Vector3.Distance(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                upperRight.transform.position.y, -10f)) <= 0.1f){
+                if(this.transform.position.y <= upperRight.transform.position.y){
                     transitioning = false;
                 }
 

@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
 
         }
-
+        print("4");
         Play("main_theme");
     }
 

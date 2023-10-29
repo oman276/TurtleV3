@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
 
     //public TextMeshProUGUI timerText;
 
-    public void EnemyDestroyed() {
+    public void EnemyDestroyed(){
         enemiesInLevel--;
-        if (enemiesInLevel == 0) {
-            //StartCoroutine(Restart());
+        if (enemiesInLevel <= 0) {
+            //StartCoroutineRestart());
             EndGame();
         }
     }

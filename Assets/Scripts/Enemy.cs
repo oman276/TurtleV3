@@ -49,7 +49,8 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") {
-            Instantiate(explosion, this.transform.position, this.transform.rotation);
+            GameObject exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
+            exp.transform.parent = null;
             FindObjectOfType<GameManager>().EnemyDestroyed();
             am.Play("enemy_destroy");
             Destroy(this.gameObject);

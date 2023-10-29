@@ -74,8 +74,9 @@ public class NewMovement : MonoBehaviour
     Vector3 saveHeadPos;
     Vector3 saveTailPos;
     Vector2 directionGlobal;
-
-    public GameObject Turtle;
+    public GameObject Mud1;
+    public GameObject Mud2;
+    public GameObject Mud3;
     // ANIMATION END
 
     struct DirectionVector {
@@ -92,6 +93,9 @@ public class NewMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Mud1.SetActive(false);
+        Mud2.SetActive(false);
+        Mud3.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         Time.timeScale = 1f;
         shadow = GameObject.Find("Shadow").GetComponent<Image>();
@@ -283,20 +287,20 @@ public class NewMovement : MonoBehaviour
         float step2 = 2.5f * Time.deltaTime;
 
         if(setTurtleAnimation == 1) {
-            // rightleg.transform.Rotate(0, 0, -100 * Time.deltaTime);
-            // leftleg.transform.Rotate(0, 0, 100 * Time.deltaTime);
-            // rightarm.transform.Rotate(0, 0, 100 * Time.deltaTime);
-            // leftarm.transform.Rotate(0, 0, -100 * Time.deltaTime);
+            rightleg.transform.Rotate(0, 0, -150 * Time.deltaTime);
+            leftleg.transform.Rotate(0, 0, 150 * Time.deltaTime);
+            rightarm.transform.Rotate(0, 0, 120 * Time.deltaTime);
+            leftarm.transform.Rotate(0, 0, -120 * Time.deltaTime);
             head.transform.position = Vector3.MoveTowards(head.transform.position, playerSprite.transform.position, step);
             tail.transform.position = Vector3.MoveTowards(tail.transform.position, playerSprite.transform.position, step);
             if(Vector3.Distance (head.transform.position, playerSprite.transform.position) <= 0.01f) {
                 setTurtleAnimation = 2;
             }
         } else if(setTurtleAnimation == 2) {
-            // rightleg.transform.rotation = Quaternion.RotateTowards(rightleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
-            // leftleg.transform.rotation = Quaternion.RotateTowards(leftleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
-            // rightarm.transform.rotation = Quaternion.RotateTowards(rightarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
-            // leftarm.transform.rotation = Quaternion.RotateTowards(leftarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            rightleg.transform.rotation = Quaternion.RotateTowards(rightleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            leftleg.transform.rotation = Quaternion.RotateTowards(leftleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            rightarm.transform.rotation = Quaternion.RotateTowards(rightarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            leftarm.transform.rotation = Quaternion.RotateTowards(leftarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
             head.transform.localPosition = Vector3.MoveTowards(head.transform.localPosition, saveHeadPos, step2);
             tail.transform.localPosition = Vector3.MoveTowards(tail.transform.localPosition, saveTailPos, step2);
             if(Vector3.Distance(head.transform.localPosition, saveHeadPos) <= 0.01f && leftleg.transform.eulerAngles.z <= 1) {
@@ -478,7 +482,21 @@ public class NewMovement : MonoBehaviour
             rb.drag = 1.0f;
             rb.angularDrag = 1.0f;
             rb.velocity *= 0.5f;
+            
+
+            StartCoroutine(ShowAndHide(Mud1, 1.5f));
+            StartCoroutine(ShowAndHide(Mud2, 1.0f));
+            StartCoroutine(ShowAndHide(Mud3, 0.5f));
+
+
         }
+    }
+
+    IEnumerator ShowAndHide(GameObject obj, float delay)
+    {
+        obj.SetActive(true);
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
