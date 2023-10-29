@@ -163,6 +163,7 @@ public class NewMovement : MonoBehaviour
                 trajCirArray[i].transform.localPosition = Vector3.zero;
                 trajCirArray[i].SetActive(true);
             }
+            am.Play("player_select");
         }
 
         //Get Button Up
@@ -483,6 +484,7 @@ public class NewMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         setTurtleAnimation = 1;
+        am.Play("player_impact");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -493,10 +495,6 @@ public class NewMovement : MonoBehaviour
         } 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        am.Play("player_impact");
-    }
 
 }
 
