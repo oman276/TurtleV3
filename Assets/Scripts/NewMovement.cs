@@ -45,7 +45,7 @@ public class NewMovement : MonoBehaviour
     public float camZoomSpeed = 1.5f;
     public float camMoveSpeed = 1f;
 
-    float startOrthoSize;
+    public float startOrthoSize;
 
     Vector3 originalPos = new Vector3(0f, 0f, -10f);
 
