@@ -59,6 +59,24 @@ public class NewMovement : MonoBehaviour
     PlayerHealth ph;
     Vector3 startMouseVec;
 
+    // ANIMATION START
+    public GameObject playerSprite;
+    public GameObject head;
+    public GameObject rightarm;
+    public GameObject leftarm;
+    public GameObject rightleg;
+    public GameObject leftleg;
+    public GameObject tail;
+
+    int setTurtleAnimation = 0;
+
+    Vector3 saveHeadPos;
+    Vector3 saveTailPos;
+    Vector2 directionGlobal;
+
+    public GameObject Turtle;
+    // ANIMATION END
+
     struct DirectionVector {
         public Vector2 coordinates;
         public Vector2 direction;
@@ -116,6 +134,10 @@ public class NewMovement : MonoBehaviour
         directions[7] = new DirectionVector(new Vector2(4, 2), (new Vector2(-0.707f, 0.707f)).normalized); //Northwest
 
         ph = GetComponent<PlayerHealth>();
+
+
+        saveHeadPos = head.transform.localPosition;
+        saveTailPos = tail.transform.localPosition;
     }
 
     // Update is called once per frame
@@ -167,6 +189,7 @@ public class NewMovement : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     rb.AddForce(direction * speed);
                 }
+                directionGlobal = direction;
             }
 
             //Deactivate Points
@@ -203,8 +226,9 @@ public class NewMovement : MonoBehaviour
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
             direction = clampedDirection(direction);
+            directionGlobal = direction;
 
-            // REMOVE WHEN DONE TEST -NICOLE
+            // MAKES DIFFERENT SWIPE TYPES HAVE DIFFERENT DRAG
             float adjustedPercentage = (percentage - swipeBuffer) / (1 - swipeBuffer);
             if (adjustedPercentage >= 0.5) rb.drag = 0.2f;
             else if (adjustedPercentage >= 0.2) rb.drag = 0.4f;
@@ -251,6 +275,33 @@ public class NewMovement : MonoBehaviour
                 }
             }   
         }
+
+        float step = 1.4f * Time.deltaTime;
+            
+        float step2 = 2.5f * Time.deltaTime;
+
+        if(setTurtleAnimation == 1) {
+            // rightleg.transform.Rotate(0, 0, -100 * Time.deltaTime);
+            // leftleg.transform.Rotate(0, 0, 100 * Time.deltaTime);
+            // rightarm.transform.Rotate(0, 0, 100 * Time.deltaTime);
+            // leftarm.transform.Rotate(0, 0, -100 * Time.deltaTime);
+            head.transform.position = Vector3.MoveTowards(head.transform.position, playerSprite.transform.position, step);
+            tail.transform.position = Vector3.MoveTowards(tail.transform.position, playerSprite.transform.position, step);
+            if(Vector3.Distance (head.transform.position, playerSprite.transform.position) <= 0.01f) {
+                setTurtleAnimation = 2;
+            }
+        } else if(setTurtleAnimation == 2) {
+            // rightleg.transform.rotation = Quaternion.RotateTowards(rightleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            // leftleg.transform.rotation = Quaternion.RotateTowards(leftleg.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            // rightarm.transform.rotation = Quaternion.RotateTowards(rightarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            // leftarm.transform.rotation = Quaternion.RotateTowards(leftarm.transform.rotation, head.transform.rotation, 250 * Time.deltaTime);
+            head.transform.localPosition = Vector3.MoveTowards(head.transform.localPosition, saveHeadPos, step2);
+            tail.transform.localPosition = Vector3.MoveTowards(tail.transform.localPosition, saveTailPos, step2);
+            if(Vector3.Distance(head.transform.localPosition, saveHeadPos) <= 0.01f && leftleg.transform.eulerAngles.z <= 1) {
+                setTurtleAnimation = 0;
+            }
+        }
+            
     }
 
     Vector2 clampedDirection(Vector2 original) {
@@ -360,6 +411,11 @@ public class NewMovement : MonoBehaviour
             camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
                 Vector3.zero, camMoveSpeed * 0.7f);
         }
+
+        if (directionGlobal != Vector2.zero) {
+        	float angle = Mathf.Atan2(directionGlobal.y, directionGlobal.x) * Mathf.Rad2Deg;
+        	playerSprite.transform.rotation = Quaternion.AngleAxis((angle - 90f), playerSprite.transform.forward);
+        }
     }
 
     void AddPoints(List<Vector2> list, Vector2 startPos, Vector2 direction, float distance)
@@ -421,6 +477,11 @@ public class NewMovement : MonoBehaviour
             rb.angularDrag = 1.0f;
             rb.velocity *= 0.5f;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        setTurtleAnimation = 1;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
