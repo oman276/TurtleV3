@@ -11,6 +11,12 @@ public class Catapult : MonoBehaviour
     NewMovement nm;
     PlayerHealth ph;
     public float addedSlingPower = 1.1f;
+    AudioManager am;
+
+    private void Start()
+    {
+        am = FindObjectOfType<AudioManager>();
+    }
 
     void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject.tag == "Player") {
@@ -23,11 +29,13 @@ public class Catapult : MonoBehaviour
     }
 
     IEnumerator Launch(){
+        am.Play("stretch");
         player.transform.position = this.transform.position;
         rb.velocity = Vector2.zero;
         ph.canMove = false;
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.2f);
+        am.Play("whoosh");
         ph.canMove = true;
         Vector2 direction = (target.position - this.transform.position).normalized;
         rb.AddForce(direction * nm.speed * addedSlingPower);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7338242337119513506}
   - component: {fileID: 7338242337119513505}
   - component: {fileID: 7338242337119513504}
+  - component: {fileID: 1652960750}
   m_Layer: 0
   m_Name: GameSystemNew
   m_TagString: Untagged
@@ -59,3 +60,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4198e875322b8de4f93b51092f4518c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1652960750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338242337119513519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49273801ca7771c4ea714193d001dcd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: main_theme
+    clip: {fileID: 8300000, guid: 9b8a2b76b461d8245b5e7fd6b14ddf77, type: 3}
+    volume: 0.25
+    pitchMin: 1
+    pitchMax: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: player_release
+    clip: {fileID: 8300000, guid: 02b8286023bd04440a7278c4bc700588, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: player_impact
+    clip: {fileID: 8300000, guid: 406473257c64e044198b7d40e9e1cb2c, type: 3}
+    volume: 0.358
+    pitchMin: 0.6
+    pitchMax: 1.4
+    loop: 0
+    source: {fileID: 0}
+  - name: player_select
+    clip: {fileID: 8300000, guid: 2f3468ea637994a4fa21cfae24961762, type: 3}
+    volume: 0.2
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_destroy
+    clip: {fileID: 8300000, guid: 054c5e8289b7fb5429f4a4064ba81795, type: 3}
+    volume: 0.8
+    pitchMin: 1
+    pitchMax: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_release
+    clip: {fileID: 8300000, guid: ddbe8cee921ccca4c8c38325c81acd0e, type: 3}
+    volume: 0.3
+    pitchMin: 0.8
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_impact
+    clip: {fileID: 8300000, guid: f1b793a50f324a4479d2cbc3f3dccb0a, type: 3}
+    volume: 0.4
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: boing
+    clip: {fileID: 8300000, guid: dd09a5518bd2e434f95f5b5f139fd26d, type: 3}
+    volume: 0.6
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: stretch
+    clip: {fileID: 8300000, guid: d017565821434c3489acc2eb6826accd, type: 3}
+    volume: 0.4
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: whoosh
+    clip: {fileID: 8300000, guid: bda2264d8acb52d49ab90ca12e89db28, type: 3}
+    volume: 0.8
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
