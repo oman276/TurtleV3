@@ -1133,6 +1133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3398897160357046725, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860641, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_Name
       value: CameraZone (5)
@@ -3450,6 +3454,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3398897160357046725, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860641, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_Name
       value: CameraZone (1)
@@ -3644,7 +3652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860643, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_Size.y
-      value: 34.32
+      value: 28.44
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860644, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_RootOrder
@@ -3656,7 +3664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860644, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 153.2
+      value: 163.7
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860644, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5743,7 +5751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860643, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_Size.y
-      value: 34.32
+      value: 25.32
       objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860644, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_RootOrder
@@ -16009,6 +16017,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3398897160357046725, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3398897160931860641, guid: 0db95c07aef60114da28e73628f8a141, type: 3}
       propertyPath: m_Name
       value: CameraZone
