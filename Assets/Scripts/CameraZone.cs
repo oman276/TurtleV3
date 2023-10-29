@@ -24,10 +24,7 @@ public class CameraZone : MonoBehaviour
     {
         if (collision.tag == "Player") {
             nm.startOrthoSize = orthogSize;
-            cmm.lowerLeft = lowerLeft;
-            cmm.upperRight = upperRight;
-            cmm.zoneTarget = zoneTarget;
-            cmm.transitioning = true;
+            cmm.swapZones(lowerLeft, upperRight, zoneTarget);
         }
     }
 

@@ -34,12 +34,43 @@ public class CameraMainMovement : MonoBehaviour
 
             this.transform.position = temp;
         }
-        else {
-            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.position.x,
-                    zoneTarget.position.y, -10f), speed * Time.deltaTime);
+        else{
+            /*
+            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
             this.transform.position = temp;
-            if (temp.x >= lowerLeft.position.x && temp.x <= upperRight.position.x
-                && temp.y >= lowerLeft.position.y && temp.y <= upperRight.position.y) transitioning = false;
+            */
+            //Left Is Closer
+            if(Vector3.Distance(this.transform.position, new Vector3(lowerLeft.transform.position.x,
+                lowerLeft.transform.position.y, -10f)) <= Vector3.Distance(this.transform.position, 
+                new Vector3(upperRight.transform.position.x, upperRight.transform.position.y, -10f)) ){
+                    //Left Is Closer
+                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
+                this.transform.position = temp;
+                if(Vector3.Distance(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                lowerLeft.transform.position.y, -10f)) <= 0.1f){
+                    transitioning = false;
+                }
+            }
+            else{
+                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
+                this.transform.position = temp;
+                if(Vector3.Distance(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                upperRight.transform.position.y, -10f)) <= 0.1f){
+                    transitioning = false;
+                }
+
+            }
+
         }
+    }
+
+    public void swapZones(Transform _lowerLeft, Transform _upperRight, Transform _zoneTarget){
+        transitioning = true;
+        lowerLeft = _lowerLeft;
+        upperRight = _upperRight;
+        zoneTarget = _zoneTarget;
     }
 }
