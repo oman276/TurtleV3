@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb_player;
     AudioManager am;
 
+    bool alive = true;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +49,8 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.tag == "Player" && alive) {
+            alive = false;
             GameObject exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
             exp.transform.parent = null;
             FindObjectOfType<GameManager>().EnemyDestroyed();
