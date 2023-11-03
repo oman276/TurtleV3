@@ -85,8 +85,7 @@ public class PlayerHealth : MonoBehaviour
         //Reduce or increase health
         if ((lavaCount > 0 && canMove) && bridgeCount <= 0)
         {
-            health -= Time.deltaTime * healthDecayMultiplier;
-            healthSlider.value = health;
+            health -= Time.deltaTime * healthDecayMultiplier;           
             if (health <= 0)
             {
                 this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
@@ -101,7 +100,6 @@ public class PlayerHealth : MonoBehaviour
             if (fadeState == 3)
             {
                 health += Time.deltaTime * reviveMultiplier;
-                healthSlider.value = health;
                 if (health >= timeToDeath)
                 {
                     fadeState = 4;
@@ -111,6 +109,7 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
         }
+        healthSlider.value = health;
     }
 
     IEnumerator WaitToRefill()
@@ -133,5 +132,9 @@ public class PlayerHealth : MonoBehaviour
     void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ResetHealth() {
+        health = timeToDeath;
     }
 }

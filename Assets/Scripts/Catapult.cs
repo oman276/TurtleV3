@@ -33,6 +33,7 @@ public class Catapult : MonoBehaviour
         player.transform.position = this.transform.position;
         rb.velocity = Vector2.zero;
         ph.canMove = false;
+        ph.ResetHealth();
 
         yield return new WaitForSeconds(1.2f);
         am.Play("whoosh");

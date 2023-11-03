@@ -79,6 +79,8 @@ public class NewMovement : MonoBehaviour
     public GameObject Mud3;
     // ANIMATION END
 
+    bool firstSwipe = true;
+
     struct DirectionVector {
         public Vector2 coordinates;
         public Vector2 direction;
@@ -203,6 +205,12 @@ public class NewMovement : MonoBehaviour
             {
                 trajCirArray[i].transform.localPosition = Vector3.zero;
                 trajCirArray[i].SetActive(false);
+            }
+
+            if (firstSwipe) {
+                firstSwipe = false;
+                Timer t = FindObjectOfType<Timer>();
+                t.StartTimer();
             }
         }
 

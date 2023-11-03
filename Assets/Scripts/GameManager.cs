@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
 
     Timer timerObj;
 
+    Color green = new Color(157f / 225f, 233f / 225f, 188f / 225f);
+    Color gold = new Color(210f / 255f, 224f / 255f, 64f / 255f);
+
     //public TextMeshProUGUI timerText;
 
     public void EnemyDestroyed(){
@@ -35,22 +38,41 @@ public class GameManager : MonoBehaviour
     }
 
     void EndGame() {
-        timerObj = FindObjectOfType<Timer>();
-        if ((Time.time - timerObj.startTime) < bestTime) {
-            bestTime = (Time.time - timerObj.startTime);
-        }
-
-        GameObject.Find("Timer").SetActive(false);
+        
         PlayerHealth ph = FindObjectOfType<PlayerHealth>();
         ph.canMove = false;
 
-        int minutes = Mathf.FloorToInt(bestTime / 60F);
-        int seconds = Mathf.FloorToInt(bestTime - minutes * 60);
+        timerObj = FindObjectOfType<Timer>();
+        float currentTime = Time.time - timerObj.startTime;
 
-        string niceTime = "Best Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
-        timerObj.endScreen.SetActive(true);
-        timerObj.bestTimeText.text = niceTime;
         
+
+        int minutes = Mathf.FloorToInt(currentTime / 60F);
+        int seconds = Mathf.FloorToInt(currentTime - minutes * 60);
+
+        string niceTime = "Current Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerObj.curTimeText.text = niceTime;
+
+        string bestBase = "Best Time: ";
+        timerObj.endScreen.SetActive(true);
+
+        if (currentTime < bestTime)
+        {
+            bestTime = currentTime;
+            bestBase = "New Best Time: ";
+            timerObj.bestTimeText.color = gold;
+        }
+        else{
+            timerObj.bestTimeText.color = green;
+        }
+        minutes = Mathf.FloorToInt(bestTime / 60F);
+        seconds = Mathf.FloorToInt(bestTime - minutes * 60);
+
+        niceTime = bestBase + string.Format("{0:0}:{1:00}", minutes, seconds);
+        timerObj.bestTimeText.text = niceTime;
+
+        GameObject.Find("Timer").SetActive(false);
+        timerObj.endScreen.SetActive(true);
     }
 
     public void LoadLevel1(){
