@@ -23,8 +23,8 @@ public class CameraZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player") {
-            nm.startOrthoSize = orthogSize;
-            cmm.swapZones(lowerLeft, upperRight, zoneTarget);
+            //nm.startOrthoSize = orthogSize;
+            //cmm.swapZones(lowerLeft, upperRight, zoneTarget);
         }
     }
 

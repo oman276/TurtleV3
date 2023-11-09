@@ -2,73 +2,125 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DirectionCheck { 
+    GreaterThanX,
+    GreaterThanY,
+    LessThanX,
+    LessThanY,
+}
+
+public enum CameraState { 
+    Active,
+    Locked,
+    Transitioning
+}
+[System.Serializable]
+public class TransitionData {
+    public Vector2 transitionPoint;
+    public DirectionCheck directionToCheck;
+    public Vector2 targetPoint;
+    public int handoffState;
+}
+
+[System.Serializable]
+public class CameraBound {
+    public Vector2 lowerLeft;
+    public Vector2 upperRight;
+    public List<TransitionData> transitions;
+    public float camSize = 11f;
+}
+
 public class CameraMainMovement : MonoBehaviour
-{
+{  
+    public List<CameraBound> zones;
+
     public float speed = 5.0f;
-    public Transform lowerLeft;
-    public Transform upperRight;
-    public Transform zoneTarget;
+    Vector2 lowerLeft;
+    Vector2 upperRight;
+    
+    List<TransitionData> transitions;
+    Vector2 transitionTarget;
+    CameraState currentState;
 
     GameObject player;
+    NewMovement nm;
 
-    public bool transitioning = false;
+    public int startingZone = 0;
+    int nextState;
 
     void Start() {
-        player = GameObject.Find("Player");
+        nm = FindObjectOfType<NewMovement>();
+        player = nm.gameObject;
+
+        //Upon Initialization, move camera to the start of the begining state
+        changeStates(startingZone);
+        transform.position = new Vector3(lowerLeft.x, lowerLeft.y, -10f);
     }
 
     private void Update()
     {
-        if (!transitioning)
+        //If Locked, do nothing
+        if (currentState != CameraState.Locked)
         {
-            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(player.transform.position.x,
-                    player.transform.position.y, -10f), speed * Time.deltaTime);
+            if (currentState == CameraState.Active)
+            {
+                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(player.transform.position.x,
+                        player.transform.position.y, -10f), speed * Time.deltaTime);
 
-            //Clamp X
-            if (temp.x < lowerLeft.position.x) temp.x = lowerLeft.position.x;
-            else if (temp.x > upperRight.position.x) temp.x = upperRight.position.x;
+                //Clamp X
+                if (temp.x < lowerLeft.x) temp.x = lowerLeft.x;
+                else if (temp.x > upperRight.x) temp.x = upperRight.x;
 
-            //Clamp Y
-            if (temp.y < lowerLeft.position.y && !transitioning) temp.y = lowerLeft.position.y;
-            else if (temp.y > upperRight.position.y && !transitioning) temp.y = upperRight.position.y;
+                //Clamp Y
+                if (temp.y < lowerLeft.y) temp.y = lowerLeft.y;
+                else if (temp.y > upperRight.y) temp.y = upperRight.y;
 
-            this.transform.position = temp;
-        }
-        else{
-            /*
-            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-            this.transform.position = temp;
-            */
-            //Left Is Closer
-            if(Vector3.Distance(this.transform.position, new Vector3(lowerLeft.transform.position.x,
-                lowerLeft.transform.position.y, -10f)) <= Vector3.Distance(this.transform.position, 
-                new Vector3(upperRight.transform.position.x, upperRight.transform.position.y, -10f)) ){
-                    //Left Is Closer
-                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-                this.transform.position = temp;
-                if(this.transform.position.y >= lowerLeft.transform.position.y){
-                    transitioning = false;
+                //Check for state transition
+                foreach (TransitionData td in transitions) {
+                    if ((td.directionToCheck == DirectionCheck.GreaterThanX && player.transform.position.x > td.transitionPoint.x) ||
+                        (td.directionToCheck == DirectionCheck.GreaterThanY && player.transform.position.y > td.transitionPoint.y) || 
+                        (td.directionToCheck == DirectionCheck.LessThanX && player.transform.position.x < td.transitionPoint.x) || 
+                        (td.directionToCheck == DirectionCheck.LessThanY && player.transform.position.y < td.transitionPoint.y)) { 
+                        
+                        StartTransition(td);
+                        break;
+                    } 
                 }
-            }
-            else{
-                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-                this.transform.position = temp;
-                if(this.transform.position.y <= upperRight.transform.position.y){
-                    transitioning = false;
-                }
+                if(currentState == CameraState.Active) this.transform.position = temp;
 
             }
-
+            else {
+                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(transitionTarget.x,
+                        transitionTarget.y, -10f), speed * Time.deltaTime);
+                this.transform.position = temp;
+                if (Vector3.Distance(this.transform.position, new Vector3(transitionTarget.x,
+                        transitionTarget.y, -10f)) < 0.05f) {
+                    currentState = CameraState.Active;
+                    changeStates(nextState);
+                    
+                }
+            }
         }
     }
 
-    public void swapZones(Transform _lowerLeft, Transform _upperRight, Transform _zoneTarget){
-        transitioning = true;
-        lowerLeft = _lowerLeft;
-        upperRight = _upperRight;
-        zoneTarget = _zoneTarget;
+    void StartTransition(TransitionData td) {
+        currentState = CameraState.Transitioning;
+        nextState = td.handoffState;
+        transitionTarget = td.targetPoint;
+    }
+
+    void changeStates(int stateNum) {
+        CameraBound currentBound = zones[stateNum];
+        lowerLeft = currentBound.lowerLeft;
+        upperRight = currentBound.upperRight;
+        transitions = currentBound.transitions;
+    }
+
+    public void LockCamera() {
+        currentState = CameraState.Locked;       
+    }
+
+    public void UnlockCamera() {
+        currentState = CameraState.Active;
     }
 }

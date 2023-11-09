@@ -77,6 +77,6 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel1(){
         enemiesInLevel++;
-        SceneManager.LoadScene("test 1");
+        SceneManager.LoadScene("level1");
     }
 }
