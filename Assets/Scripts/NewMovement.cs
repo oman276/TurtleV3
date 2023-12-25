@@ -161,7 +161,6 @@ public class NewMovement : MonoBehaviour
             line.SetPosition(0, mouseVec);
             startMouseVec = mouseVec;
             swiping = true;
-            //Time.timeScale = timeSlowedFactor;
 
             //Activate Points
             for (int i = 0; i < pointNum; ++i)

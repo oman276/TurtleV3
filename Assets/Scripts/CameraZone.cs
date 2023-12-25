@@ -18,6 +18,9 @@ public class CameraZone : MonoBehaviour
     {
         nm = FindObjectOfType<NewMovement>();
         cmm = FindObjectOfType<CameraMainMovement>();
+
+        Destroy(lowerLeft.GetChild(0).gameObject);
+        Destroy(upperRight.GetChild(0).gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,14 +28,6 @@ public class CameraZone : MonoBehaviour
         if (collision.tag == "Player") {
             nm.startOrthoSize = orthogSize;
             cmm.swapZones(lowerLeft, upperRight, zoneTarget);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-
         }
     }
 
