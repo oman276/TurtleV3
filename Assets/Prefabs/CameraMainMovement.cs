@@ -14,54 +14,55 @@ public class CameraMainMovement : MonoBehaviour
     public bool transitioning = false;
 
     void Start() {
-        player = GameObject.Find("Player");
+        player = GameManager.G.player.playerObject;
     }
 
     private void Update()
     {
-        if (!transitioning)
+        if (GameManager.G.state != GameState.MainMenu && GameManager.G.state != GameState.LevelSelect)
         {
-            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(player.transform.position.x,
-                    player.transform.position.y, -10f), speed * Time.deltaTime);
+            if (!transitioning)
+            {
+                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(player.transform.position.x,
+                        player.transform.position.y, -10f), speed * Time.deltaTime);
 
-            //Clamp X
-            if (temp.x < lowerLeft.position.x) temp.x = lowerLeft.position.x;
-            else if (temp.x > upperRight.position.x) temp.x = upperRight.position.x;
+                //Clamp X
+                if (temp.x < lowerLeft.position.x) temp.x = lowerLeft.position.x;
+                else if (temp.x > upperRight.position.x) temp.x = upperRight.position.x;
 
-            //Clamp Y
-            if (temp.y < lowerLeft.position.y && !transitioning) temp.y = lowerLeft.position.y;
-            else if (temp.y > upperRight.position.y && !transitioning) temp.y = upperRight.position.y;
+                //Clamp Y
+                if (temp.y < lowerLeft.position.y && !transitioning) temp.y = lowerLeft.position.y;
+                else if (temp.y > upperRight.position.y && !transitioning) temp.y = upperRight.position.y;
 
-            this.transform.position = temp;
-        }
-        else{
-            /*
-            Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-            this.transform.position = temp;
-            */
-            //Left Is Closer
-            if(Vector3.Distance(this.transform.position, new Vector3(lowerLeft.transform.position.x,
-                lowerLeft.transform.position.y, -10f)) <= Vector3.Distance(this.transform.position, 
-                new Vector3(upperRight.transform.position.x, upperRight.transform.position.y, -10f)) ){
+                this.transform.position = temp;
+            }
+            else
+            {
+                //Left Is Closer
+                if (Vector3.Distance(this.transform.position, new Vector3(lowerLeft.transform.position.x,
+                    lowerLeft.transform.position.y, -10f)) <= Vector3.Distance(this.transform.position,
+                    new Vector3(upperRight.transform.position.x, upperRight.transform.position.y, -10f)))
+                {
                     //Left Is Closer
-                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-                this.transform.position = temp;
-                if(this.transform.position.y >= lowerLeft.transform.position.y){
-                    transitioning = false;
+                    Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                        zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
+                    this.transform.position = temp;
+                    if (this.transform.position.y >= lowerLeft.transform.position.y)
+                    {
+                        transitioning = false;
+                    }
+                }
+                else
+                {
+                    Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
+                        zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
+                    this.transform.position = temp;
+                    if (this.transform.position.y <= upperRight.transform.position.y)
+                    {
+                        transitioning = false;
+                    }
                 }
             }
-            else{
-                Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(zoneTarget.transform.position.x,
-                    zoneTarget.transform.position.y, -10f), speed * Time.deltaTime);
-                this.transform.position = temp;
-                if(this.transform.position.y <= upperRight.transform.position.y){
-                    transitioning = false;
-                }
-
-            }
-
         }
     }
 

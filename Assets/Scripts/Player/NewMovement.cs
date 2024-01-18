@@ -26,7 +26,6 @@ public class NewMovement : MonoBehaviour
 
     public GameObject fx;
 
-    bool swiping = false;
     bool validSwipe = false;
     Image shadow;
 
@@ -47,8 +46,6 @@ public class NewMovement : MonoBehaviour
 
     public float startOrthoSize;
 
-    Vector3 originalPos = new Vector3(0f, 0f, -10f);
-
     //Direction Lines
     public float maxLineDistance = 3f;
     public LayerMask trajectoryLayer;
@@ -56,8 +53,6 @@ public class NewMovement : MonoBehaviour
     public int pointNum = 5;
     GameObject[] trajCirArray;
 
-    PlayerHealth ph;
-    Vector3 startMouseVec;
     AudioManager am;
 
     // ANIMATION START
@@ -79,8 +74,6 @@ public class NewMovement : MonoBehaviour
     public GameObject Mud3;
     // ANIMATION END
 
-    bool firstSwipe = true;
-
     struct DirectionVector {
         public Vector2 coordinates;
         public Vector2 direction;
@@ -95,11 +88,13 @@ public class NewMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //TODO: Move animation and visual components into new script somewhere else
         Mud1.SetActive(false);
         Mud2.SetActive(false);
         Mud3.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         Time.timeScale = 1f;
+        //TODO: Replace with GM Ref
         shadow = GameObject.Find("Shadow").GetComponent<Image>();
         shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
 
@@ -118,8 +113,12 @@ public class NewMovement : MonoBehaviour
         line.startColor = inactiveLine;
         line.endColor = inactiveLine;
 
-        cam = FindObjectOfType<Camera>();
-        camParent = GameObject.Find("Camera Main/Camera Tilt");
+        //TODO: Replace Camera With Game Manager Ref
+        //cam = FindObjectOfType<Camera>();
+        //camParent = GameObject.Find("Camera Main/Camera Tilt");
+        cam = GameManager.G.mainCamera;
+        camParent = GameManager.G.cameraTilt;
+
         startOrthoSize = cam.orthographicSize;
 
         //Target Line
@@ -140,7 +139,6 @@ public class NewMovement : MonoBehaviour
         directions[6] = new DirectionVector(new Vector2(5, 3), (new Vector2(-1f, 0f)).normalized); //West     
         directions[7] = new DirectionVector(new Vector2(4, 2), (new Vector2(-0.707f, 0.707f)).normalized); //Northwest
 
-        ph = GetComponent<PlayerHealth>();
         saveHeadPos = head.transform.localPosition;
         saveTailPos = tail.transform.localPosition;
         am = FindObjectOfType<AudioManager>();
@@ -149,32 +147,35 @@ public class NewMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Using Input.GetMouseButton, will work on mobile but not a long term solution
-
-        //Get Button Down
-        if (Input.GetMouseButtonDown(0) && ph.canMove)
+        //Start Swiping
+        //TODO: Replace Input with more flexible input manager at some point
+        if (Input.GetMouseButtonDown(0) && 
+            (GameManager.G.player.state == PlayerState.Active || GameManager.G.player.state == PlayerState.PreGame))
         {
             swipeStartPos = Input.mousePosition;
 
             Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseVec.z = 0f;
             line.SetPosition(0, mouseVec);
-            startMouseVec = mouseVec;
-            swiping = true;
 
             //Activate Points
+            //TODO: Move to the right place
             for (int i = 0; i < pointNum; ++i)
             {
                 trajCirArray[i].transform.localPosition = Vector3.zero;
                 trajCirArray[i].SetActive(true);
             }
+            //TODO: Replace with GM Reference
             am.Play("player_select");
+
+            GameManager.G.player.SwapState((GameManager.G.player.state == PlayerState.PreGame ? 
+                PlayerState.FirstHeld : PlayerState.Held));
         }
 
         //Get Button Up
-        if (Input.GetMouseButtonUp(0) && swiping && ph.canMove)
+        if (Input.GetMouseButtonUp(0) && 
+            (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld))
         {
-            swiping = false;
             validSwipe = false;
 
             swipeEndPos = Input.mousePosition;
@@ -183,8 +184,6 @@ public class NewMovement : MonoBehaviour
             //Get direction as percentage of screen 
             float percentage = direction.magnitude / maxMagnitude;
             percentage = Mathf.Pow(percentage, 0.33f);
-            line.SetPosition(0, Vector2.zero);
-            line.SetPosition(1, Vector2.zero);
 
             if (percentage >= swipeBuffer)
             {
@@ -199,36 +198,11 @@ public class NewMovement : MonoBehaviour
                 directionGlobal = direction;
             }
 
-            //Deactivate Points
-            for (int i = 0; i < pointNum; ++i)
-            {
-                trajCirArray[i].transform.localPosition = Vector3.zero;
-                trajCirArray[i].SetActive(false);
-            }
-
-            if (firstSwipe) {
-                firstSwipe = false;
-                Timer t = FindObjectOfType<Timer>();
-                t.StartTimer();
-            }
+            GameManager.G.player.SwapState(PlayerState.Active);
         }
 
-        if (swiping)
+        if (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld)
         {
-            //canMove = false: handbrake
-            if (!ph.canMove) {
-                swiping = false;
-
-                line.SetPosition(0, Vector2.zero);
-                line.SetPosition(1, Vector2.zero);
-
-                //Deactivate Points
-                for (int i = 0; i < pointNum; ++i)
-                {
-                    trajCirArray[i].transform.localPosition = Vector3.zero;
-                    trajCirArray[i].SetActive(false);
-                }
-            }
 
             Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseVec.z = 0f;
@@ -262,6 +236,7 @@ public class NewMovement : MonoBehaviour
                 line.endColor = inactiveLine;
             }
 
+            //TODO: Move to UI Manager or Player Manager
             {
                 List<Vector2> points = new List<Vector2>();
 
@@ -289,6 +264,7 @@ public class NewMovement : MonoBehaviour
             }   
         }
 
+        //TODO: Move to Player Animation Script
         float step = 1.4f * Time.deltaTime;
             
         float step2 = 2.5f * Time.deltaTime;
@@ -360,9 +336,11 @@ public class NewMovement : MonoBehaviour
         return new Vector2(0, 0);
     }
 
+    //TODO: Time Slowdown should be moved??
     private void FixedUpdate()
     {
-        if (swiping)
+        if (GameManager.G.player.state == PlayerState.Held || 
+            GameManager.G.player.state == PlayerState.FirstHeld)
         {
             //Speed
             if ((currentTime - slowdownLerp) > timeBuffer)
@@ -431,6 +409,20 @@ public class NewMovement : MonoBehaviour
         }
     }
 
+    public void DeactivateUIElements() {
+        line.SetPosition(0, Vector2.zero);
+        line.SetPosition(1, Vector2.zero);
+
+        //Deactivate Points
+        for (int i = 0; i < pointNum; ++i)
+        {
+            trajCirArray[i].transform.localPosition = Vector3.zero;
+            trajCirArray[i].SetActive(false);
+        }
+    }
+
+
+    //TODO: Move to Other Script or PM
     void AddPoints(List<Vector2> list, Vector2 startPos, Vector2 direction, float distance)
     {
 
@@ -453,6 +445,7 @@ public class NewMovement : MonoBehaviour
         }
     }
 
+    //TODO: Move to player?
     Vector2 ReturnPoint(List<Vector2> list, float distance)
     {
         Vector2 result = list[list.Count - 1];
@@ -474,10 +467,10 @@ public class NewMovement : MonoBehaviour
         return result;
     }
 
+    //Not sure what this is doing
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Water") {
-            Debug.Log("Water");
 
             if(speed > 1700f) {
                 Vector2 direction = swipeEndPos - swipeStartPos;
@@ -485,20 +478,17 @@ public class NewMovement : MonoBehaviour
                 if (direction != Vector2.zero) rb.AddForce(direction * (speed / 2 * -1));   
             }
 
-            
             rb.drag = 1.0f;
             rb.angularDrag = 1.0f;
             rb.velocity *= 0.5f;
-            
 
             StartCoroutine(ShowAndHide(Mud1, 1.5f));
             StartCoroutine(ShowAndHide(Mud2, 1.0f));
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
-
-
         }
     }
 
+    //Move to Animation (or Object Fade?)
     IEnumerator ShowAndHide(GameObject obj, float delay)
     {
         obj.SetActive(true);
@@ -519,8 +509,6 @@ public class NewMovement : MonoBehaviour
             rb.angularDrag = 0.15f;
         } 
     }
-
-
 }
 
 

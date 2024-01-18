@@ -8,13 +8,11 @@ public class ObjectFade : MonoBehaviour
 
     PlayerHealth ph;
     bool isPlayer = false;
-
-    public ObjectFade(bool _isPlayer = false) {
-        isPlayer = _isPlayer;
-    }
+    
 
     private void Start()
     {
+        //TODO: Figure Out if we actually need this
         if(isPlayer) ph = FindObjectOfType<PlayerHealth>();
     }
 
@@ -87,7 +85,7 @@ public class ObjectFade : MonoBehaviour
         {
             if (isPlayer)
             {
-                if (ph.fadeState != 4)
+                //if (ph.fadeState != 4)
                 {
                     i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
                     break;
@@ -96,10 +94,12 @@ public class ObjectFade : MonoBehaviour
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
             yield return null;
         }
+        /*
         if (isPlayer && ph.fadeState == 4)
         {
             ph.fadeState = 0;
         }
+        */
     }
 
     IEnumerator FadeObjectToFullAlpha(float t, GameObject obj)
