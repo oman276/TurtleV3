@@ -53,8 +53,6 @@ public class NewMovement : MonoBehaviour
     public int pointNum = 5;
     GameObject[] trajCirArray;
 
-    AudioManager am;
-
     // ANIMATION START
     public GameObject playerSprite;
     public GameObject head;
@@ -95,7 +93,7 @@ public class NewMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Time.timeScale = 1f;
         //TODO: Replace with GM Ref
-        shadow = GameObject.Find("Shadow").GetComponent<Image>();
+        shadow = GameManager.G.ui.shadow.GetComponent<Image>();
         shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
 
         timeBuffer = Mathf.Abs(currentTime - slowdownLerp) * lerpBuffer;
@@ -141,7 +139,6 @@ public class NewMovement : MonoBehaviour
 
         saveHeadPos = head.transform.localPosition;
         saveTailPos = tail.transform.localPosition;
-        am = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -166,7 +163,7 @@ public class NewMovement : MonoBehaviour
                 trajCirArray[i].SetActive(true);
             }
             //TODO: Replace with GM Reference
-            am.Play("player_select");
+            GameManager.G.audio.Play("player_select");
 
             GameManager.G.player.SwapState((GameManager.G.player.state == PlayerState.PreGame ? 
                 PlayerState.FirstHeld : PlayerState.Held));
@@ -191,7 +188,7 @@ public class NewMovement : MonoBehaviour
                 Destroy(nowfx, 1f);
                 direction = clampedDirection(direction);
                 if (direction != Vector2.zero) {
-                    am.Play("player_release");
+                    GameManager.G.audio.Play("player_release");
                     rb.velocity = Vector2.zero;
                     rb.AddForce(direction * speed);
                 }
@@ -499,7 +496,7 @@ public class NewMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         setTurtleAnimation = 1;
-        am.Play("player_impact");
+        GameManager.G.audio.Play("player_impact");
     }
 
     private void OnTriggerExit2D(Collider2D collision)

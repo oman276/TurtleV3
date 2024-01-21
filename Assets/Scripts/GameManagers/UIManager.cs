@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public enum UIState { 
     MainMenu,
@@ -14,14 +15,17 @@ public enum UIState {
 
 public class UIManager : MonoBehaviour
 {
-    public UIState state;
+    public UIState state = UIState.MainMenu;
 
     //Main Menu
+    public GameObject mainMenuUI;
 
     //Level Select
 
     //General Game UI
     public GameObject TimerObjects;
+    public GameObject shadow;
+    public GameObject swipeToStart;
 
     //Level Beat Screen
     public GameObject levelBeatScreen;
@@ -37,8 +41,12 @@ public class UIManager : MonoBehaviour
 
         //Outgoing State Actions
         switch (state) {
+            case UIState.MainMenu:
+                mainMenuUI.SetActive(false);
+                break;
             case UIState.InGame:
                 TimerObjects.SetActive(false);
+                shadow.GetComponent<Image>().enabled = false;
                 break;
             case UIState.PostGame:
                 levelBeatScreen.SetActive(false);
@@ -47,9 +55,15 @@ public class UIManager : MonoBehaviour
 
         //Incoming State Actions
         switch (newState) {
+            case UIState.MainMenu:
+                mainMenuUI.SetActive(true);
+                break;
             case UIState.InGame:
                 TimerObjects.SetActive(true);
+                shadow.GetComponent<Image>().enabled = true;
                 gameTimer.timerText.text = string.Format("{0:0}:{1:00}", 0, 0);
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
+                swipeToStart.SetActive(true);
                 break;
             case UIState.PostGame:
                 gameTimer.EndTimer();

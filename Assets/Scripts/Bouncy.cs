@@ -8,12 +8,6 @@ public class Bouncy : MonoBehaviour
     public bool isMoving = false;
     public float movingMultiplier = 1f;
 
-    AudioManager am;
-    private void Start()
-    {
-        am = FindObjectOfType<AudioManager>();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
@@ -30,7 +24,7 @@ public class Bouncy : MonoBehaviour
 
             if (!isMoving)
             {
-                am.Play("boing");
+                GameManager.G.audio.Play("boing");
                 rb.velocity = Vector2.zero;
                 rb.velocity = newVector * multiply * oldMag;
             }
@@ -38,20 +32,6 @@ public class Bouncy : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
                 rb.velocity = newVector * multiply * (oldMag + (10 * movingMultiplier));
-                /*
-                RigidbodyRotate rbr = this.transform.parent.gameObject.GetComponent<RigidbodyRotate>();
-                RigidbodyHorizontal rbh = this.gameObject.GetComponent<RigidbodyHorizontal>();
-                if (rbr)
-                {
-                    rb.velocity = Vector2.zero;
-                    rb.velocity = newVector * multiply * (oldMag + (Mathf.Abs(rbr.speed) * movingMultiplier));
-                }
-                else if (rbh)
-                {
-                    rb.velocity = Vector2.zero;
-                    rb.velocity = newVector * multiply * (oldMag + (10 * movingMultiplier));
-                }
-                */
             }
         }
     }

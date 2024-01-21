@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     public float rotateSpeed = 50f;
     public Transform spawnPoint;
     GameObject player;
-    AudioManager am;
 
     bool alive = true;
     private void Start()
@@ -20,7 +19,6 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("FireProjectile", projectileDelay, projectileDelay);
         player = GameManager.G.player.playerObject;
-        am = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -34,7 +32,6 @@ public class Enemy : MonoBehaviour
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
         angle = angle + 90f;
         float step = rotateSpeed * Time.deltaTime;
-        //this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + 90f));
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation,
             Quaternion.Euler(new Vector3(0, 0, angle)), step);
     }
@@ -46,7 +43,7 @@ public class Enemy : MonoBehaviour
             GameObject exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
             exp.transform.parent = null;
             GameManager.G.currentLevel.EnemyDefeated();
-            am.Play("enemy_destroy");
+            GameManager.G.audio.Play("enemy_destroy");
             Destroy(this.gameObject);
         }
     }
@@ -59,7 +56,7 @@ public class Enemy : MonoBehaviour
             //Vector3 direction = player.transform.position - this.transform.position;
             Vector3 direction = -this.transform.up;
             currentProj.GetComponent<Rigidbody2D>().velocity = projectileForce * direction.normalized;
-            am.Play("enemy_release");
+            GameManager.G.audio.Play("enemy_release");
         }
     }
 }

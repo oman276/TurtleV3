@@ -35,8 +35,9 @@ public class GameManager : MonoBehaviour
     public UIManager ui;
 
     public Dictionary<string, float> bestTimes = new Dictionary<string, float>();
-
     public ObjectFade objectFade;
+
+    public AudioManager audio;
 
     private void Awake()
     {
@@ -68,7 +69,6 @@ public class GameManager : MonoBehaviour
                 break;
         }
         
-
         //Incoming State Setup
         switch (newState)
         {
@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
             case GameState.PreStart:
                 ui.SwapState(UIState.InGame);
                 player.SwapState(PlayerState.PreGame);
+                break;
+            case GameState.MainMenu:
+                cameraObject.transform.position = new Vector3(14.2f, 250f, -10f);
+                ui.SwapState(UIState.MainMenu);
+                player.SwapState(PlayerState.Disabled);
                 break;
         }
         
@@ -97,7 +102,6 @@ public class GameManager : MonoBehaviour
         if (!bestTimes.ContainsKey(currentLevel.levelName)) {
             bestTimes.Add(currentLevel.levelName, 276);
         }
-        //cameraObject.transform.position = currentLevel.cameraSpawn.position;
         camMovement.swapZones(currentLevel.startingCamZone.lowerLeft, currentLevel.startingCamZone.upperRight,
             currentLevel.startingCamZone.zoneTarget);
         player.StopVelocity();
@@ -111,5 +115,14 @@ public class GameManager : MonoBehaviour
 
     public float ActiveBestTime() {
         return GameManager.G.bestTimes[GameManager.G.currentLevel.levelName];
+    }
+
+    public void TempLoadLevel() {
+        SceneManager.LoadScene("test 1");
+    }
+
+    public void BackToMenu() {
+        SwapState(GameState.MainMenu);
+        SceneManager.LoadScene("Menu");
     }
 }

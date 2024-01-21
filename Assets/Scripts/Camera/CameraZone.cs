@@ -10,14 +10,8 @@ public class CameraZone : MonoBehaviour
     public Transform zoneTarget;
     public float orthogSize = 11f;
 
-    GameObject tutorialText;
-    NewMovement nm;
-    CameraMainMovement cmm;
-
     private void Start()
     {
-        nm = FindObjectOfType<NewMovement>();
-        cmm = FindObjectOfType<CameraMainMovement>();
 
         Destroy(lowerLeft.GetChild(0).gameObject);
         Destroy(upperRight.GetChild(0).gameObject);
@@ -26,8 +20,8 @@ public class CameraZone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player") {
-            nm.startOrthoSize = orthogSize;
-            cmm.swapZones(lowerLeft, upperRight, zoneTarget);
+            GameManager.G.player.movement.startOrthoSize = orthogSize;
+            GameManager.G.camMovement.swapZones(lowerLeft, upperRight, zoneTarget);
         }
     }
 

@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
             Vector2 newVector = (this.GetComponent<Collider2D>().ClosestPoint(collision.gameObject.transform.position)
                 - thisPos).normalized;
             rb.AddForce(newVector * nm.speed);
-            print(newVector * nm.speed);
         }
         if (collision.tag != "Enemy") {
             Destroy(this.gameObject);
