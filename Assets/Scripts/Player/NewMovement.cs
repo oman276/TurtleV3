@@ -39,10 +39,10 @@ public class NewMovement : MonoBehaviour
 
     Color baseLine;
     Color inactiveLine;
-    Camera cam;
-    GameObject camParent;
-    public float camZoomSpeed = 1.5f;
-    public float camMoveSpeed = 1f;
+    public Camera cam;
+    public GameObject camParent;
+    // public float camZoomSpeed = 1.5f;
+    // public float camMoveSpeed = 1f;
 
     public float startOrthoSize;
 
@@ -111,13 +111,13 @@ public class NewMovement : MonoBehaviour
         line.startColor = inactiveLine;
         line.endColor = inactiveLine;
 
-        //TODO: Replace Camera With Game Manager Ref
-        //cam = FindObjectOfType<Camera>();
-        //camParent = GameObject.Find("Camera Main/Camera Tilt");
-        cam = GameManager.G.mainCamera;
-        camParent = GameManager.G.cameraTilt;
+        // TODO: Replace Camera With Game Manager Ref    uhhh maybe not i mightve messed something up - nicole
+        // cam = FindObjectOfType<Camera>();
+        // camParent = GameObject.Find("Camera Main/Camera Tilt");
+        // cam = GameManager.G.mainCamera;
+        // camParent = GameManager.G.cameraTilt;
 
-        startOrthoSize = cam.orthographicSize;
+        // startOrthoSize = cam.orthographicSize;
 
         //Target Line
         trajCirArray = new GameObject[pointNum];
@@ -151,9 +151,9 @@ public class NewMovement : MonoBehaviour
         {
             swipeStartPos = Input.mousePosition;
 
-            Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseVec.z = 0f;
-            line.SetPosition(0, mouseVec);
+            // Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // mouseVec.z = 0f;
+            // line.SetPosition(0, mouseVec);
 
             //Activate Points
             //TODO: Move to the right place
@@ -201,10 +201,10 @@ public class NewMovement : MonoBehaviour
         if (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld)
         {
 
-            Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouseVec.z = 0f;
+            // Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // mouseVec.z = 0f;
             
-            line.SetPosition(1, mouseVec);
+            // line.SetPosition(1, mouseVec);
 
             swipeEndPos = Input.mousePosition;
             Vector2 direction = swipeEndPos - swipeStartPos;
@@ -358,16 +358,16 @@ public class NewMovement : MonoBehaviour
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
 
-            float size = startOrthoSize - percentage / 3;
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, size, camZoomSpeed);
+            // float size = startOrthoSize - percentage / 3;
+            // cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, size, camZoomSpeed);
 
             
-            Vector3 camPos = this.transform.position - cam.transform.position;
-            camPos *= percentage / 4;
-            camPos.z = -10;
+            // Vector3 camPos = this.transform.position - cam.transform.position;
+            // camPos *= percentage / 4;
+            // camPos.z = -10;
 
-            camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
-                camParent.transform.localPosition + camPos, camMoveSpeed);
+            // camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
+            //     camParent.transform.localPosition + camPos, camMoveSpeed);
 
         }
         else
@@ -395,9 +395,9 @@ public class NewMovement : MonoBehaviour
 
             }
 
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, startOrthoSize, camZoomSpeed * 0.7f);
-            camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
-                Vector3.zero, camMoveSpeed * 0.7f);
+            // cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, startOrthoSize, camZoomSpeed * 0.7f);
+            // camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
+            //     Vector3.zero, camMoveSpeed * 0.7f);
         }
 
         if (directionGlobal != Vector2.zero) {

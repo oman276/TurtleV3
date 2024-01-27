@@ -23,10 +23,10 @@ public class GameManager : MonoBehaviour
     public PlayerManager player;
 
     //Camera Info
-    public CameraMainMovement camMovement;
-    public GameObject cameraObject;
-    public Camera mainCamera;
-    public GameObject cameraTilt;
+    // public CameraMainMovement camMovement;
+    // public GameObject cameraObject;
+    // public Camera mainCamera;
+    // public GameObject cameraTilt;
 
     //Level Manager
     public LevelManager currentLevel;
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
                 player.SwapState(PlayerState.PreGame);
                 break;
             case GameState.MainMenu:
-                cameraObject.transform.position = new Vector3(14.2f, 250f, -10f);
+                // cameraObject.transform.position = new Vector3(14.2f, 250f, -10f);
                 ui.SwapState(UIState.MainMenu);
                 player.SwapState(PlayerState.Disabled);
                 break;
@@ -102,8 +102,8 @@ public class GameManager : MonoBehaviour
         if (!bestTimes.ContainsKey(currentLevel.levelName)) {
             bestTimes.Add(currentLevel.levelName, 276);
         }
-        camMovement.swapZones(currentLevel.startingCamZone.lowerLeft, currentLevel.startingCamZone.upperRight,
-            currentLevel.startingCamZone.zoneTarget);
+        // camMovement.swapZones(currentLevel.startingCamZone.lowerLeft, currentLevel.startingCamZone.upperRight,
+        //     currentLevel.startingCamZone.zoneTarget);
         player.StopVelocity();
         player.playerObject.transform.position = currentLevel.playerSpawn.position;
     }
