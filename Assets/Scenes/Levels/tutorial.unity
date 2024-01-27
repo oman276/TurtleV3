@@ -14961,11 +14961,19 @@ PrefabInstance:
     - target: {fileID: 7338242337119513505, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: cameraObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1446210617}
     - target: {fileID: 7338242337119513505, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: currentLevel
       value: 
       objectReference: {fileID: 155578867}
+    - target: {fileID: 7338242337119513505, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: mainMenuCamZone
+      value: 
+      objectReference: {fileID: 1446210616}
+    - target: {fileID: 7338242337119513505, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: mainMenuCamTarget
+      value: 
+      objectReference: {fileID: 1446210615}
     - target: {fileID: 7338242337119513506, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -15016,6 +15024,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+--- !u!1 &1446210615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1251561825613259583, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+  m_PrefabInstance: {fileID: 1446210614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446210616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5059084179413518406, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+  m_PrefabInstance: {fileID: 1446210614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1446210617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5218632832952748068, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+  m_PrefabInstance: {fileID: 1446210614}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1472752794
 GameObject:
   m_ObjectHideFlags: 0

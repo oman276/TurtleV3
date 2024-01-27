@@ -2072,11 +2072,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3667849732117642849}
-  cameraObject: {fileID: 1792425767}
+  cameraObject: {fileID: 5218632832952748068}
   currentLevel: {fileID: 0}
   ui: {fileID: 1153467418}
-  mainMenuCamZone: {fileID: 0}
-  mainMenuCamTarget: {fileID: 0}
+  mainMenuCamZone: {fileID: 5059084179413518406}
+  mainMenuCamTarget: {fileID: 1251561825613259583}
   objectFade: {fileID: 7338242337119513504}
   audio: {fileID: 1652960750}
   state: 5
@@ -2611,9 +2611,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 521295319646418972, guid: 086578f9c0c34e04994deb28c0362114, type: 3}
   m_PrefabInstance: {fileID: 521295318936913720}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1792425767 stripped
+--- !u!1 &5218632832952748068 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 521295319646418975, guid: 086578f9c0c34e04994deb28c0362114, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5715153404919664412, guid: 086578f9c0c34e04994deb28c0362114, type: 3}
   m_PrefabInstance: {fileID: 521295318936913720}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3667849730740802152
