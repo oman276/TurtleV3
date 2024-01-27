@@ -12,6 +12,7 @@ TagManager:
   - Catapult
   - Mud
   - Lava
+  - Island
   layers:
   - Default
   - TransparentFX

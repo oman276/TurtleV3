@@ -33,6 +33,10 @@ public class NewMovement : MonoBehaviour
 
     //private bool fingerDown;
     Rigidbody2D rb;
+
+    float maxVelocity = 43.0f;
+    float sqrMaxVelocity;
+
     LineRenderer line;
 
     float maxMagnitude;
@@ -83,6 +87,12 @@ public class NewMovement : MonoBehaviour
 
     DirectionVector[] directions = new DirectionVector[8];
 
+
+    void SetMaxVelocity(float maxVelocity){
+        this.maxVelocity = maxVelocity;
+        sqrMaxVelocity = maxVelocity * maxVelocity;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +101,7 @@ public class NewMovement : MonoBehaviour
         Mud2.SetActive(false);
         Mud3.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+        SetMaxVelocity(maxVelocity);
         Time.timeScale = 1f;
         //TODO: Replace with GM Ref
         shadow = GameManager.G.ui.shadow.GetComponent<Image>();
@@ -336,6 +347,7 @@ public class NewMovement : MonoBehaviour
     //TODO: Time Slowdown should be moved??
     private void FixedUpdate()
     {
+
         if (GameManager.G.player.state == PlayerState.Held || 
             GameManager.G.player.state == PlayerState.FirstHeld)
         {
@@ -404,6 +416,16 @@ public class NewMovement : MonoBehaviour
         	float angle = Mathf.Atan2(directionGlobal.y, directionGlobal.x) * Mathf.Rad2Deg;
         	playerSprite.transform.rotation = Quaternion.AngleAxis((angle - 90f), playerSprite.transform.forward);
         }
+
+        var v = rb.velocity;
+        // Clamp the velocity, if necessary
+        // Use sqrMagnitude instead of magnitude for performance reasons.
+        if(v.sqrMagnitude > sqrMaxVelocity){ // Equivalent to: rigidbody.velocity.magnitude > maxVelocity, but faster.
+            // Vector3.normalized returns this vector with a magnitude 
+            // of 1. This ensures that we're not messing with the 
+            // direction of the vector, only its magnitude.
+            rb.velocity = v.normalized * maxVelocity;
+        }   
     }
 
     public void DeactivateUIElements() {
@@ -484,18 +506,6 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
 
-        // if (collision.gameObject.tag == "Water") {
-
-        //     if(speed > 1700f) {
-        //         Vector2 direction = Vector2(1, 0);
-        //         direction = clampedDirection(direction);
-        //         if (direction != Vector2.zero) rb.AddForce(direction * (speed));   
-        //     }
-
-        //     // rb.drag = 1.0f;
-        //     // rb.angularDrag = 1.0f;
-        //     // rb.velocity *= 0.5f;
-        // }
     }
 
     //Move to Animation (or Object Fade?)
