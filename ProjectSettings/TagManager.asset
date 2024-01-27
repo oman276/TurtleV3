@@ -10,6 +10,8 @@ TagManager:
   - Water
   - CrumbleBlock
   - Catapult
+  - Mud
+  - Lava
   layers:
   - Default
   - TransparentFX
