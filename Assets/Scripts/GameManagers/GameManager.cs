@@ -105,8 +105,8 @@ public class GameManager : MonoBehaviour
         if (!bestTimes.ContainsKey(currentLevel.levelName)) {
             bestTimes.Add(currentLevel.levelName, 276);
         }
-        cameraObject.transform.position = new Vector3(lm.cameraSpawn.position.x, lm.cameraSpawn.position.y,
-            cameraObject.transform.position.z);
+        //cameraObject.transform.position = new Vector3(lm.cameraSpawn.position.x, lm.cameraSpawn.position.y,
+        //    cameraObject.transform.position.z);
         player.StopVelocity();
         player.playerObject.transform.position = currentLevel.playerSpawn.position;
     }
