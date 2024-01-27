@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public enum GameState { 
     Playing,
@@ -23,16 +24,15 @@ public class GameManager : MonoBehaviour
     public PlayerManager player;
 
     //Camera Info
-    // public CameraMainMovement camMovement;
-    // public GameObject cameraObject;
-    // public Camera mainCamera;
-    // public GameObject cameraTilt;
+    public GameObject cameraObject;
 
     //Level Manager
     public LevelManager currentLevel;
 
     //UI Manager
     public UIManager ui;
+    public GameObject mainMenuCamZone;
+    public GameObject mainMenuCamTarget;
 
     public Dictionary<string, float> bestTimes = new Dictionary<string, float>();
     public ObjectFade objectFade;
@@ -54,8 +54,6 @@ public class GameManager : MonoBehaviour
 
     public GameState state = GameState.MainMenu;
 
-    //Figure out how to manage scene loading after this is done
-
     public void SwapState(GameState newState)
     {
         if (newState == state) return;
@@ -66,6 +64,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Defeated:
                 ui.gameTimer.EndTimer();
+                break;
+            case GameState.MainMenu:
+                mainMenuCamZone.SetActive(false);
                 break;
         }
         
@@ -81,9 +82,11 @@ public class GameManager : MonoBehaviour
                 player.SwapState(PlayerState.PreGame);
                 break;
             case GameState.MainMenu:
-                // cameraObject.transform.position = new Vector3(14.2f, 250f, -10f);
                 ui.SwapState(UIState.MainMenu);
                 player.SwapState(PlayerState.Disabled);
+                mainMenuCamZone.GetComponent<CinemachineVirtualCamera>().Follow =
+                    mainMenuCamTarget.transform;
+                mainMenuCamZone.SetActive(true);
                 break;
         }
         
@@ -102,15 +105,14 @@ public class GameManager : MonoBehaviour
         if (!bestTimes.ContainsKey(currentLevel.levelName)) {
             bestTimes.Add(currentLevel.levelName, 276);
         }
-        // camMovement.swapZones(currentLevel.startingCamZone.lowerLeft, currentLevel.startingCamZone.upperRight,
-        //     currentLevel.startingCamZone.zoneTarget);
+        cameraObject.transform.position = new Vector3(lm.cameraSpawn.position.x, lm.cameraSpawn.position.y,
+            cameraObject.transform.position.z);
         player.StopVelocity();
         player.playerObject.transform.position = currentLevel.playerSpawn.position;
     }
 
     public void BeatLevel() {
         SwapState(GameState.LevelBeat);
-        //Timer setup stuff
     }
 
     public float ActiveBestTime() {
@@ -118,11 +120,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void TempLoadLevel() {
-        SceneManager.LoadScene("test 1");
+        SceneManager.LoadScene("tutorial");
     }
 
     public void BackToMenu() {
-        SwapState(GameState.MainMenu);
         SceneManager.LoadScene("Menu");
+        SwapState(GameState.MainMenu);
     }
 }

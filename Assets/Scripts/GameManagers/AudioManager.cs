@@ -45,7 +45,8 @@ public class AudioManager : MonoBehaviour
             print("Sound " + name + "not found");
             return;
         }
-        s.source.Play();
+        //s.source.Play();
+        //TODO: RE-ADD AUDIO TO GAME
     }
 
     public bool isPlaying(string name)
