@@ -9,7 +9,9 @@ public class LevelManager : MonoBehaviour
     public int numberOfEnemies = 1;
     public string levelName = "test 1";
     public Transform playerSpawn;
-    public Transform cameraSpawn;    
+    public Transform cameraSpawn;
+
+    public MoveToTarget[] itemsToActivate;
 
     private void Start()
     {
@@ -24,5 +26,9 @@ public class LevelManager : MonoBehaviour
         if (numberOfEnemies == 0) {
             GameManager.G.BeatLevel();
         }
+    }
+
+    public void ActivateItems() {
+        foreach (var i in itemsToActivate) i.StartWithDelay();
     }
 }
