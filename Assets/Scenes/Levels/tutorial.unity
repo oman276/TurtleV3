@@ -13569,6 +13569,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lava (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8577302680174402862, guid: 02e321d801b2d8540beee206c8ee17c2, type: 3}
+      propertyPath: m_TagString
+      value: Lava
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e321d801b2d8540beee206c8ee17c2, type: 3}
 --- !u!1 &894422029

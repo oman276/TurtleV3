@@ -467,7 +467,7 @@ public class NewMovement : MonoBehaviour
     //Not sure what this is doing
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Water") {
+        if (collision.gameObject.tag == "Mud") {
 
             if(speed > 1700f) {
                 Vector2 direction = swipeEndPos - swipeStartPos;
@@ -483,6 +483,19 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud2, 1.0f));
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
+
+        // if (collision.gameObject.tag == "Water") {
+
+        //     if(speed > 1700f) {
+        //         Vector2 direction = Vector2(1, 0);
+        //         direction = clampedDirection(direction);
+        //         if (direction != Vector2.zero) rb.AddForce(direction * (speed));   
+        //     }
+
+        //     // rb.drag = 1.0f;
+        //     // rb.angularDrag = 1.0f;
+        //     // rb.velocity *= 0.5f;
+        // }
     }
 
     //Move to Animation (or Object Fade?)
@@ -501,7 +514,7 @@ public class NewMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-       if (collision.gameObject.tag == "Water") {
+       if (collision.gameObject.tag == "Mud") {
             rb.drag = 0.0f;
             rb.angularDrag = 0.15f;
         } 

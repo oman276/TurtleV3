@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "OOB") {
+        if (collision.gameObject.tag == "Lava") {
 
             fadeState = HealthFadeState.Active;
 
@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "OOB")
+        if (collision.gameObject.tag == "Lava")
         {
             --lavaCount;
             if (lavaCount == 0)
