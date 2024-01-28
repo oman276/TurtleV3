@@ -34,7 +34,7 @@ public class NewMovement : MonoBehaviour
     //private bool fingerDown;
     Rigidbody2D rb;
 
-    float maxVelocity = 43.0f;
+    public float maxVelocity = 58.0f;
     float sqrMaxVelocity;
 
     LineRenderer line;
@@ -76,6 +76,15 @@ public class NewMovement : MonoBehaviour
     public GameObject Mud3;
     // ANIMATION END
 
+
+    public int crumbleBlocks_colliding;
+
+    public bool riverActive = false;
+
+    LayerMask nothingmask;
+
+    LayerMask playermask;
+
     struct DirectionVector {
         public Vector2 coordinates;
         public Vector2 direction;
@@ -96,6 +105,9 @@ public class NewMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        nothingmask = LayerMask.GetMask("Nothing");
+        playermask = LayerMask.GetMask("Player");
+        
         //TODO: Move animation and visual components into new script somewhere else
         Mud1.SetActive(false);
         Mud2.SetActive(false);
@@ -150,11 +162,13 @@ public class NewMovement : MonoBehaviour
 
         saveHeadPos = head.transform.localPosition;
         saveTailPos = tail.transform.localPosition;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //Start Swiping
         //TODO: Replace Input with more flexible input manager at some point
         if (Input.GetMouseButtonDown(0) && 
@@ -297,6 +311,24 @@ public class NewMovement : MonoBehaviour
             if(Vector3.Distance(head.transform.localPosition, saveHeadPos) <= 0.01f && leftleg.transform.eulerAngles.z <= 1) {
                 setTurtleAnimation = 0;
             }
+        }
+
+
+        if (crumbleBlocks_colliding >= 1 && riverActive == true) {
+
+            foreach (GameObject river in LevelManager.rivers)
+            {
+                river.GetComponent<AreaEffector2D>().colliderMask = nothingmask;
+            }
+            riverActive = false;
+
+        } else if (crumbleBlocks_colliding <= 0 && riverActive == false) {
+            foreach (GameObject river in LevelManager.rivers)
+            {
+                river.GetComponent<AreaEffector2D>().colliderMask = playermask;
+            }
+            riverActive = true;
+
         }
             
     }
@@ -506,6 +538,10 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
 
+        if (collision.gameObject.tag == "CrumbleBlock") {
+            crumbleBlocks_colliding += 1;
+        }
+
     }
 
     //Move to Animation (or Object Fade?)
@@ -527,7 +563,11 @@ public class NewMovement : MonoBehaviour
        if (collision.gameObject.tag == "Mud") {
             rb.drag = 0.0f;
             rb.angularDrag = 0.15f;
-        } 
+        }
+
+        if (collision.gameObject.tag == "CrumbleBlock") {
+            crumbleBlocks_colliding -= 1;
+        }
     }
 }
 
