@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float force = 1f; 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -14,7 +16,7 @@ public class Bullet : MonoBehaviour
             Vector2 thisPos = this.transform.position;
             Vector2 newVector = (this.GetComponent<Collider2D>().ClosestPoint(collision.gameObject.transform.position)
                 - thisPos).normalized;
-            rb.AddForce(newVector * nm.speed);
+            rb.AddForce(newVector * (nm.speed * force + 1));
         }
         if (collision.tag != "Enemy") {
             Destroy(this.gameObject);

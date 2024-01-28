@@ -56,6 +56,9 @@ TagManager:
   - name: Wall
     uniqueID: 72991041
     locked: 0
+  - name: WallDecal
+    uniqueID: 3263297489
+    locked: 0
   - name: Player
     uniqueID: 3032127489
     locked: 0
