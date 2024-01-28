@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             case GameState.Defeated:
                 ui.gameTimer.EndTimer();
                 break;
-            case GameState.MainMenu:
+            case GameState.LevelSelect:
                 mainMenuCamZone.SetActive(false);
                 break;
         }
@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
         //Incoming State Setup
         switch (newState)
         {
+            case GameState.LevelSelect:
+                ui.SwapState(UIState.LevelSelect);
+                break;
             case GameState.LevelBeat:
                 ui.SwapState(UIState.PostGame);
                 player.SwapState(PlayerState.PostGame);
@@ -119,8 +122,8 @@ public class GameManager : MonoBehaviour
         return GameManager.G.bestTimes[GameManager.G.currentLevel.levelName];
     }
 
-    public void TempLoadLevel() {
-        SceneManager.LoadScene("tutorial");
+    public void LoadLevelSelect() {
+        SwapState(GameState.LevelSelect);
     }
 
     public void BackToMenu() {

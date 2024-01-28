@@ -313,22 +313,27 @@ public class NewMovement : MonoBehaviour
             }
         }
 
-
-        if (crumbleBlocks_colliding >= 1 && riverActive == true) {
-
-            foreach (GameObject river in LevelManager.rivers)
+        if (GameManager.G.state != GameState.MainMenu && GameManager.G.state != GameState.LevelSelect)
+        {
+            if (crumbleBlocks_colliding >= 1 && riverActive == true)
             {
-                river.GetComponent<AreaEffector2D>().colliderMask = nothingmask;
-            }
-            riverActive = false;
 
-        } else if (crumbleBlocks_colliding <= 0 && riverActive == false) {
-            foreach (GameObject river in LevelManager.rivers)
+                foreach (GameObject river in LevelManager.rivers)
+                {
+                    river.GetComponent<AreaEffector2D>().colliderMask = nothingmask;
+                }
+                riverActive = false;
+
+            }
+            else if (crumbleBlocks_colliding <= 0 && riverActive == false)
             {
-                river.GetComponent<AreaEffector2D>().colliderMask = playermask;
-            }
-            riverActive = true;
+                foreach (GameObject river in LevelManager.rivers)
+                {
+                    river.GetComponent<AreaEffector2D>().colliderMask = playermask;
+                }
+                riverActive = true;
 
+            }
         }
             
     }

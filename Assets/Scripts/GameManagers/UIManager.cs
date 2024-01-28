@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject mainMenuUI;
 
     //Level Select
+    public GameObject levelSelectUI;
 
     //General Game UI
     public GameObject TimerObjects;
@@ -51,12 +52,18 @@ public class UIManager : MonoBehaviour
             case UIState.PostGame:
                 levelBeatScreen.SetActive(false);
                 break;
+            case UIState.LevelSelect:
+                levelSelectUI.SetActive(false);
+                break;
         }
 
         //Incoming State Actions
         switch (newState) {
             case UIState.MainMenu:
                 mainMenuUI.SetActive(true);
+                break;
+            case UIState.LevelSelect:
+                levelSelectUI.SetActive(true);
                 break;
             case UIState.InGame:
                 TimerObjects.SetActive(true);

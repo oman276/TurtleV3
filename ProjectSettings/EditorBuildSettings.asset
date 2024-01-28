@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/RollingBalls.unity
     guid: 55ebb6c439a708f408f40fcd8950743b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 2.unity
+    guid: 72f16d5215bff4546a1d7c3d8c756163
   m_configObjects: {}
