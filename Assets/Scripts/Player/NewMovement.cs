@@ -34,7 +34,7 @@ public class NewMovement : MonoBehaviour
     //private bool fingerDown;
     Rigidbody2D rb;
 
-    float maxVelocity = 43.0f;
+    public float maxVelocity = 58.0f;
     float sqrMaxVelocity;
 
     LineRenderer line;
