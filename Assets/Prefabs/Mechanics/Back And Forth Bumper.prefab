@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4580849911921134658}
   m_Layer: 0
   m_Name: Moving Object
-  m_TagString: Untagged
+  m_TagString: Bumper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
