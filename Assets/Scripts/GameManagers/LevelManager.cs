@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
         GameManager.G.StartLevel(this);
 
         CinemachineVirtualCamera[] cams = FindObjectsOfType<CinemachineVirtualCamera>(true);
-        foreach (CinemachineVirtualCamera c in cams) c.Follow = GameManager.G.player.playerObject.transform;
+        foreach (CinemachineVirtualCamera c in cams) c.Follow = GameManager.G.player.playerObject.transform.Find("PlayerSprite").transform.Find("CameraFollow").transform;
     }
 
     public void EnemyDefeated() {
