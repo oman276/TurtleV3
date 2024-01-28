@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
 
     //Level Select
     public GameObject levelSelectUI;
+    public ScoreDisplay[] scores;
 
     //General Game UI
     public GameObject TimerObjects;
@@ -63,6 +64,9 @@ public class UIManager : MonoBehaviour
                 mainMenuUI.SetActive(true);
                 break;
             case UIState.LevelSelect:
+                foreach (ScoreDisplay sc in scores) {
+                    sc.ChangeScore();
+                }
                 levelSelectUI.SetActive(true);
                 break;
             case UIState.InGame:
