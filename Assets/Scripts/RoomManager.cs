@@ -5,7 +5,10 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     public GameObject virtualCam;
+
     private void OnTriggerEnter2D(Collider2D other) {
+
+        Debug.Log(virtualCam);
 
         if(other.CompareTag("Player") && !other.isTrigger) {
             virtualCam.SetActive(true);

@@ -32,7 +32,7 @@ public class Island : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") {
 
-            LayerMask mask = LayerMask.GetMask("Nothing");
+            LayerMask mask = LayerMask.GetMask("Player");
 
             foreach (GameObject river in rivers) {
                 river.GetComponent<AreaEffector2D>().colliderMask = mask;

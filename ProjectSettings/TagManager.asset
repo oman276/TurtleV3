@@ -13,6 +13,7 @@ TagManager:
   - Mud
   - Lava
   - Island
+  - River
   layers:
   - Default
   - TransparentFX
