@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
                 - thisPos).normalized;
             rb.AddForce(newVector * (nm.speed * force + 1));
         }
-        if (collision.tag != "Enemy") {
+        if (collision.tag != "Enemy" && collision.tag != "Lava" && collision.tag != "Bumper") {
             Destroy(this.gameObject);
         }
     }

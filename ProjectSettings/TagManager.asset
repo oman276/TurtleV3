@@ -13,6 +13,7 @@ TagManager:
   - Mud
   - Lava
   - Island
+  - Bumper
   layers:
   - Default
   - TransparentFX
