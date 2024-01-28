@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/tutorial.unity
     guid: 2fda0253a39f26d42860a67197a8dd9f
+  - enabled: 1
+    path: Assets/Scenes/Levels/RisingBumpers.unity
+    guid: 85f349e560870eb4eaefdc01fb7bfe06
   m_configObjects: {}

@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
                 GameManager.G.ui.gameTimer.StartTimer();
                 movement.DeactivateUIElements();
                 GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Go!";
+                GameManager.G.currentLevel.ActivateItems();
                 Invoke("DisableSwipeText", 1f);
                 break;
             case PlayerState.Held:
