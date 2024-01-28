@@ -13,8 +13,11 @@ public class LevelManager : MonoBehaviour
 
     public MoveToTarget[] itemsToActivate;
 
+    public static GameObject[] rivers;
+
     private void Start()
     {
+        rivers = GameObject.FindGameObjectsWithTag("Water");
         GameManager.G.StartLevel(this);
 
         CinemachineVirtualCamera[] cams = FindObjectsOfType<CinemachineVirtualCamera>(true);

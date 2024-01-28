@@ -80,13 +80,10 @@ public class NewMovement : MonoBehaviour
     public int crumbleBlocks_colliding;
 
     public bool riverActive = false;
-    public GameObject[] rivers;
 
     LayerMask nothingmask;
 
     LayerMask playermask;
-
-
 
     struct DirectionVector {
         public Vector2 coordinates;
@@ -108,7 +105,6 @@ public class NewMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rivers = GameObject.FindGameObjectsWithTag("Water");
         nothingmask = LayerMask.GetMask("Nothing");
         playermask = LayerMask.GetMask("Player");
         
@@ -317,16 +313,17 @@ public class NewMovement : MonoBehaviour
             }
         }
 
+
         if (crumbleBlocks_colliding >= 1 && riverActive == true) {
 
-            foreach (GameObject river in rivers)
+            foreach (GameObject river in LevelManager.rivers)
             {
                 river.GetComponent<AreaEffector2D>().colliderMask = nothingmask;
             }
             riverActive = false;
 
         } else if (crumbleBlocks_colliding <= 0 && riverActive == false) {
-            foreach (GameObject river in rivers)
+            foreach (GameObject river in LevelManager.rivers)
             {
                 river.GetComponent<AreaEffector2D>().colliderMask = playermask;
             }
