@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 873592748}
+  whereIsTurtleCamera: 0
 --- !u!60 &52216198
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1797,6 +1798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 1973098061}
+  whereIsTurtleCamera: 0
 --- !u!60 &284095799
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1825,7 +1827,7 @@ PolygonCollider2D:
     - - {x: -11.720024, y: -4.131073}
       - {x: -9.252565, y: 129.86862}
       - {x: 13.882294, y: 129.94217}
-      - {x: 15.337925, y: 16.862206}
+      - {x: 34.768982, y: 129.61346}
       - {x: 35.711227, y: 16.792145}
       - {x: 35.269867, y: -4.494438}
 --- !u!4 &284095800
@@ -2314,6 +2316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 177869499}
+  whereIsTurtleCamera: 0
 --- !u!60 &488703751
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3202,7 +3205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779415877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.234256, y: 22.926449, z: -9.89925}
+  m_LocalPosition: {x: 26.486889, y: 249.4, z: -11.855027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4954,6 +4957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 345183499}
+  whereIsTurtleCamera: 0
 --- !u!60 &1349349375
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5212,10 +5216,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1472018784, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1927310286, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5224,9 +5224,13 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2053398754, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+    - target: {fileID: 4741674649780072238, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: -13.581542
       objectReference: {fileID: 0}
     - target: {fileID: 5218632832952748068, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_IsActive
@@ -5611,6 +5615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 1556883509}
+  whereIsTurtleCamera: 0
 --- !u!60 &1506955743
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5885,6 +5890,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 2126022369}
+  whereIsTurtleCamera: 0
 --- !u!60 &1559437433
 PolygonCollider2D:
   m_ObjectHideFlags: 0

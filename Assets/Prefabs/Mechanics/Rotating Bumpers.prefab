@@ -56,7 +56,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 3
 --- !u!114 &4954410431099265142
 MonoBehaviour:
@@ -78,6 +78,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4954410431099265143}
     m_Modifications:
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: isMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: movingMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544352225863046132, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -141,6 +149,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4954410431099265143}
     m_Modifications:
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: isMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: movingMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544352225863046132, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -204,6 +220,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4954410431099265143}
     m_Modifications:
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: isMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: movingMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544352225863046132, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -267,6 +291,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4954410431099265143}
     m_Modifications:
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: isMoving
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544352225129720008, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
+      propertyPath: movingMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544352225863046132, guid: c5b8f12e41b78ad49a7005f7bb0b06e0, type: 3}
       propertyPath: m_RootOrder
       value: 2
