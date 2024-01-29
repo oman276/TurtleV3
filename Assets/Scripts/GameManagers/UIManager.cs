@@ -73,8 +73,8 @@ public class UIManager : MonoBehaviour
                 TimerObjects.SetActive(true);
                 shadow.GetComponent<Image>().enabled = true;
                 gameTimer.timerText.text = string.Format("{0:0}:{1:00}", 0, 0);
-                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
-                swipeToStart.SetActive(true);
+                //GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
+                //swipeToStart.SetActive(true);
                 break;
             case UIState.PostGame:
                 gameTimer.EndTimer();

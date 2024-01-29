@@ -80,6 +80,9 @@ public class PlayerManager : MonoBehaviour
                 movement.DeactivateUIElements();
                 break;
             case PlayerState.PreGame:
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
+                GameManager.G.ui.swipeToStart.SetActive(true);
+                health.lavaCount = 0;
                 trailRenderer.enabled = false;
                 SetupNewScene();
                 break;
