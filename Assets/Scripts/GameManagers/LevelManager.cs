@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
 
     public static GameObject[] rivers;
 
+    public Camera levelCam;
+
     private void Start()
     {
         rivers = GameObject.FindGameObjectsWithTag("Water");

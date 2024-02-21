@@ -2100,6 +2100,10 @@ PrefabInstance:
       value: Level Manager
       objectReference: {fileID: 0}
     - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: levelCam
+      value: 
+      objectReference: {fileID: 684843822}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
       propertyPath: levelName
       value: level1
       objectReference: {fileID: 0}
@@ -2964,7 +2968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684843819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.234256, y: 9.5, z: -9.89925}
+  m_LocalPosition: {x: 548.6088, y: 386.69485, z: -11.855027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6789,6 +6793,18 @@ PrefabInstance:
     - target: {fileID: 2053398755, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_SortingOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1285.5312
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -370.86658
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -30.178583
       objectReference: {fileID: 0}
     - target: {fileID: 7338242337119513506, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_RootOrder
