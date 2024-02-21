@@ -8,7 +8,6 @@ public class NewMovement : MonoBehaviour
     private Vector2 swipeStartPos;
     private Vector2 swipeEndPos;
 
-    //public int buffer = 20;
     public float speed = 2;
 
     float currentTime = 1f;
@@ -31,7 +30,6 @@ public class NewMovement : MonoBehaviour
 
     public float swipeBuffer = 0.05f;
 
-    //private bool fingerDown;
     Rigidbody2D rb;
 
     public float maxVelocity = 58.0f;
@@ -45,8 +43,6 @@ public class NewMovement : MonoBehaviour
     Color inactiveLine;
     public Camera cam;
     public GameObject camParent;
-    // public float camZoomSpeed = 1.5f;
-    // public float camMoveSpeed = 1f;
 
     public float startOrthoSize;
 
@@ -123,24 +119,10 @@ public class NewMovement : MonoBehaviour
         shadowFadeFactor /= 255;
         shadowBuffer = shadowFadeFactor * lerpBuffer;
 
-        line = FindObjectOfType<LineRenderer>();
-        line.SetPosition(0, Vector2.zero);
-        line.SetPosition(1, Vector2.zero);
-
         //Maximum Screen Size
         maxMagnitude = (new Vector2(Screen.width, Screen.height) - Vector2.zero).magnitude;
         baseLine = new Color(1, 1, 1, 0.6f);
         inactiveLine = new Color(0.5f, 0.5f, 0.5f, 0.6f);
-        line.startColor = inactiveLine;
-        line.endColor = inactiveLine;
-
-        // TODO: Replace Camera With Game Manager Ref    uhhh maybe not i mightve messed something up - nicole
-        // cam = FindObjectOfType<Camera>();
-        // camParent = GameObject.Find("Camera Main/Camera Tilt");
-        // cam = GameManager.G.mainCamera;
-        // camParent = GameManager.G.cameraTilt;
-
-        // startOrthoSize = cam.orthographicSize;
 
         //Target Line
         trajCirArray = new GameObject[pointNum];
@@ -168,7 +150,6 @@ public class NewMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //Start Swiping
         //TODO: Replace Input with more flexible input manager at some point
         if (Input.GetMouseButtonDown(0) && 
@@ -176,9 +157,10 @@ public class NewMovement : MonoBehaviour
         {
             swipeStartPos = Input.mousePosition;
 
-            // Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // mouseVec.z = 0f;
-            // line.SetPosition(0, mouseVec);
+            Vector2 mousePos = Input.mousePosition;
+            GameManager.G.ui.swipeLine.rectTransform.position = mousePos;
+            GameManager.G.ui.swipeStart = mousePos;
+            GameManager.G.ui.swipeLine.gameObject.SetActive(true);
 
             //Activate Points
             //TODO: Move to the right place
@@ -198,6 +180,8 @@ public class NewMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && 
             (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld))
         {
+            GameManager.G.ui.swipeLine.gameObject.SetActive(false);
+
             validSwipe = false;
 
             swipeEndPos = Input.mousePosition;
@@ -226,10 +210,14 @@ public class NewMovement : MonoBehaviour
         if (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld)
         {
 
-            // Vector3 mouseVec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // mouseVec.z = 0f;
-            
-            // line.SetPosition(1, mouseVec);
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 startPos = GameManager.G.ui.swipeStart;
+            Vector2 linePosition = (mousePos + startPos) / 2;
+            GameManager.G.ui.swipeLine.rectTransform.position = linePosition;
+            Vector2 directionLine = mousePos - startPos;
+            float distance = directionLine.magnitude;
+            GameManager.G.ui.swipeLine.rectTransform.sizeDelta = new Vector2(distance, 30f);
+            GameManager.G.ui.swipeLine.rectTransform.rotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(directionLine.y, directionLine.x) * Mathf.Rad2Deg);
 
             swipeEndPos = Input.mousePosition;
             Vector2 direction = swipeEndPos - swipeStartPos;
@@ -246,16 +234,12 @@ public class NewMovement : MonoBehaviour
             if (!validSwipe && percentage > swipeBuffer)
             {
                 validSwipe = true;
-
-                line.startColor = baseLine;
-                line.endColor = baseLine;
+                GameManager.G.ui.swipeLine.color = baseLine;
             }
             else if (validSwipe && percentage <= swipeBuffer)
             {
                 validSwipe = false;
-
-                line.startColor = inactiveLine;
-                line.endColor = inactiveLine;
+                GameManager.G.ui.swipeLine.color = inactiveLine;
             }
 
             //TODO: Move to UI Manager or Player Manager
@@ -407,17 +391,6 @@ public class NewMovement : MonoBehaviour
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
 
-            // float size = startOrthoSize - percentage / 3;
-            // cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, size, camZoomSpeed);
-
-            
-            // Vector3 camPos = this.transform.position - cam.transform.position;
-            // camPos *= percentage / 4;
-            // camPos.z = -10;
-
-            // camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
-            //     camParent.transform.localPosition + camPos, camMoveSpeed);
-
         }
         else
         {
@@ -443,10 +416,6 @@ public class NewMovement : MonoBehaviour
                 shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
 
             }
-
-            // cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, startOrthoSize, camZoomSpeed * 0.7f);
-            // camParent.transform.localPosition = Vector3.Lerp(camParent.transform.localPosition, 
-            //     Vector3.zero, camMoveSpeed * 0.7f);
         }
 
         if (directionGlobal != Vector2.zero) {
@@ -466,8 +435,7 @@ public class NewMovement : MonoBehaviour
     }
 
     public void DeactivateUIElements() {
-        line.SetPosition(0, Vector2.zero);
-        line.SetPosition(1, Vector2.zero);
+        GameManager.G.ui.swipeLine.gameObject.SetActive(false);
 
         //Deactivate Points
         for (int i = 0; i < pointNum; ++i)

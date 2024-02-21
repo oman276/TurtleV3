@@ -28,6 +28,9 @@ public class UIManager : MonoBehaviour
     public GameObject TimerObjects;
     public GameObject shadow;
     public GameObject swipeToStart;
+    public Image swipeLine;
+    [HideInInspector]
+    public Vector3 swipeStart;
 
     //Level Beat Screen
     public GameObject levelBeatScreen;

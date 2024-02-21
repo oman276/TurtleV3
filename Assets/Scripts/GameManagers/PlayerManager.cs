@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerHealth health;
     public GameObject playerObject;
     public GameObject playerSprite;
+    public LineRenderer directionLine;
 
     public PlayerState state = PlayerState.Disabled;
 
