@@ -130,4 +130,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
         SwapState(GameState.MainMenu);
     }
+
+    public void PrintBestTimes() {
+        string s = "";
+        foreach (var i in bestTimes) {
+            s += i.Key + "  -  " + i.Value + "\n";
+        }
+        Debug.Log(s);
+    }
 }
