@@ -30,4 +30,9 @@ public class LoadManager : MonoBehaviour
     {
         SceneManager.LoadScene("RollingBalls");
     }
+
+    public void LoadLevel6()
+    {
+        SceneManager.LoadScene("Level6");
+    }
 }
