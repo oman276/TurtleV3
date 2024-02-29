@@ -1008,7 +1008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779415877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 271.451, y: 198.20143, z: -11.855027}
+  m_LocalPosition: {x: 316.64505, y: 235.1345, z: -11.855027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1121,6 +1121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df1fdd4db9d3a54a837fac24dcb9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   minInterval: 1
   maxInterval: 3
   ball: {fileID: 8893129996266638477, guid: 70ebbf60bbc3ac44e98fde94e9c5c7e9, type: 3}
@@ -1171,6 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df1fdd4db9d3a54a837fac24dcb9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   minInterval: 1
   maxInterval: 3
   ball: {fileID: 8893129996266638477, guid: 70ebbf60bbc3ac44e98fde94e9c5c7e9, type: 3}
@@ -1417,15 +1419,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1215.856
+      value: -1235.9844
       objectReference: {fileID: 0}
     - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 285.8259
+      value: 95.532875
       objectReference: {fileID: 0}
     - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -61.364044
+      value: -52.35485
       objectReference: {fileID: 0}
     - target: {fileID: 5218632832952748068, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_IsActive
@@ -2028,6 +2030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df1fdd4db9d3a54a837fac24dcb9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
   minInterval: 1
   maxInterval: 3
   ball: {fileID: 8893129996266638477, guid: 70ebbf60bbc3ac44e98fde94e9c5c7e9, type: 3}
@@ -2168,6 +2171,22 @@ PrefabInstance:
       propertyPath: startingCamZone
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: itemsToActivate.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: itemsToActivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 2046972659847111622}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: itemsToActivate.Array.data[1]
+      value: 
+      objectReference: {fileID: 1137789578}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: itemsToActivate.Array.data[2]
+      value: 
+      objectReference: {fileID: 1121911466}
     - target: {fileID: 8064998288271949710, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
       propertyPath: m_RootOrder
       value: 5
