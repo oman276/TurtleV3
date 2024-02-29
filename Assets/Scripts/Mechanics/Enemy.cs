@@ -10,15 +10,20 @@ public class Enemy : MonoBehaviour
     public float projectileDelay = 1.7f;
     Rigidbody2D rb;
     public float rotateSpeed = 50f;
-    public Transform spawnPoint;
+    public Transform[] spawnPoints;
     GameObject player;
 
+    //Health
+    int health;
+    public int startHealth = 3;
+    bool invFrames = false;
     bool alive = true;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("FireProjectile", projectileDelay, projectileDelay);
         player = GameManager.G.player.playerObject;
+        health = startHealth;
     }
 
     private void Update()
@@ -38,25 +43,49 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" && alive) {
-            alive = false;
-            GameObject exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
-            exp.transform.parent = null;
-            GameManager.G.currentLevel.EnemyDefeated();
-            GameManager.G.audio.Play("enemy_destroy");
-            Destroy(this.gameObject);
+        if (collision.gameObject.tag == "Player" && alive && !invFrames) {
+            health--;
+            Debug.Log("Hit");
+            StartCoroutine(Invulnerability());
+            if (health == 0) {
+                GameManager.G.player.ReduceVelocity(0.5f);
+                Die(); 
+            }
+            else
+            {
+                GameManager.G.player.BounceBack(0.7f);
+            }
         }
+    }
+
+    IEnumerator Invulnerability() {
+        invFrames = true;
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        invFrames = false;
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+    }
+
+    void Die()
+    {
+        alive = false;
+        GameObject exp = Instantiate(explosion, this.transform.position, this.transform.rotation);
+        exp.transform.parent = null;
+        GameManager.G.currentLevel.EnemyDefeated();
+        GameManager.G.audio.Play("enemy_destroy");
+        Destroy(this.gameObject);
     }
 
     void FireProjectile() {
         if (Vector3.Distance(player.transform.position, this.transform.position) <= 25f &&
             GameManager.G.player.state != PlayerState.Dead && GameManager.G.state == GameState.Playing)
         {
-            GameObject currentProj = Instantiate(bullet, spawnPoint.position, Quaternion.identity);
-            //Vector3 direction = player.transform.position - this.transform.position;
-            Vector3 direction = -this.transform.up;
-            currentProj.GetComponent<Rigidbody2D>().velocity = projectileForce * direction.normalized;
-            GameManager.G.audio.Play("enemy_release");
+            foreach(var p in spawnPoints) {
+                GameObject currentProj = Instantiate(bullet, p.position, Quaternion.identity);
+                Vector3 direction = p.position - this.transform.position;
+                currentProj.GetComponent<Rigidbody2D>().velocity = projectileForce * direction.normalized;
+                GameManager.G.audio.Play("enemy_release");
+            }
         }
     }
 }

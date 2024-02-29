@@ -163,7 +163,9 @@ MonoBehaviour:
   projectileForce: 50
   projectileDelay: 1.7
   rotateSpeed: 150
-  spawnPoint: {fileID: 3776191475430204155}
+  spawnPoints:
+  - {fileID: 3776191475430204155}
+  startHealth: 3
 --- !u!50 &6904529804396764429
 Rigidbody2D:
   serializedVersion: 4
