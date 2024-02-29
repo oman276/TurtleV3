@@ -134,4 +134,14 @@ public class PlayerManager : MonoBehaviour
     public void AddForce(Vector2 direction) {
         rb.AddForce(direction);
     }
+
+    public void BounceBack(float percentOfMaxVel) {
+        Vector2 direction = rb.velocity;
+        StopVelocity();
+        rb.AddForce(-direction.normalized * (percentOfMaxVel * movement.speed));
+    }
+
+    public void ReduceVelocity(float percent) {
+        rb.AddForce(-rb.velocity.normalized * movement.speed * percent);
+    }
 }
