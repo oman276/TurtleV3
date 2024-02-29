@@ -177,8 +177,7 @@ public class NewMovement : MonoBehaviour
         }
 
         //Get Button Up
-        if (Input.GetMouseButtonUp(0) && 
-            (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld))
+        if (Input.GetMouseButtonUp(0) && (GameManager.G.player.isHeld()))
         {
             GameManager.G.ui.swipeLine.gameObject.SetActive(false);
 
@@ -207,7 +206,7 @@ public class NewMovement : MonoBehaviour
             GameManager.G.player.SwapState(PlayerState.Active);
         }
 
-        if (GameManager.G.player.state == PlayerState.Held || GameManager.G.player.state == PlayerState.FirstHeld)
+        if (GameManager.G.player.isHeld())
         {
 
             Vector2 mousePos = Input.mousePosition;
@@ -369,8 +368,7 @@ public class NewMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (GameManager.G.player.state == PlayerState.Held || 
-            GameManager.G.player.state == PlayerState.FirstHeld)
+        if (GameManager.G.player.isHeld())
         {
             //Speed
             if ((currentTime - slowdownLerp) > timeBuffer)
@@ -379,12 +377,14 @@ public class NewMovement : MonoBehaviour
                 Time.timeScale = currentTime;
             }
 
+            Debug.Log(Time.time - GameManager.G.player.lastHeldTime);
+
             //Shadow
-            if ((shadowFadeFactor - currentFade) > shadowBuffer)
+            if (((shadowFadeFactor - currentFade) > shadowBuffer) && 
+                (Time.time - GameManager.G.player.lastHeldTime) > 0.4f)
             {
                 currentFade = Mathf.Lerp(currentFade, shadowFadeFactor, shadowLerp);
                 shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
-
             }
 
             swipeEndPos = Input.mousePosition;

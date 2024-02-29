@@ -30,6 +30,8 @@ public class PlayerManager : MonoBehaviour
     CircleCollider2D playerCollider;
     TrailRenderer trailRenderer;
 
+    public float lastHeldTime;
+
     private void Start()
     {
         PlayerSetup();
@@ -94,6 +96,10 @@ public class PlayerManager : MonoBehaviour
                 break;
             case PlayerState.FirstHeld:
                 GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Ready...";
+                lastHeldTime = Time.time;
+                break;
+            case PlayerState.Held:
+                lastHeldTime = Time.time;
                 break;
         }
 
@@ -102,6 +108,10 @@ public class PlayerManager : MonoBehaviour
 
     public bool isActive() {
         return state == PlayerState.Active || state == PlayerState.Held || state == PlayerState.FirstHeld;
+    }
+
+    public bool isHeld() { 
+        return state == PlayerState.Held || state == PlayerState.FirstHeld;
     }
 
     void DisableSwipeText() {
