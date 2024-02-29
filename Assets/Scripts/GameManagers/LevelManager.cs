@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public Transform playerSpawn;
     public Transform cameraSpawn;
 
-    public MoveToTarget[] itemsToActivate;
+    public Activatable[] itemsToActivate;
 
     public static GameObject[] rivers;
 
@@ -34,6 +34,6 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ActivateItems() {
-        foreach (var i in itemsToActivate) i.StartWithDelay();
+        foreach (Activatable i in itemsToActivate) i.Activate();
     }
 }

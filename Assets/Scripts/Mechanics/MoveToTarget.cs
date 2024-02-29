@@ -2,36 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveToTarget : MonoBehaviour
+public class MoveToTarget : Activatable
 {
     public Transform target;
     public float speed;
 
-    public bool beginsMoving = false;
+    bool activatedInternal = false;
     public float startDelay = 0;
 
-    bool active;
-
-    private void Start()
+    public override void Activate()
     {
-        /*
-        if (beginsMoving) {
-            Invoke("Activate", startDelay);
-        }
-        */
+        base.Activate();
+        StartCoroutine(Delay());
     }
 
-    public void StartWithDelay() {
-        Invoke("Activate", startDelay);
-    }
-
-    public void Activate() {
-        active = true;
+    IEnumerator Delay() {
+        yield return new WaitForSeconds(startDelay);
+        activatedInternal = true;
     }
 
     private void Update()
     {
-        if (active) {
+        if (activatedInternal) {
             Vector3 direction = (target.position - transform.position).normalized;
             transform.Translate(direction * speed * Time.deltaTime);
         }
