@@ -35,4 +35,9 @@ public class LoadManager : MonoBehaviour
     {
         SceneManager.LoadScene("Level6");
     }
+
+    public void LoadLevel7()
+    {
+        SceneManager.LoadScene("spotlight");
+    }
 }

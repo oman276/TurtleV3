@@ -235,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49987292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 563.79626, y: 394.72357, z: -21.855026}
+  m_LocalPosition: {x: 26.486889, y: 249.4, z: -21.855026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9490,6 +9490,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1040402493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1040402493, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+  m_PrefabInstance: {fileID: 1405416444}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82419da4e3ff0d9499b308afbf4d7e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1405416444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9497,6 +9508,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1153467418, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: scores.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153467418, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: scores.Array.data[6]
+      value: 
+      objectReference: {fileID: 1040402493}
     - target: {fileID: 1927310286, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9504,22 +9523,6 @@ PrefabInstance:
     - target: {fileID: 1927310286, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1231821245637751327, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1285.5312
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -370.86658
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891911763421115288, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -54.178585
       objectReference: {fileID: 0}
     - target: {fileID: 7338242337119513506, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_RootOrder
