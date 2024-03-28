@@ -1,43 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoadManager : MonoBehaviour
 {
     //Temporary: Make Less Terrible
 
+    public float levelFadeTime = 0.3f;
+    public Image fadeSprite;
+
+    IEnumerator LoadInCoroutine(string tag, bool isLevel) {
+        GameManager.G.objectFade.FadeIn(levelFadeTime, fadeSprite);
+        yield return new WaitForSeconds(levelFadeTime);
+        SceneManager.LoadScene(tag);
+        if (!isLevel) {
+            switch (tag) {
+                case "Menu":
+                    GameManager.G.SwapState(GameState.MainMenu);
+                    break;
+            }
+            SetupEndedSignal();
+        }
+    }
+
+    
+    IEnumerator LoadOutCoroutine() {
+        GameManager.G.objectFade.FadeOut(levelFadeTime, fadeSprite);
+        yield return new WaitForSeconds(levelFadeTime);
+    }
+
+    public void SetupEndedSignal() {
+        StartCoroutine(LoadOutCoroutine());
+    }
+
+    public void LoadLevel(string tag, bool isLevel = true) {
+        StartCoroutine(LoadInCoroutine(tag, isLevel));
+    }
+
     public void LoadLevel1() {
-        SceneManager.LoadScene("tutorial");
+        LoadLevel("tutorial");
     }
 
     public void LoadLevel2()
     {
-        SceneManager.LoadScene("test 1");
+        LoadLevel("test 1");
     }
 
     public void LoadLevel3()
     {
-        SceneManager.LoadScene("RisingBumpers");
+        LoadLevel("RisingBumpers");
     }
 
     public void LoadLevel4()
     {
-        SceneManager.LoadScene("Level 2");
+        LoadLevel("Level 2");
     }
 
     public void LoadLevel5()
     {
-        SceneManager.LoadScene("RollingBalls");
+        LoadLevel("RollingBalls");
     }
 
     public void LoadLevel6()
     {
-        SceneManager.LoadScene("Level6");
+        LoadLevel("Level6");
     }
 
     public void LoadLevel7()
     {
-        SceneManager.LoadScene("spotlight");
+        LoadLevel("spotlight");
     }
 }

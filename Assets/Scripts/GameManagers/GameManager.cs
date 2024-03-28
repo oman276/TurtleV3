@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public ObjectFade objectFade;
 
     public AudioManager audio;
+    public LoadManager load;
 
     private void Awake()
     {
@@ -97,8 +98,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReloadCurrentLevel() {
-        SwapState(GameState.PreStart);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        load.LoadLevel(SceneManager.GetActiveScene().name);
     }
 
     public void StartLevel(LevelManager lm) {
@@ -106,12 +106,11 @@ public class GameManager : MonoBehaviour
         SwapState(GameState.PreStart);
         ui.SwapState(UIState.InGame);
         if (!bestTimes.ContainsKey(currentLevel.levelName)) {
-            bestTimes.Add(currentLevel.levelName, 276);
+            bestTimes.Add(currentLevel.levelName, 9999);
         }
-        //cameraObject.transform.position = new Vector3(lm.cameraSpawn.position.x, lm.cameraSpawn.position.y,
-        //    cameraObject.transform.position.z);
         player.StopVelocity();
         player.playerObject.transform.position = currentLevel.playerSpawn.position;
+        load.SetupEndedSignal();
     }
 
     public void BeatLevel() {
@@ -127,8 +126,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void BackToMenu() {
-        SceneManager.LoadScene("Menu");
-        SwapState(GameState.MainMenu);
+        load.LoadLevel("Menu", false);
     }
 
     public void PrintBestTimes() {
