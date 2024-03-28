@@ -72,4 +72,9 @@ public class LoadManager : MonoBehaviour
     {
         LoadLevel("spotlight");
     }
+
+    public void LoadLevel8()
+    {
+        LoadLevel("Darts");
+    }
 }

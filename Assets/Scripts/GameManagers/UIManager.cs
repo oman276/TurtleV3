@@ -41,6 +41,14 @@ public class UIManager : MonoBehaviour
 
     public Timer gameTimer;
 
+    public GameObject levelSelectScroll;
+    Vector3 levelSelectBaseTrans;
+
+    private void Start()
+    {
+        levelSelectBaseTrans = levelSelectScroll.transform.position;
+    }
+
     public void SwapState(UIState newState) {
         if (newState == state) return;
 
@@ -67,6 +75,7 @@ public class UIManager : MonoBehaviour
                 mainMenuUI.SetActive(true);
                 break;
             case UIState.LevelSelect:
+                levelSelectScroll.transform.position = levelSelectBaseTrans;
                 foreach (ScoreDisplay sc in scores) {
                     sc.ChangeScore();
                 }
@@ -76,8 +85,6 @@ public class UIManager : MonoBehaviour
                 TimerObjects.SetActive(true);
                 shadow.GetComponent<Image>().enabled = true;
                 gameTimer.timerText.text = string.Format("{0:0}:{1:00}", 0, 0);
-                //GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
-                //swipeToStart.SetActive(true);
                 break;
             case UIState.PostGame:
                 gameTimer.EndTimer();

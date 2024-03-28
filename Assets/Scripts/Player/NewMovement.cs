@@ -377,7 +377,7 @@ public class NewMovement : MonoBehaviour
                 Time.timeScale = currentTime;
             }
 
-            Debug.Log(Time.time - GameManager.G.player.lastHeldTime);
+            //Debug.Log(Time.time - GameManager.G.player.lastHeldTime);
 
             //Shadow
             if (((shadowFadeFactor - currentFade) > shadowBuffer) && 
