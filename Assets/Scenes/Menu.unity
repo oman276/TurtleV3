@@ -9497,16 +9497,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1153467418, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-      propertyPath: levelSelectScroll
-      value: 
-      objectReference: {fileID: 1489438613}
     - target: {fileID: 1927310286, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1927310286, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835068026764381545, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_text
+      value: the TURTLE game
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835068026764381545, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_fontSize
+      value: 219
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835068026764381545, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_margin.x
+      value: 96.44153
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835068026764381545, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_margin.z
+      value: 114.987915
+      objectReference: {fileID: 0}
+    - target: {fileID: 3835068026764381545, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
+      propertyPath: m_fontStyle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7338242337119513506, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
@@ -9559,8 +9575,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
---- !u!1 &1489438613 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 701674137, guid: cfd2d8b05a185f144947a14e29ef0aa4, type: 3}
-  m_PrefabInstance: {fileID: 1405416444}
-  m_PrefabAsset: {fileID: 0}

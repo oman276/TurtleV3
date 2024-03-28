@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public static GameObject[] rivers;
 
     public Camera levelCam;
+    public bool lavaRising = false;
 
     private void Start()
     {
@@ -35,5 +36,9 @@ public class LevelManager : MonoBehaviour
 
     public void ActivateItems() {
         foreach (Activatable i in itemsToActivate) i.Activate();
+    }
+
+    public string startText() {
+        return (lavaRising ? "Rising Lava Incoming!" : "Go!");
     }
 }

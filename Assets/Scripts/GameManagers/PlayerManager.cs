@@ -30,6 +30,9 @@ public class PlayerManager : MonoBehaviour
     CircleCollider2D playerCollider;
     TrailRenderer trailRenderer;
 
+    Color greenText = new Color(0.49019607843137253f, 0.9529411764705882f, 0.5098039215686274f);
+    Color redText = new Color(0.9176470588235294f, 0.3176470588235294f, 0.26666666666666666f);
+
     public float lastHeldTime;
 
     private void Start()
@@ -52,7 +55,7 @@ public class PlayerManager : MonoBehaviour
             case PlayerState.FirstHeld:
                 GameManager.G.ui.gameTimer.StartTimer();
                 movement.DeactivateUIElements();
-                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Go!";
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = GameManager.G.currentLevel.startText();
                 GameManager.G.currentLevel.ActivateItems();
                 Invoke("DisableSwipeText", 1f);
                 break;
@@ -66,6 +69,7 @@ public class PlayerManager : MonoBehaviour
                 playerSprite.SetActive(true);
                 break;
             case PlayerState.Dead:
+                GameManager.G.ui.swipeToStart.SetActive(false);
                 health.ResetHealth();
                 break;
         }
@@ -74,6 +78,9 @@ public class PlayerManager : MonoBehaviour
         switch (newState) {
             case PlayerState.Dead:
                 PlayerDeath();
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().color = redText;
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "You Died!";
+                GameManager.G.ui.swipeToStart.SetActive(true);
                 GameManager.G.SwapState(GameState.Defeated);
                 break;
             case PlayerState.Active:
@@ -83,6 +90,7 @@ public class PlayerManager : MonoBehaviour
                 movement.DeactivateUIElements();
                 break;
             case PlayerState.PreGame:
+                GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().color = greenText;
                 GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "Swipe To Start";
                 GameManager.G.ui.swipeToStart.SetActive(true);
                 health.lavaCount = 0;
@@ -123,7 +131,7 @@ public class PlayerManager : MonoBehaviour
         playerCollider.enabled = false;
         rb.velocity = Vector2.zero;
         playerSprite.SetActive(false);
-        Invoke("LoadNewScene", 1f);
+        Invoke("LoadNewScene", 2f);
     }
 
     void LoadNewScene() {
