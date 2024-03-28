@@ -123,7 +123,7 @@ public class PlayerManager : MonoBehaviour
         playerCollider.enabled = false;
         rb.velocity = Vector2.zero;
         playerSprite.SetActive(false);
-        Invoke("LoadNewScene", 3f);
+        Invoke("LoadNewScene", 1f);
     }
 
     void LoadNewScene() {
