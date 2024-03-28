@@ -48,6 +48,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Outer Wall
+    uniqueID: 3232213805
+    locked: 0
   - name: Background
     uniqueID: 31889631
     locked: 0
