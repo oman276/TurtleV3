@@ -54,6 +54,9 @@ TagManager:
   - name: Background
     uniqueID: 31889631
     locked: 0
+  - name: Decorations
+    uniqueID: 4199894871
+    locked: 0
   - name: Lava
     uniqueID: 3571843675
     locked: 0
@@ -74,6 +77,9 @@ TagManager:
     locked: 0
   - name: Bridges
     uniqueID: 1446048985
+    locked: 0
+  - name: Sky Decorations
+    uniqueID: 2576928689
     locked: 0
   - name: Spotlight
     uniqueID: 2650709093
