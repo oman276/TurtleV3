@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
     public GameObject shadow;
     public GameObject swipeToStart;
     public Image swipeLine;
+    public GameObject pauseButton;
+    public GameObject pauseMenu;
     [HideInInspector]
     public Vector3 swipeStart;
 
@@ -59,6 +61,7 @@ public class UIManager : MonoBehaviour
                 break;
             case UIState.InGame:
                 TimerObjects.SetActive(false);
+                pauseButton.SetActive(false);
                 shadow.GetComponent<Image>().enabled = false;
                 break;
             case UIState.PostGame:
@@ -66,6 +69,9 @@ public class UIManager : MonoBehaviour
                 break;
             case UIState.LevelSelect:
                 levelSelectUI.SetActive(false);
+                break;
+            case UIState.Pause:
+                pauseMenu.SetActive(false);
                 break;
         }
 
@@ -83,6 +89,7 @@ public class UIManager : MonoBehaviour
                 break;
             case UIState.InGame:
                 TimerObjects.SetActive(true);
+                pauseButton.SetActive(true);
                 shadow.GetComponent<Image>().enabled = true;
                 gameTimer.timerText.text = string.Format("{0:0}:{1:00}", 0, 0);
                 break;
@@ -90,6 +97,9 @@ public class UIManager : MonoBehaviour
                 gameTimer.EndTimer();
                 SetNewTime();
                 levelBeatScreen.SetActive(true);
+                break;
+            case UIState.Pause:
+                pauseMenu.SetActive(true);
                 break;
         }
         

@@ -36,6 +36,7 @@ public class LoadManager : MonoBehaviour
     }
 
     public void LoadLevel(string tag, bool isLevel = true) {
+        Time.timeScale = 1;
         StartCoroutine(LoadInCoroutine(tag, isLevel));
     }
 

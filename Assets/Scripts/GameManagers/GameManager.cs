@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void SwapState(GameState newState)
     {
+        Debug.Log("Flagged");
         if (newState == state) return;
 
         
@@ -68,6 +69,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.LevelSelect:
                 mainMenuCamZone.SetActive(false);
+                break;
+            case GameState.Paused:
+                Time.timeScale = 1;
+                player.SwapState(PlayerState.Active);
                 break;
         }
         
@@ -91,6 +96,14 @@ public class GameManager : MonoBehaviour
                 mainMenuCamZone.GetComponent<CinemachineVirtualCamera>().Follow =
                     mainMenuCamTarget.transform;
                 mainMenuCamZone.SetActive(true);
+                break;
+            case GameState.Paused:
+                Time.timeScale = 0;
+                ui.SwapState(UIState.Pause);
+                player.SwapState(PlayerState.ManualPause);
+                break;
+            case GameState.Playing:
+                ui.SwapState(UIState.InGame);
                 break;
         }
         
@@ -135,5 +148,10 @@ public class GameManager : MonoBehaviour
             s += i.Key + "  -  " + i.Value + "\n";
         }
         Debug.Log(s);
+    }
+
+    public void PauseGame() {
+        if (state != GameState.Paused) SwapState(GameState.Paused);
+        else SwapState(GameState.Playing);
     }
 }
