@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
                 GameManager.G.SwapState(GameState.Defeated);
                 break;
             case PlayerState.Active:
-                GameManager.G.SwapState(GameState.Playing);
+                if(GameManager.G.state != GameState.Paused) GameManager.G.SwapState(GameState.Playing);
                 break;
             case PlayerState.PostGame:
                 movement.DeactivateUIElements();
