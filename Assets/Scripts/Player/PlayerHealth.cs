@@ -26,6 +26,8 @@ public class PlayerHealth : MonoBehaviour
 
     public int bridgeCount = 0;
 
+    public int mudCount = 0;
+
     private void Start()
     {
         health = timeToDeath;
@@ -49,6 +51,15 @@ public class PlayerHealth : MonoBehaviour
             fadeState = HealthFadeState.WaitingToRecharge;
             StartCoroutine("WaitToRefill");
             bridgeCount++;
+
+            lavaCount = 0;
+        }
+
+        if (collision.gameObject.tag == "Mud") {
+            fadeState = HealthFadeState.WaitingToRecharge;
+            StartCoroutine("WaitToRefill");
+            mudCount++;
+
         }
     }
 
@@ -68,12 +79,16 @@ public class PlayerHealth : MonoBehaviour
             --bridgeCount;
         }
 
+        if (collision.gameObject.tag == "Mud") {
+            --mudCount;
+        }
+
     }
 
     private void FixedUpdate()
     {
         //Reduce or increase health
-        if (lavaCount > 0 && GameManager.G.player.isActive() && bridgeCount <= 0)
+        if (lavaCount > 0 && GameManager.G.player.isActive() && bridgeCount <= 0 && mudCount <= 0)
         {
             Debug.Log("health is decreasing");
             background.color = new Color(background.color.r, background.color.g, background.color.b, 1);
