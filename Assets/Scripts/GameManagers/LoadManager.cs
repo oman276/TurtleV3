@@ -6,14 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadManager : MonoBehaviour
 {
-    //Temporary: Make Less Terrible
-
     public float levelFadeTime = 0.3f;
     public Image fadeSprite;
 
     IEnumerator LoadInCoroutine(string tag, bool isLevel) {
         GameManager.G.objectFade.FadeIn(levelFadeTime, fadeSprite);
         yield return new WaitForSeconds(levelFadeTime);
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(tag);
         if (!isLevel) {
             switch (tag) {
@@ -24,7 +23,6 @@ public class LoadManager : MonoBehaviour
             SetupEndedSignal();
         }
     }
-
     
     IEnumerator LoadOutCoroutine() {
         GameManager.G.objectFade.FadeOut(levelFadeTime, fadeSprite);
@@ -40,6 +38,7 @@ public class LoadManager : MonoBehaviour
         StartCoroutine(LoadInCoroutine(tag, isLevel));
     }
 
+    /*
     public void LoadLevel1() {
         LoadLevel("tutorial");
     }
@@ -78,4 +77,5 @@ public class LoadManager : MonoBehaviour
     {
         LoadLevel("Darts");
     }
+    */
 }

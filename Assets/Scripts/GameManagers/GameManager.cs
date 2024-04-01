@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Cinemachine;
+using System;
 
 public enum GameState { 
     Playing,
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     public AudioManager audio;
     public LoadManager load;
+    public ScoreManager scores;
+    public int activeLevelIndex = 0;
 
     private void Awake()
     {
@@ -50,14 +53,12 @@ public class GameManager : MonoBehaviour
         {
             G = this;
         }
-        
     }
 
     public GameState state = GameState.MainMenu;
 
     public void SwapState(GameState newState)
     {
-        Debug.Log("Flagged");
         if (newState == state) return;
 
         
@@ -154,4 +155,5 @@ public class GameManager : MonoBehaviour
         if (state != GameState.Paused) SwapState(GameState.Paused);
         else SwapState(GameState.Playing);
     }
+    
 }
