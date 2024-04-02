@@ -70,6 +70,10 @@ public class NewMovement : MonoBehaviour
     public GameObject Mud1;
     public GameObject Mud2;
     public GameObject Mud3;
+
+    public GameObject FireParticles;
+
+    public GameObject LavaTears;
     // ANIMATION END
 
 
@@ -108,6 +112,8 @@ public class NewMovement : MonoBehaviour
         Mud1.SetActive(false);
         Mud2.SetActive(false);
         Mud3.SetActive(false);
+        FireParticles.SetActive(false);
+        LavaTears.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         SetMaxVelocity(maxVelocity);
         Time.timeScale = 1f;
@@ -511,6 +517,11 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
 
+        if (collision.gameObject.tag == "Lava") {
+            FireParticles.SetActive(true);
+            LavaTears.SetActive(true);
+        }
+
         if (collision.gameObject.tag == "CrumbleBlock") {
             crumbleBlocks_colliding += 1;
         }
@@ -536,6 +547,11 @@ public class NewMovement : MonoBehaviour
        if (collision.gameObject.tag == "Mud") {
             rb.drag = 0.0f;
             rb.angularDrag = 0.15f;
+        }
+
+        if (collision.gameObject.tag == "Lava") {
+            StartCoroutine(ShowAndHide(FireParticles, 1.5f));
+            StartCoroutine(ShowAndHide(LavaTears, 1.5f));
         }
 
         if (collision.gameObject.tag == "CrumbleBlock") {
