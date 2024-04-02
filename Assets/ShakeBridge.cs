@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShakeBridge : MonoBehaviour
 {
+    // river stuff
+    public GameObject[] rivers;
 
     public float speed = 30.0f; //how fast it shakes
     public float amount = 0.7f; //how much it shakes
@@ -23,19 +25,33 @@ public class ShakeBridge : MonoBehaviour
     void Start()
     {
         sprite = transform.GetChild(0).gameObject;
+        rivers = GameObject.FindGameObjectsWithTag("Water");
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Player") {
             start_timer = true;
             isCurrentlyColliding = true;
+
+            LayerMask mask = LayerMask.GetMask("Nothing");
+            foreach (GameObject river in rivers) {
+                river.GetComponent<AreaEffector2D>().colliderMask = mask;
+            }
         }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player") {
             isCurrentlyColliding = false;
+
+            LayerMask mask = LayerMask.GetMask("Player");
+
+            foreach (GameObject river in rivers) {
+                river.GetComponent<AreaEffector2D>().colliderMask = mask;
+            }
         }
     }
 
@@ -70,6 +86,12 @@ public class ShakeBridge : MonoBehaviour
                     start_timer = true;
                 }
                 GetComponent<BoxCollider2D>().enabled = true;
+
+                LayerMask mask = LayerMask.GetMask("Player");
+
+                foreach (GameObject river in rivers) {
+                    river.GetComponent<AreaEffector2D>().colliderMask = mask;
+                }
                 
             } else {
                 crumble_timer += Time.deltaTime;
@@ -93,6 +115,11 @@ public class ShakeBridge : MonoBehaviour
                 amount = 0.7f;
 
                 GetComponent<BoxCollider2D>().enabled = false;
+
+                LayerMask mask = LayerMask.GetMask("Nothing");
+                foreach (GameObject river in rivers) {
+                    river.GetComponent<AreaEffector2D>().colliderMask = mask;
+                }
                 
             } else {
                 crumble_timer += Time.deltaTime;
