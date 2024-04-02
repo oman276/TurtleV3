@@ -5,17 +5,6 @@ using UnityEngine.UI;
 
 public class ObjectFade : MonoBehaviour
 {
-
-    PlayerHealth ph;
-    bool isPlayer = false;
-    
-
-    private void Start()
-    {
-        //TODO: Figure Out if we actually need this
-        if(isPlayer) ph = FindObjectOfType<PlayerHealth>();
-    }
-
     public void FadeOut(float t, Text i)
     {
         StartCoroutine(FadeTextToZeroAlpha(t, i));
@@ -81,25 +70,12 @@ public class ObjectFade : MonoBehaviour
     IEnumerator FadeImageToZeroAlpha(float t, Image i)
     {
         i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a);
-        while (i && i.color.a > 0.0f)
+        while (i && i.color.a > 0.001f)
         {
-            if (isPlayer)
-            {
-                //if (ph.fadeState != 4)
-                {
-                    i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
-                    break;
-                }
-            }
             i.color = new Color(i.color.r, i.color.g, i.color.b, i.color.a - (Time.deltaTime / t));
             yield return null;
         }
-        /*
-        if (isPlayer && ph.fadeState == 4)
-        {
-            ph.fadeState = 0;
-        }
-        */
+        i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
     }
 
     IEnumerator FadeObjectToFullAlpha(float t, GameObject obj)

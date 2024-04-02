@@ -107,12 +107,33 @@ public class UIManager : MonoBehaviour
     }
 
     void SetNewTime() {
-        int minutes = Mathf.FloorToInt(gameTimer.lastTime / 60F);
-        int seconds = Mathf.FloorToInt(gameTimer.lastTime - minutes * 60);
+        //int minutes = Mathf.FloorToInt(gameTimer.lastTime / 60F);
+        //int seconds = Mathf.FloorToInt(gameTimer.lastTime - minutes * 60);
 
-        string niceTime = "Current Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+        //string niceTime = "Current Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+        string niceTime = "Current Time: " + GameManager.G.scores.formatTime(gameTimer.lastTime);
         curTimeText.text = niceTime;
 
+        int scoreResult = GameManager.G.scores.InsertNewScore(GameManager.G.activeLevelIndex, gameTimer.lastTime);
+        string resultText = "";
+        bestTimeText.color = green;
+
+        switch (scoreResult) {
+            case 0:
+                bestTimeText.color = gold;
+                resultText = "New #1 Time! Wow!";
+                break;
+            case 5:
+                resultText = "No record beat... yet!";
+                break;
+            default:
+                resultText = "New #" + (scoreResult + 1) + " Time!";
+                break;
+        }
+        bestTimeText.text = resultText;
+
+
+        /*
         string bestBase = "Best Time: ";
         if (gameTimer.lastTime < GameManager.G.ActiveBestTime())
         {
@@ -130,5 +151,6 @@ public class UIManager : MonoBehaviour
 
         niceTime = bestBase + string.Format("{0:0}:{1:00}", minutes, seconds);
         bestTimeText.text = niceTime;
+        */
     }
 }
