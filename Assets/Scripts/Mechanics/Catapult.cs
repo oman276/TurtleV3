@@ -24,6 +24,7 @@ public class Catapult : MonoBehaviour
         GameManager.G.audio.Play("whoosh");
         GameManager.G.player.SwapState(PlayerState.Active);
         Vector2 direction = (target.position - this.transform.position).normalized;
+        //Debug.Log(direction + " " + GameManager.G.player.transform.position);
         GameManager.G.player.AddForce(direction * GameManager.G.player.movement.speed * addedSlingPower);
     }
 }
