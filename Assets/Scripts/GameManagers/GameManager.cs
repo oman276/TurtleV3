@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
                 player.SwapState(PlayerState.PostGame);
                 break;
             case GameState.PreStart:
+                ui.gameTimer.resetTimer();
+                player.health.ResetHealth();
                 ui.SwapState(UIState.InGame);
                 player.SwapState(PlayerState.PreGame);
                 break;
