@@ -35,7 +35,9 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ActivateItems() {
-        foreach (Activatable i in itemsToActivate) i.Activate();
+        foreach (Activatable i in itemsToActivate) {
+            if(!i.activated) i.Activate();
+        };
     }
 
     public string startText() {

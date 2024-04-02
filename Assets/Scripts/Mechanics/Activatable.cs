@@ -5,7 +5,7 @@ using UnityEngine;
 public class Activatable : MonoBehaviour
 {
     public bool activateOnStart = false;
-    protected bool activated = false;
+    public bool activated = false;
 
     private void Start()
     {
