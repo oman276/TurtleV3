@@ -2695,7 +2695,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 477820764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1413516709}
+        m_TargetAssemblyTypeName: LevelSelectManager, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &573848014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5570,6 +5582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectables: {fileID: 922043663}
   titleCard: {fileID: 1647778620}
+  display: {fileID: 790695743}
 --- !u!1 &1440843439
 GameObject:
   m_ObjectHideFlags: 0
@@ -10923,6 +10936,7 @@ MonoBehaviour:
   audio: {fileID: 1652960750}
   load: {fileID: 2446455367117021047}
   scores: {fileID: 1301358168}
+  activeLevelIndex: 0
   state: 5
 --- !u!114 &7338242337119513504
 MonoBehaviour:
