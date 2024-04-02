@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RigidbodyHorizontal : MonoBehaviour
 {
-    Rigidbody2D rb;
+
+    public Rigidbody2D rb;
     public float moveSpeed = 0.5f;
 
     public Transform leftBound;
@@ -15,7 +16,9 @@ public class RigidbodyHorizontal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        if(rb == null) {
+            rb = this.GetComponent<Rigidbody2D>();
+        }
 
     }
 
