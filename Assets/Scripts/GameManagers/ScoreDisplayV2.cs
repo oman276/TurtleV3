@@ -18,7 +18,7 @@ public class ScoreDisplayV2 : MonoBehaviour
         int i = 0;
         foreach (TextMeshProUGUI t in textLines) {
             (string, float) result = GameManager.G.scores.highScores[levelIndex][i];
-            t.text = result.Item1 + " ~ " + GameManager.G.scores.formatTime(result.Item2);
+            t.text = (i+1) + ". " + result.Item1 + " ~ " + GameManager.G.scores.formatTime(result.Item2);
             ++i;
         }
     }
