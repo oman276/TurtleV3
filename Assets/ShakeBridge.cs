@@ -32,12 +32,14 @@ public class ShakeBridge : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             start_timer = true;
             isCurrentlyColliding = true;
-
+            GameManager.G.currentLevel.BridgeEnter();
+            /*
             Debug.Log("Activate - Enter");
             LayerMask mask = LayerMask.GetMask("Nothing");
             foreach (GameObject river in rivers) {
                 river.GetComponent<AreaEffector2D>().colliderMask = mask;
             }
+            */
         }
     }
 
@@ -45,12 +47,14 @@ public class ShakeBridge : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") {
             isCurrentlyColliding = false;
-
+            GameManager.G.currentLevel.BridgeExit();
+            /*
             LayerMask mask = LayerMask.GetMask("Player");
             Debug.Log("Deactivate - Exit");
             foreach (GameObject river in rivers) {
                 river.GetComponent<AreaEffector2D>().colliderMask = mask;
             }
+            */
         }
     }
 
@@ -85,12 +89,14 @@ public class ShakeBridge : MonoBehaviour
                     start_timer = true;
                 }
                 GetComponent<BoxCollider2D>().enabled = true;
-
+                GameManager.G.currentLevel.BridgeExit();
+                /*
                 LayerMask mask = LayerMask.GetMask("Player");
                 Debug.Log("Deactivate - Respawn");
                 foreach (GameObject river in rivers) {
                     river.GetComponent<AreaEffector2D>().colliderMask = mask;
                 }
+                */
                 
             } else {
                 crumble_timer += Time.deltaTime;
@@ -114,12 +120,14 @@ public class ShakeBridge : MonoBehaviour
                 amount = 0.7f;
 
                 GetComponent<BoxCollider2D>().enabled = false;
-
+                GameManager.G.currentLevel.BridgeEnter();
+                /*
                 LayerMask mask = LayerMask.GetMask("Nothing");
                 foreach (GameObject river in rivers) {
                     river.GetComponent<AreaEffector2D>().colliderMask = mask;
                 }
-                
+                */
+
             } else {
                 crumble_timer += Time.deltaTime;
             }

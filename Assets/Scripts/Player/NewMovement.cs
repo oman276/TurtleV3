@@ -517,7 +517,7 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
 
-        if (collision.gameObject.tag == "Lava") {
+        if (GameManager.G.player.health.lavaCount > 0 ) {
             FireParticles.SetActive(true);
             LavaTears.SetActive(true);
         }
