@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     public Activatable[] itemsToActivate;
 
     public static GameObject[] rivers;
+    List<AreaEffector2D> effectors;
 
     public Camera levelCam;
     public bool lavaRising = false;
@@ -23,6 +24,11 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         rivers = GameObject.FindGameObjectsWithTag("Water");
+        effectors = new List<AreaEffector2D>();
+        foreach (GameObject river in rivers)
+        {
+            effectors.Add(river.GetComponent<AreaEffector2D>());
+        }
         GameManager.G.StartLevel(this);
 
         CinemachineVirtualCamera[] cams = FindObjectsOfType<CinemachineVirtualCamera>(true);
@@ -56,7 +62,19 @@ public class LevelManager : MonoBehaviour
         bridgeCount++;
     }
 
-    void BridgeOnOff(bool activate) { 
-    
+    void BridgeOnOff(bool activate) {
+        LayerMask mask;
+        if (activate)
+        {
+            mask = LayerMask.GetMask("Nothing");
+        }
+        else {
+            mask = LayerMask.GetMask("Player");
+        }
+
+        foreach (AreaEffector2D e in effectors)
+        {
+            e.colliderMask = mask;
+        }
     }
 }
