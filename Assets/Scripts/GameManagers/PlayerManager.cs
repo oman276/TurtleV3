@@ -123,6 +123,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     void DisableSwipeText() {
+        GameManager.G.ui.swipeToStart.GetComponent<TextMeshProUGUI>().text = "";
         GameManager.G.ui.swipeToStart.SetActive(false);
     }
 

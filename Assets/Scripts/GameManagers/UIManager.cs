@@ -10,7 +10,8 @@ public enum UIState {
     InGame,
     Pause,
     GameOver,
-    PostGame
+    PostGame,
+    Popup,
 }
 
 public class UIManager : MonoBehaviour
@@ -73,6 +74,11 @@ public class UIManager : MonoBehaviour
             case UIState.Pause:
                 pauseMenu.SetActive(false);
                 break;
+            case UIState.Popup:
+                TimerObjects.SetActive(true);
+                pauseButton.SetActive(true);
+                swipeToStart.SetActive(true);
+                break;
         }
 
         //Incoming State Actions
@@ -101,16 +107,17 @@ public class UIManager : MonoBehaviour
             case UIState.Pause:
                 pauseMenu.SetActive(true);
                 break;
+            case UIState.Popup:
+                TimerObjects.SetActive(false);
+                pauseButton.SetActive(false);
+                swipeToStart.SetActive(false);
+                break;
         }
         
         state = newState;
     }
 
     void SetNewTime() {
-        //int minutes = Mathf.FloorToInt(gameTimer.lastTime / 60F);
-        //int seconds = Mathf.FloorToInt(gameTimer.lastTime - minutes * 60);
-
-        //string niceTime = "Current Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
         string niceTime = "Current Time: " + GameManager.G.scores.formatTime(gameTimer.lastTime);
         curTimeText.text = niceTime;
 
@@ -131,26 +138,5 @@ public class UIManager : MonoBehaviour
                 break;
         }
         bestTimeText.text = resultText;
-
-
-        /*
-        string bestBase = "Best Time: ";
-        if (gameTimer.lastTime < GameManager.G.ActiveBestTime())
-        {
-            GameManager.G.bestTimes[GameManager.G.currentLevel.levelName] = gameTimer.lastTime;
-            bestBase = "New Best Time: ";
-            bestTimeText.color = gold;
-        }
-        else
-        {
-            bestTimeText.color = green;
-        }
-
-        minutes = Mathf.FloorToInt(GameManager.G.ActiveBestTime() / 60F);
-        seconds = Mathf.FloorToInt(GameManager.G.ActiveBestTime() - minutes * 60);
-
-        niceTime = bestBase + string.Format("{0:0}:{1:00}", minutes, seconds);
-        bestTimeText.text = niceTime;
-        */
     }
 }

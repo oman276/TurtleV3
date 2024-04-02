@@ -14,7 +14,8 @@ public enum GameState {
     Defeated,
     LevelBeat,
     MainMenu,
-    LevelSelect
+    LevelSelect,
+    Popup,
 }
 
 public class GameManager : MonoBehaviour
@@ -75,6 +76,10 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 player.SwapState(PlayerState.Active);
                 break;
+            case GameState.Popup:
+                Time.timeScale = 1;
+                //player.SwapState(PlayerState.Active);
+                break;
         }
         
         //Incoming State Setup
@@ -105,6 +110,11 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Playing:
                 ui.SwapState(UIState.InGame);
+                break;
+            case GameState.Popup:
+                Time.timeScale = 0;
+                ui.SwapState(UIState.Popup);
+                player.SwapState(PlayerState.MovementLocked);
                 break;
         }
         

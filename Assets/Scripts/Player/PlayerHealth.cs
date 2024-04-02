@@ -41,9 +41,6 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "Lava") {
 
             fadeState = HealthFadeState.Active;
-
-            
-
             ++lavaCount;
         }
 
@@ -90,7 +87,7 @@ public class PlayerHealth : MonoBehaviour
         //Reduce or increase health
         if (lavaCount > 0 && GameManager.G.player.isActive() && bridgeCount <= 0 && mudCount <= 0)
         {
-            Debug.Log("health is decreasing");
+            //Debug.Log("health is decreasing");
             background.color = new Color(background.color.r, background.color.g, background.color.b, 1);
             fill.color = new Color(fill.color.r, fill.color.g, fill.color.b, 1);
             fadeState = HealthFadeState.Active;
