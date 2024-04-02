@@ -15,7 +15,7 @@ public class Spotlight : MonoBehaviour
     void Update()
     {
         Vector3 temp = Vector3.Lerp(this.transform.position, new Vector3(player.transform.position.x,
-                         player.transform.position.y, -4f), speed * Time.deltaTime);
+                         player.transform.position.y, 0), speed * Time.deltaTime);
         this.transform.position = temp;
     }
 }

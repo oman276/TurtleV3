@@ -50,7 +50,7 @@ public class LevelSelectManager : MonoBehaviour
     }
     public void Level5()
     {
-        UpdateTags("Rolling Balls", 4, "Rolling Stones");
+        UpdateTags("RollingBalls", 4, "Rolling Stones");
     }
     public void Level6()
     {

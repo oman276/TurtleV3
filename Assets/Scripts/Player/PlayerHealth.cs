@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
     {
         health = timeToDeath;
         healthSlider.maxValue = timeToDeath;
-        healthSlider.minValue = 0;
+        healthSlider.minValue = 0.05f;
         healthSlider.value = health;
     }
 
