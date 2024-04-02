@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour
     public Camera levelCam;
     public bool lavaRising = false;
 
+    int bridgeCount = 0;
+
     private void Start()
     {
         rivers = GameObject.FindGameObjectsWithTag("Water");
@@ -42,5 +44,19 @@ public class LevelManager : MonoBehaviour
 
     public string startText() {
         return (lavaRising ? "Rising Lava Incoming!" : "Go!");
+    }
+
+    public void BridgeExit() {
+        bridgeCount--;
+        if (bridgeCount == 0) BridgeOnOff(false);
+    }
+
+    public void BridgeEnter() {
+        if (bridgeCount == 0) BridgeOnOff(true);
+        bridgeCount++;
+    }
+
+    void BridgeOnOff(bool activate) { 
+    
     }
 }

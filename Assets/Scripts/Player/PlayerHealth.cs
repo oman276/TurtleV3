@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine("WaitToRefill");
             bridgeCount++;
 
-            lavaCount = 0;
+            //lavaCount = 0;
         }
 
         if (collision.gameObject.tag == "Mud") {

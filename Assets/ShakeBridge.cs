@@ -33,13 +33,12 @@ public class ShakeBridge : MonoBehaviour
             start_timer = true;
             isCurrentlyColliding = true;
 
+            Debug.Log("Activate - Enter");
             LayerMask mask = LayerMask.GetMask("Nothing");
             foreach (GameObject river in rivers) {
                 river.GetComponent<AreaEffector2D>().colliderMask = mask;
             }
         }
-
-        
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -48,7 +47,7 @@ public class ShakeBridge : MonoBehaviour
             isCurrentlyColliding = false;
 
             LayerMask mask = LayerMask.GetMask("Player");
-
+            Debug.Log("Deactivate - Exit");
             foreach (GameObject river in rivers) {
                 river.GetComponent<AreaEffector2D>().colliderMask = mask;
             }
@@ -88,7 +87,7 @@ public class ShakeBridge : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = true;
 
                 LayerMask mask = LayerMask.GetMask("Player");
-
+                Debug.Log("Deactivate - Respawn");
                 foreach (GameObject river in rivers) {
                     river.GetComponent<AreaEffector2D>().colliderMask = mask;
                 }
@@ -99,7 +98,7 @@ public class ShakeBridge : MonoBehaviour
 
         } else if(start_timer) {
 
-            Vector3 shaker = new Vector3(Mathf.Sin(Time.time * speed) * amount, sprite.transform.localPosition.y, sprite.transform.localPosition.z);
+            Vector3 shaker = new Vector3(Mathf.Sin(Time.time * speed) * amount * 0.75f, sprite.transform.localPosition.y, sprite.transform.localPosition.z);
             sprite.transform.localPosition = shaker;
 
             if (crumble_timer > until_crumble) { //crumbled
