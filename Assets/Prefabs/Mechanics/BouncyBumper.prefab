@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7544352225129720012}
   - component: {fileID: 7544352225129720008}
   - component: {fileID: 7544352225129720011}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Moving Object
   m_TagString: Bumper
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7544352225863046132}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BouncyBumper
   m_TagString: Bumper
   m_Icon: {fileID: 0}

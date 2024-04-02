@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 131114803}
   - component: {fileID: 131114802}
   - component: {fileID: 131114804}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (4)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -1081,7 +1081,7 @@ GameObject:
   - component: {fileID: 156831547}
   - component: {fileID: 156831546}
   - component: {fileID: 156831548}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 188707775}
   - component: {fileID: 188707774}
   - component: {fileID: 188707776}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (10)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -1485,7 +1485,7 @@ GameObject:
   - component: {fileID: 238638731}
   - component: {fileID: 238638730}
   - component: {fileID: 238638732}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16415,7 +16415,7 @@ GameObject:
   - component: {fileID: 285405723}
   - component: {fileID: 285405722}
   - component: {fileID: 285405724}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (3)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -24474,7 +24474,7 @@ GameObject:
   - component: {fileID: 308628269}
   - component: {fileID: 308628268}
   - component: {fileID: 308628270}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24641,7 +24641,7 @@ GameObject:
   - component: {fileID: 334113856}
   - component: {fileID: 334113855}
   - component: {fileID: 334113857}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25440,7 +25440,7 @@ GameObject:
   - component: {fileID: 592520956}
   - component: {fileID: 592520955}
   - component: {fileID: 592520957}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25737,7 +25737,7 @@ GameObject:
   - component: {fileID: 664123680}
   - component: {fileID: 664123679}
   - component: {fileID: 664123681}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25981,7 +25981,7 @@ GameObject:
   - component: {fileID: 677722365}
   - component: {fileID: 677722364}
   - component: {fileID: 677722366}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -26228,7 +26228,7 @@ GameObject:
   - component: {fileID: 712740379}
   - component: {fileID: 712740378}
   - component: {fileID: 712740380}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27001,7 +27001,7 @@ GameObject:
   - component: {fileID: 799442100}
   - component: {fileID: 799442099}
   - component: {fileID: 799442101}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27637,7 +27637,7 @@ GameObject:
   - component: {fileID: 880703238}
   - component: {fileID: 880703237}
   - component: {fileID: 880703239}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (11)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -27968,7 +27968,7 @@ GameObject:
   - component: {fileID: 935137309}
   - component: {fileID: 935137308}
   - component: {fileID: 935137310}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28822,7 +28822,7 @@ GameObject:
   - component: {fileID: 1132047325}
   - component: {fileID: 1132047324}
   - component: {fileID: 1132047326}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (6)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -29125,7 +29125,7 @@ GameObject:
   - component: {fileID: 1282414777}
   - component: {fileID: 1282414776}
   - component: {fileID: 1282414778}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30017,7 +30017,7 @@ GameObject:
   - component: {fileID: 1392710591}
   - component: {fileID: 1392710590}
   - component: {fileID: 1392710592}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -31318,7 +31318,7 @@ GameObject:
   - component: {fileID: 1641710585}
   - component: {fileID: 1641710584}
   - component: {fileID: 1641710586}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31485,7 +31485,7 @@ GameObject:
   - component: {fileID: 1683002146}
   - component: {fileID: 1683002145}
   - component: {fileID: 1683002147}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (8)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -31873,7 +31873,7 @@ GameObject:
   - component: {fileID: 1711320944}
   - component: {fileID: 1711320943}
   - component: {fileID: 1711320945}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32260,7 +32260,7 @@ GameObject:
   - component: {fileID: 1793836052}
   - component: {fileID: 1793836051}
   - component: {fileID: 1793836053}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32511,7 +32511,7 @@ GameObject:
   - component: {fileID: 1824010014}
   - component: {fileID: 1824010013}
   - component: {fileID: 1824010015}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (9)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
@@ -32911,7 +32911,7 @@ GameObject:
   - component: {fileID: 1929238452}
   - component: {fileID: 1929238451}
   - component: {fileID: 1929238453}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Triangle (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33078,7 +33078,7 @@ GameObject:
   - component: {fileID: 2019060061}
   - component: {fileID: 2019060060}
   - component: {fileID: 2019060062}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall (5)
   m_TagString: World Boundary
   m_Icon: {fileID: 0}
