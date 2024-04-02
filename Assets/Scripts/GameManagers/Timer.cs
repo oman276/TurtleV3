@@ -56,4 +56,8 @@ public class Timer : MonoBehaviour
     public float GetTime() {
         return (started ? timer : lastTime);
     }
+
+    public void resetTimer() {
+        timer = 0;
+    }
 }
