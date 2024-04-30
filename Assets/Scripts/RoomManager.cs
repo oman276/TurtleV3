@@ -7,6 +7,8 @@ public class RoomManager : MonoBehaviour
     public GameObject virtualCam;
 
     public float whereIsTurtleCamera = 0f;
+    public bool containsWater = false;
+    public bool containsLava = false;
 
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -17,7 +19,28 @@ public class RoomManager : MonoBehaviour
             cameraOfPlayer.transform.localPosition = new Vector3(whereIsTurtleCamera, 0f, 0f);
 
             virtualCam.SetActive(true);
-        
+
+            if (containsWater && !GameManager.G.audio.waterPlaying)
+            {
+                GameManager.G.audio.waterPlaying = true;
+                GameManager.G.audio.Play("running_water");
+            }
+            else if (!containsWater)
+            {
+                GameManager.G.audio.waterPlaying = false;
+                GameManager.G.audio.Stop("running_water");
+            }
+
+            if (containsLava && !GameManager.G.audio.lavaPlaying)
+            {
+                GameManager.G.audio.lavaPlaying = true;
+                GameManager.G.audio.Play("lava_sizzle");
+            }
+            else if (!containsLava)
+            {
+                GameManager.G.audio.lavaPlaying = false;
+                GameManager.G.audio.Stop("lava_sizzle");
+            }
         }
     }
 

@@ -13,6 +13,10 @@ public class LoadManager : MonoBehaviour
         GameManager.G.objectFade.FadeIn(levelFadeTime, fadeSprite);
         yield return new WaitForSeconds(levelFadeTime);
         yield return new WaitForSeconds(0.1f);
+        GameManager.G.audio.waterPlaying = false;
+        GameManager.G.audio.Stop("running_water");
+        GameManager.G.audio.lavaPlaying = false;
+        GameManager.G.audio.Stop("lava_sizzle");
         SceneManager.LoadScene(tag);
         if (!isLevel) {
             switch (tag) {

@@ -25924,6 +25924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 753314739}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &673121944
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -28368,6 +28370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 139431716}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &963982773
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -28894,6 +28898,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 149225671}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!1 &1132047322
 GameObject:
   m_ObjectHideFlags: 0
@@ -31597,6 +31603,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 384625118}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 1
 --- !u!60 &1638748462
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -48564,6 +48572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 448079171}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &2114039829
 PolygonCollider2D:
   m_ObjectHideFlags: 0

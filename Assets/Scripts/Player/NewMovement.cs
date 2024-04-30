@@ -78,7 +78,7 @@ public class NewMovement : MonoBehaviour
 
 
     public int crumbleBlocks_colliding;
-
+    public int waterCount = 0;
     public bool riverActive = false;
 
     LayerMask nothingmask;
@@ -168,15 +168,13 @@ public class NewMovement : MonoBehaviour
             GameManager.G.ui.swipeStart = mousePos;
             GameManager.G.ui.swipeLine.gameObject.SetActive(true);
 
-            //Activate Points
-            //TODO: Move to the right place
             for (int i = 0; i < pointNum; ++i)
             {
                 trajCirArray[i].transform.localPosition = Vector3.zero;
                 trajCirArray[i].SetActive(true);
             }
             //TODO: Replace with GM Reference
-            GameManager.G.audio.Play("player_select");
+            //GameManager.G.audio.Play("player_select");
 
             GameManager.G.player.SwapState((GameManager.G.player.state == PlayerState.PreGame ? 
                 PlayerState.FirstHeld : PlayerState.Held));
@@ -203,6 +201,9 @@ public class NewMovement : MonoBehaviour
                 direction = clampedDirection(direction);
                 if (direction != Vector2.zero) {
                     GameManager.G.audio.Play("player_release");
+                    if (waterCount > 0 && riverActive) {
+                        GameManager.G.audio.Play("splash");
+                    }
                     rb.velocity = Vector2.zero;
                     rb.AddForce(direction * speed);
                 }
@@ -526,6 +527,11 @@ public class NewMovement : MonoBehaviour
             crumbleBlocks_colliding += 1;
         }
 
+        if (collision.gameObject.tag == "Water") {
+            if (waterCount == 0) GameManager.G.audio.Play("splash");
+            waterCount++;
+        }
+
     }
 
     //Move to Animation (or Object Fade?)
@@ -539,7 +545,7 @@ public class NewMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         setTurtleAnimation = 1;
-        GameManager.G.audio.Play("player_impact");
+        GameManager.G.audio.Play("hit");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -556,6 +562,12 @@ public class NewMovement : MonoBehaviour
 
         if (collision.gameObject.tag == "CrumbleBlock") {
             crumbleBlocks_colliding -= 1;
+        }
+
+        if (collision.gameObject.tag == "Water")
+        {
+            waterCount--;
+            if (waterCount == 0) GameManager.G.audio.Play("splash");
         }
     }
 }

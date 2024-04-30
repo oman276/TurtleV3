@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && alive && !invFrames) {
             health--;
-            Debug.Log("Hit");
+            GameManager.G.audio.Play("enemy_hit");
             StartCoroutine(Invulnerability());
             if (health == 0) {
                 GameManager.G.player.ReduceVelocity(0.5f);
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                GameManager.G.player.BounceBack(0.7f);
+                GameManager.G.player.BounceBack(0.85f);
             }
         }
     }

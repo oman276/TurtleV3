@@ -24,7 +24,7 @@ public class Bouncy : MonoBehaviour
 
             if (!isMoving)
             {
-                GameManager.G.audio.Play("boing");
+                if(collision.gameObject.tag == "Player") GameManager.G.audio.Play("boing");
                 rb.velocity = Vector2.zero;
                 rb.velocity = newVector * multiply * oldMag;
             }
