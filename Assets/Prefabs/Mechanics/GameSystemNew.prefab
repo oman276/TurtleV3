@@ -7842,7 +7842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053398753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.98821926, y: 0.98821926, z: 0.98821926}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8473,6 +8473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 5059084179413518406}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!1 &885989628734461626
 GameObject:
   m_ObjectHideFlags: 0
@@ -10160,7 +10162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5059084179413518406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1259.75, y: -127.47984, z: -41.71771}
+  m_LocalPosition: {x: -1285.5312, y: -370.86658, z: -54.178585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11171,17 +11173,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: main_theme
-    clip: {fileID: 8300000, guid: 9b8a2b76b461d8245b5e7fd6b14ddf77, type: 3}
-    volume: 0.326
+    clip: {fileID: 8300000, guid: 5548c9e3a22ad0144bde2a6aed1ef008, type: 3}
+    volume: 0.25
     pitchMin: 1
     pitchMax: 1
     loop: 1
     source: {fileID: 0}
   - name: player_release
-    clip: {fileID: 8300000, guid: 02b8286023bd04440a7278c4bc700588, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: bda2264d8acb52d49ab90ca12e89db28, type: 3}
+    volume: 0.2
     pitchMin: 0.8
-    pitchMax: 1.2
+    pitchMax: 1.4
     loop: 0
     source: {fileID: 0}
   - name: player_impact
@@ -11240,6 +11242,229 @@ MonoBehaviour:
     pitchMax: 1.3
     loop: 0
     source: {fileID: 0}
+  - name: running_water
+    clip: {fileID: 8300000, guid: 284cf288d094d3c49ac919916d4e7350, type: 3}
+    volume: 0.4
+    pitchMin: 1
+    pitchMax: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: lava_sizzle
+    clip: {fileID: 8300000, guid: 26643c0507afd084bbe4ab250aa826bf, type: 3}
+    volume: 0.35
+    pitchMin: 1
+    pitchMax: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: on_fire
+    clip: {fileID: 8300000, guid: be0ae4197b730e64e8d8974a473d2bd2, type: 3}
+    volume: 1
+    pitchMin: 1
+    pitchMax: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: glass_break
+    clip: {fileID: 8300000, guid: 96e40bb683b80994a8c176f4e00f619e, type: 3}
+    volume: 0.55
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: menu_click
+    clip: {fileID: 8300000, guid: 7b54b949f55b618479c517a51ea028d9, type: 3}
+    volume: 0.55
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: load_theme
+    clip: {fileID: 8300000, guid: 40b2eaef701b2ba4f95ed2b401f7c3fb, type: 3}
+    volume: 0.8
+    pitchMin: 1
+    pitchMax: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: you_win
+    clip: {fileID: 8300000, guid: cc29c2c612825ce47bf5d4f9d5581659, type: 3}
+    volume: 0.7
+    pitchMin: 1
+    pitchMax: 1
+    loop: 0
+    source: {fileID: 0}
+  boings:
+  - name: b1
+    clip: {fileID: 8300000, guid: 03d6db5a43557834b8ed535521995cfd, type: 3}
+    volume: 0.5
+    pitchMin: 0.85
+    pitchMax: 1.15
+    loop: 0
+    source: {fileID: 0}
+  - name: b2
+    clip: {fileID: 8300000, guid: d9f0b08a880bd9c4392244c350205eec, type: 3}
+    volume: 0.5
+    pitchMin: 0.85
+    pitchMax: 1.15
+    loop: 0
+    source: {fileID: 0}
+  - name: b3
+    clip: {fileID: 8300000, guid: dd93d4b75b02de94c984b5e25ba4c39e, type: 3}
+    volume: 0.5
+    pitchMin: 0.85
+    pitchMax: 1.15
+    loop: 0
+    source: {fileID: 0}
+  - name: b4
+    clip: {fileID: 8300000, guid: 3eb523f1a75ac1e438a61c0cb6ac18d7, type: 3}
+    volume: 0.5
+    pitchMin: 0.85
+    pitchMax: 1.15
+    loop: 0
+    source: {fileID: 0}
+  - name: b5
+    clip: {fileID: 8300000, guid: 5d79fdfa27f990647b7034c65e977f50, type: 3}
+    volume: 0.5
+    pitchMin: 0.85
+    pitchMax: 1.15
+    loop: 0
+    source: {fileID: 0}
+  hits:
+  - name: h1
+    clip: {fileID: 8300000, guid: b0f7f652981fc85488210e596a0742b9, type: 3}
+    volume: 0.35
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: h2
+    clip: {fileID: 8300000, guid: f3271ff0dbb625c4cbd38139b1338f3d, type: 3}
+    volume: 0.35
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: h3
+    clip: {fileID: 8300000, guid: 36f886ed49034644baf6a05d6e3af9b2, type: 3}
+    volume: 0.35
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  - name: h1
+    clip: {fileID: 8300000, guid: 0d6db34682f02ef4099ff237b530f90e, type: 3}
+    volume: 0.35
+    pitchMin: 0.7
+    pitchMax: 1.3
+    loop: 0
+    source: {fileID: 0}
+  enemyHits:
+  - name: eh1
+    clip: {fileID: 8300000, guid: ae6bc442bf36ac3469318332457e5357, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: eh2
+    clip: {fileID: 8300000, guid: 01bb74d4680bebc4488c1a77a872fb64, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: eh3
+    clip: {fileID: 8300000, guid: 26e69dca9f973d945a6426528a57668c, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  splashes:
+  - name: s1
+    clip: {fileID: 8300000, guid: cc2809d149699bc4cba5662fb8e3c175, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s2
+    clip: {fileID: 8300000, guid: 0591c878c0be3474383857997ec39e06, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s3
+    clip: {fileID: 8300000, guid: 0f7da11ea05ecab4d9672ca018c49d51, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s4
+    clip: {fileID: 8300000, guid: 9821bb73ec0522841a488a6d6b53a4fa, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s5
+    clip: {fileID: 8300000, guid: 4bb05407d40832444b6e41563143de2c, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s6
+    clip: {fileID: 8300000, guid: 849e98974fb2f2d428692e9db4a70491, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s7
+    clip: {fileID: 8300000, guid: cc2809d149699bc4cba5662fb8e3c175, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s8
+    clip: {fileID: 8300000, guid: 85a01c32f61774a40b1683c2dc7efa31, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s9
+    clip: {fileID: 8300000, guid: 4dbd3a4f660cc0e4ebe8123a53ee1139, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s10
+    clip: {fileID: 8300000, guid: ab45df977555f2e4ab99a4c635dac23a, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s11
+    clip: {fileID: 8300000, guid: d27323bbed81b5746914b9b4e26a1636, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: s12
+    clip: {fileID: 8300000, guid: 99fa06ad934be6543836b1baf7906d06, type: 3}
+    volume: 1
+    pitchMin: 0.8
+    pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  waterPlaying: 0
+  lavaPlaying: 0
 --- !u!114 &2446455367117021047
 MonoBehaviour:
   m_ObjectHideFlags: 0

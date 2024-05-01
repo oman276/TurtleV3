@@ -29,6 +29,7 @@ public class TutorialPopup : Activatable
 
     public void CloseTutorial() {
         //GameManager.G.SwapState(GameState.Playing);
+        GameManager.G.audio.Play("menu_click");
         GameManager.G.player.SwapState(PlayerState.Active);
         tutorialPopup.SetActive(false);
     }

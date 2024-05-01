@@ -25,8 +25,9 @@ public class PlayerHealth : MonoBehaviour
     public float healthDelay = 2.5f;
 
     public int bridgeCount = 0;
-
     public int mudCount = 0;
+
+    public bool onFire = false;
 
     private void Start()
     {
@@ -87,6 +88,11 @@ public class PlayerHealth : MonoBehaviour
         //Reduce or increase health
         if (lavaCount > 0 && GameManager.G.player.isActive() && bridgeCount <= 0 && mudCount <= 0)
         {
+            if (onFire == false) {
+                onFire = true;
+                GameManager.G.audio.Play("on_fire");
+                Debug.Log("Fire Start");
+            }
             //Debug.Log("health is decreasing");
             background.color = new Color(background.color.r, background.color.g, background.color.b, 1);
             fill.color = new Color(fill.color.r, fill.color.g, fill.color.b, 1);
@@ -94,11 +100,21 @@ public class PlayerHealth : MonoBehaviour
             health -= Time.deltaTime * healthDecayMultiplier;           
             if (health <= 0)
             {
+                onFire = false;
+                GameManager.G.audio.Stop("on_fire");
+                Debug.Log("Fire Stop");
                 GameManager.G.player.SwapState(PlayerState.Dead);
             }
         }
         else if (GameManager.G.player.isActive())
         {
+            if (onFire == true)
+            {
+                onFire = false;
+                GameManager.G.audio.Stop("on_fire");
+                Debug.Log("Fire Stop");
+            }
+
             if (fadeState == HealthFadeState.Recharging)
             {
                 health += Time.deltaTime * reviveMultiplier;

@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void BeatLevel() {
+        GameManager.G.audio.Play("you_win");
         SwapState(GameState.LevelBeat);
     }
 
@@ -148,6 +149,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadLevelSelect() {
+        audio.Play("menu_click");
         SwapState(GameState.LevelSelect);
     }
 
@@ -164,6 +166,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void PauseGame() {
+        GameManager.G.audio.Play("menu_click");
         if (state != GameState.Paused) SwapState(GameState.Paused);
         else SwapState(GameState.Playing);
     }

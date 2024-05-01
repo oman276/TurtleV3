@@ -120,6 +120,10 @@ public class ShakeBridge : MonoBehaviour
                 amount = 0.7f;
 
                 GetComponent<BoxCollider2D>().enabled = false;
+                if (Vector2.Distance(this.transform.position, GameManager.G.player.movement.transform.position) <= 25f) {
+                    GameManager.G.audio.Play("glass_break");
+                }
+                
                 GameManager.G.currentLevel.BridgeEnter();
                 /*
                 LayerMask mask = LayerMask.GetMask("Nothing");

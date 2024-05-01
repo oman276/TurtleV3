@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
             Vector2 thisPos = this.transform.position;
             Vector2 newVector = (this.GetComponent<Collider2D>().ClosestPoint(collision.gameObject.transform.position)
                 - thisPos).normalized;
+            GameManager.G.audio.Play("hit");
             rb.AddForce(newVector * (nm.speed * force + 1));
         }
         if (collision.tag != "Enemy" && collision.tag != "Lava" && collision.tag != "Bumper") {
