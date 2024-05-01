@@ -39,6 +39,7 @@ public class LoadManager : MonoBehaviour
 
     public void LoadLevel(string tag, bool isLevel = true) {
         Time.timeScale = 1;
+        GameManager.G.audio.Play("load_theme");
         StartCoroutine(LoadInCoroutine(tag, isLevel));
     }
 

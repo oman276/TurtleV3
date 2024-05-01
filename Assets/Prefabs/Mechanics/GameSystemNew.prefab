@@ -10162,7 +10162,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5059084179413518406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1259.75, y: -127.47984, z: -41.71771}
+  m_LocalPosition: {x: -1285.5312, y: -370.86658, z: -54.178585}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11173,15 +11173,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: main_theme
-    clip: {fileID: 8300000, guid: 9b8a2b76b461d8245b5e7fd6b14ddf77, type: 3}
-    volume: 0.326
+    clip: {fileID: 8300000, guid: 5548c9e3a22ad0144bde2a6aed1ef008, type: 3}
+    volume: 0.25
     pitchMin: 1
     pitchMax: 1
     loop: 1
     source: {fileID: 0}
   - name: player_release
     clip: {fileID: 8300000, guid: bda2264d8acb52d49ab90ca12e89db28, type: 3}
-    volume: 0.1
+    volume: 0.2
     pitchMin: 0.8
     pitchMax: 1.4
     loop: 0
@@ -11268,6 +11268,27 @@ MonoBehaviour:
     volume: 0.55
     pitchMin: 0.8
     pitchMax: 1.2
+    loop: 0
+    source: {fileID: 0}
+  - name: menu_click
+    clip: {fileID: 8300000, guid: 7b54b949f55b618479c517a51ea028d9, type: 3}
+    volume: 0.55
+    pitchMin: 0.9
+    pitchMax: 1.1
+    loop: 0
+    source: {fileID: 0}
+  - name: load_theme
+    clip: {fileID: 8300000, guid: 40b2eaef701b2ba4f95ed2b401f7c3fb, type: 3}
+    volume: 0.8
+    pitchMin: 1
+    pitchMax: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: you_win
+    clip: {fileID: 8300000, guid: cc29c2c612825ce47bf5d4f9d5581659, type: 3}
+    volume: 0.7
+    pitchMin: 1
+    pitchMax: 1
     loop: 0
     source: {fileID: 0}
   boings:

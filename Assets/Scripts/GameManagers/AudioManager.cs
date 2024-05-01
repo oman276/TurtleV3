@@ -88,6 +88,8 @@ public class AudioManager : MonoBehaviour
 
         }
         //Play("running_water");
+
+        Play("main_theme");
     }
 
 

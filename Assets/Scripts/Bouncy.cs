@@ -21,10 +21,10 @@ public class Bouncy : MonoBehaviour
             Vector2 newVector = (collision.ClosestPoint(collision.gameObject.transform.position)
                 - thisPos).normalized;
 
-
+            if (collision.gameObject.tag == "Player") GameManager.G.audio.Play("boing");
             if (!isMoving)
             {
-                if(collision.gameObject.tag == "Player") GameManager.G.audio.Play("boing");
+                
                 rb.velocity = Vector2.zero;
                 rb.velocity = newVector * multiply * oldMag;
             }

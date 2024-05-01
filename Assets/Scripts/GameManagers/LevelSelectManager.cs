@@ -14,6 +14,7 @@ public class LevelSelectManager : MonoBehaviour
     public ScoreDisplayV2 display;
 
     public void PlayGame() {
+        GameManager.G.audio.Play("menu_click");
         GameManager.G.activeLevelIndex = currentIndex;
         if(levelTag != "") GameManager.G.load.LoadLevel(levelTag);
     }
@@ -34,34 +35,42 @@ public class LevelSelectManager : MonoBehaviour
 
     //Level Select Buttons
     public void Level1() {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("tutorial", 0, "Tutorial");
     }
     public void Level2()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("test 1", 1, "Coal Walk");
     }
     public void Level3()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("RisingBumpers", 2, "Watch Out Below");
     }
     public void Level4()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("Level 2", 3, "Turtle Falls");
     }
     public void Level5()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("RollingBalls", 4, "Rolling Stones");
     }
     public void Level6()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("Level6", 5, "Smoke and Slide");
     }
     public void Level7()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("spotlight", 6, "On The Run");
     }
     public void Level8()
     {
+        GameManager.G.audio.Play("menu_click");
         UpdateTags("darts", 7, "Under Fire");
     }
 

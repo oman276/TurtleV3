@@ -12,6 +12,15 @@ public class RoomManager : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other.gameObject.name);
+        //if (other.gameObject.name == "Lava Base" || other.gameObject.name == "Rising Lava") Debug.Log("joink");
+
+        if ((other.gameObject.name == "Lava Base" || other.gameObject.name == "Rising Lava") 
+            && containsLava == false && !GameManager.G.audio.lavaPlaying) {
+            containsLava = true;
+            GameManager.G.audio.lavaPlaying = true;
+            GameManager.G.audio.Play("lava_sizzle");
+        }
 
         if(other.CompareTag("Player") && !other.isTrigger) {
 
