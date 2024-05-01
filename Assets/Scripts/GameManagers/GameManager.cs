@@ -124,6 +124,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReloadCurrentLevel() {
+        if (player.respawnCoroutine != null) {
+            StopCoroutine(player.respawnCoroutine);
+            player.respawnCoroutine = null;
+        }
         load.LoadLevel(SceneManager.GetActiveScene().name);
     }
 

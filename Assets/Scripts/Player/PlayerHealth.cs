@@ -28,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
     public int mudCount = 0;
 
     public bool onFire = false;
+ 
 
     private void Start()
     {
