@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
                 ui.SwapState(UIState.LevelSelect);
                 break;
             case GameState.LevelBeat:
+                scores.completed[activeLevelIndex] = true;
                 ui.SwapState(UIState.PostGame);
                 player.SwapState(PlayerState.PostGame);
                 break;

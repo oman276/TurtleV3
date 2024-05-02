@@ -12,6 +12,7 @@ public class RigidbodyHorizontal : MonoBehaviour
     public Transform rightBound;
 
     public bool movingRight;
+    float startTime;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +20,12 @@ public class RigidbodyHorizontal : MonoBehaviour
         if(rb == null) {
             rb = this.GetComponent<Rigidbody2D>();
         }
-
+        startTime = Time.time;
     }
 
     private void Update()
     {
-        float time = Mathf.PingPong(Time.time * moveSpeed, 1);
+        float time = Mathf.PingPong((Time.time - startTime) * moveSpeed, 1);
         if (movingRight) time = 1 - time;
         Vector3 newPosition = Vector3.Lerp(leftBound.position, rightBound.position, time);
         rb.MovePosition(newPosition);

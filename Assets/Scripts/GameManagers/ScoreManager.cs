@@ -8,9 +8,13 @@ public class ScoreManager : MonoBehaviour
     public List<List<(string, float)>> highScores;
     public string playerName = "Demo Player";
 
+    public bool[] completed = new bool[9];
+
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < 9; i++) completed[i] = false;
+
         //High Scores Setup
         {
             highScores = new List<List<(string, float)>>();
