@@ -92,7 +92,7 @@ public class PlayerHealth : MonoBehaviour
             if (onFire == false) {
                 onFire = true;
                 GameManager.G.audio.Play("on_fire");
-                Debug.Log("Fire Start");
+                //Debug.Log("Fire Start");
             }
             //Debug.Log("health is decreasing");
             background.color = new Color(background.color.r, background.color.g, background.color.b, 1);
@@ -103,7 +103,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 onFire = false;
                 GameManager.G.audio.Stop("on_fire");
-                Debug.Log("Fire Stop");
+                //Debug.Log("Fire Stop");
                 GameManager.G.player.SwapState(PlayerState.Dead);
             }
         }
@@ -113,7 +113,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 onFire = false;
                 GameManager.G.audio.Stop("on_fire");
-                Debug.Log("Fire Stop");
+                //Debug.Log("Fire Stop");
             }
 
             if (fadeState == HealthFadeState.Recharging)

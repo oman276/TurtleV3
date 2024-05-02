@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public int numberOfEnemies = 1;
     public string levelName = "test 1";
+    public int levelNum = 0;
     public Transform playerSpawn;
     public Transform cameraSpawn;
 

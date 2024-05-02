@@ -13,6 +13,8 @@ public class LevelSelectManager : MonoBehaviour
 
     public ScoreDisplayV2 display;
 
+    public bool progressionEnabled = false;
+
     public void PlayGame() {
         GameManager.G.audio.Play("menu_click");
         GameManager.G.activeLevelIndex = currentIndex;

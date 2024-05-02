@@ -17,7 +17,7 @@ public class TutorialPopup : Activatable
 
     public override void Activate() {
         base.Activate();
-        StartCoroutine(ActiveAsync());
+        if(!GameManager.G.scores.completed[0]) StartCoroutine(ActiveAsync());
     }
 
     IEnumerator ActiveAsync() {

@@ -7,6 +7,17 @@ public class Catapult : MonoBehaviour
     public Transform target;
     public float addedSlingPower = 1.1f;
 
+    public GameObject directionalArrow;
+
+    private void Start()
+    {
+        if (directionalArrow) {
+            Vector3 direction = target.position - transform.position;  // Get direction to target
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;  // Calculate rotation angle
+            directionalArrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));  // Set rotation, adjust by -90 if needed
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision){
         if (collision.gameObject.tag == "Player") {
             StartCoroutine(Launch());
