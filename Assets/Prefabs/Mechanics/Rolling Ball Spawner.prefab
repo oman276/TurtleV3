@@ -130,11 +130,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df1fdd4db9d3a54a837fac24dcb9a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activateOnStart: 0
+  activated: 0
   minInterval: 4
   maxInterval: 4
   ball: {fileID: 5630899600835965088, guid: e135ced29efba0d41bd82fb388f64b61, type: 3}
   spawnpoint: {fileID: 2046972659964789225}
-  willSpawn: 0
   distanceFromPlayer: 75
 --- !u!1 &2046972659964789224
 GameObject:
@@ -160,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046972659964789224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.51, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
