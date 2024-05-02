@@ -35,6 +35,8 @@ public class PlayerManager : MonoBehaviour
 
     public float lastHeldTime;
 
+    public Coroutine respawnCoroutine = null;
+
     private void Start()
     {
         PlayerSetup();
@@ -71,6 +73,7 @@ public class PlayerManager : MonoBehaviour
             case PlayerState.Dead:
                 GameManager.G.ui.swipeToStart.SetActive(false);
                 health.ResetHealth();
+                //respawnCoroutine = null;
                 break;
         }
 
@@ -132,15 +135,25 @@ public class PlayerManager : MonoBehaviour
         playerCollider.enabled = false;
         rb.velocity = Vector2.zero;
         playerSprite.SetActive(false);
-        Invoke("LoadNewScene", 2f);
+        respawnCoroutine = StartCoroutine(RespawnSafely());
+        //restartStartTime = Time.time;
+        //Invoke("LoadNewScene", 2f);
+    }
+
+    IEnumerator RespawnSafely() {
+        yield return new WaitForSeconds(2);
+        LoadNewScene();
     }
 
     void LoadNewScene() {
+        StopCoroutine(respawnCoroutine);
+        respawnCoroutine = null;
         GameManager.G.ReloadCurrentLevel();
     }
 
     public void SetupNewScene() {
         //Fill with whatever we need for setup
+        movement.FireParticles.SetActive(false);
         playerCollider.enabled = true;
         rb.velocity = Vector2.zero;
         playerSprite.SetActive(true);

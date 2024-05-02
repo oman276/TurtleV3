@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
         //if (other.gameObject.name == "Lava Base" || other.gameObject.name == "Rising Lava") Debug.Log("joink");
 
         if ((other.gameObject.name == "Lava Base" || other.gameObject.name == "Rising Lava") 

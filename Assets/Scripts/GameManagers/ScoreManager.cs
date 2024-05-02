@@ -17,60 +17,67 @@ public class ScoreManager : MonoBehaviour
             
             //High Scores Initialization
             List<(string, float)> l1 = new List<(string, float)> {
-                ("Josiah", 8f),
-                ("Owen", 10f),
-                ("Ryan", 12f),
-                ("Hadas", 31f),
-                ("Linda", 58f),
+                ("Josiah", 8.99f),
+                ("Owen", 10.99f),
+                ("Ryan", 12.99f),
+                ("Hadas", 31.99f),
+                ("Linda", 58.99f),
             };
             List<(string, float)> l2 = new List<(string, float)> {
-                ("Owen", 16f),
-                ("Josiah", 18f),
-                ("Nicky", 20f),
-                ("Jay", 45f),
-                ("Hadas", 62f),
+                ("Owen", 16.99f),
+                ("Josiah", 18.99f),
+                ("Nicky", 20.99f),
+                ("Jay", 45.99f),
+                ("Hadas", 62.99f),
             };
             List<(string, float)> l3 = new List<(string, float)> {
-                ("Josiah", 22f),
-                ("Owen", 26f),
-                ("Maximo", 30f),
-                ("River", 32f),
-                ("Nicole", 51f),
+                ("Josiah", 22.99f),
+                ("Owen", 26.99f),
+                ("Maximo", 30.99f),
+                ("River", 32.99f),
+                ("Nicole", 51.99f),
             };
             List<(string, float)> l4 = new List<(string, float)> {
-                ("Ryan", 24f),
-                ("Owen", 27f),
-                ("River", 31f),
-                ("Maximo", 35f),
-                ("Nicole", 47f),
+                ("Ryan", 24.99f),
+                ("Owen", 27.99f),
+                ("River", 31.99f),
+                ("Maximo", 35.99f),
+                ("Nicole", 47.99f),
             };
             List<(string, float)> l5 = new List<(string, float)> {
-                ("Maximo", 25f),
-                ("Josiah", 29f),
-                ("Ryan", 32f),
-                ("Owen", 35f),
-                ("Nicole", 44f),
+                ("Maximo", 25.99f),
+                ("Josiah", 29.99f),
+                ("Ryan", 32.99f),
+                ("Owen", 35.99f),
+                ("Nicole", 44.99f),
             };
             List<(string, float)> l6 = new List<(string, float)> {
-                ("Ryan", 15f),
-                ("Owen", 17f),
-                ("Josiah", 21f),
-                ("River", 25f),
-                ("Nicole", 33f),
+                ("Ryan", 15.99f),
+                ("Owen", 17.99f),
+                ("Josiah", 21.99f),
+                ("River", 25.99f),
+                ("Nicole", 33.99f),
             };
             List<(string, float)> l7 = new List<(string, float)> {
-                ("Ryan", 20f),
-                ("River", 24f),
-                ("Maximo", 27f),
-                ("Owen", 31f),
-                ("Nicole", 39f),
+                ("Ryan", 20.99f),
+                ("River", 24.99f),
+                ("Maximo", 27.99f),
+                ("Owen", 31.99f),
+                ("Nicole", 39.99f),
             };
             List<(string, float)> l8 = new List<(string, float)> {
-                ("Josiah", 22f),
-                ("Maximo", 23f),
-                ("Ryan", 24f),
-                ("Nicole", 27f),
-                ("Owen", 33f),
+                ("Josiah", 22.99f),
+                ("Maximo", 23.99f),
+                ("Ryan", 24.99f),
+                ("Nicole", 27.99f),
+                ("Owen", 33.99f),
+            };
+            List<(string, float)> l9 = new List<(string, float)> {
+                ("Nicole", 59.99f),
+                ("Owen", 67.99f),
+                ("Ryan", 72.99f),
+                ("Josiah", 87.99f),
+                ("Elliot", 98.99f),
             };
 
             highScores.Insert(0, l1);
@@ -81,6 +88,7 @@ public class ScoreManager : MonoBehaviour
             highScores.Insert(5, l6);
             highScores.Insert(6, l7);
             highScores.Insert(7, l8);
+            highScores.Insert(8, l9);
         }
     }
 

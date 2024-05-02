@@ -73,5 +73,8 @@ public class LevelSelectManager : MonoBehaviour
         GameManager.G.audio.Play("menu_click");
         UpdateTags("darts", 7, "Under Fire");
     }
-
+    public void Level9() {
+        GameManager.G.audio.Play("menu_click");
+        UpdateTags("slingshot", 8, "Called Shot");
+    }
 }
