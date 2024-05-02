@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Darts.unity
     guid: b16731bd6cf28144c9502d51418f634b
+  - enabled: 1
+    path: Assets/Scenes/Levels/slingshot.unity
+    guid: f41829fded1e57841a25eeed6f0d18a9
   m_configObjects: {}
