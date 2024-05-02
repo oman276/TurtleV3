@@ -76,6 +76,13 @@ public class NewMovement : MonoBehaviour
     public GameObject LavaTears;
     // ANIMATION END
 
+    public GameObject T1;
+    public GameObject T2;
+    public GameObject T3;
+    public GameObject T1S;
+    public GameObject T2S;
+    public GameObject T3S;
+
 
     public int crumbleBlocks_colliding;
     public int waterCount = 0;
@@ -168,6 +175,10 @@ public class NewMovement : MonoBehaviour
             GameManager.G.ui.swipeStart = mousePos;
             GameManager.G.ui.swipeLine.gameObject.SetActive(true);
 
+            T1S.SetActive(true);
+            T2S.SetActive(true);
+            T3S.SetActive(true);
+
             for (int i = 0; i < pointNum; ++i)
             {
                 trajCirArray[i].transform.localPosition = Vector3.zero;
@@ -198,7 +209,10 @@ public class NewMovement : MonoBehaviour
             {
                 GameObject nowfx = Instantiate(fx, this.transform.position, this.transform.rotation);
                 Destroy(nowfx, 1f);
-                direction = clampedDirection(direction);
+                //direction = direction.normalized;
+                int dMag;
+                (direction, dMag) = clampedDirection(direction);
+                Debug.Log(dMag);
                 if (direction != Vector2.zero) {
                     GameManager.G.audio.Play("player_release");
                     if (waterCount > 0 && riverActive) {
@@ -228,8 +242,15 @@ public class NewMovement : MonoBehaviour
             swipeEndPos = Input.mousePosition;
             Vector2 direction = swipeEndPos - swipeStartPos;
             float percentage = direction.magnitude / maxMagnitude;
-            direction = clampedDirection(direction);
+            //direction = clampedDirection(direction);
+            int dMag;
+            (direction, dMag) = clampedDirection(direction);
+            direction = direction.normalized;
             directionGlobal = direction;
+
+            T1.SetActive(dMag >= 1);
+            T2.SetActive(dMag >= 2);
+            T3.SetActive(dMag >= 3);
 
             // MAKES DIFFERENT SWIPE TYPES HAVE DIFFERENT DRAG
             float adjustedPercentage = (percentage - swipeBuffer) / (1 - swipeBuffer);
@@ -328,22 +349,38 @@ public class NewMovement : MonoBehaviour
             
     }
 
-    Vector2 clampedDirection(Vector2 original) {
+    (Vector2, int) clampedDirection(Vector2 original) {
         float percentage = original.magnitude / maxMagnitude;
         original = original.normalized;
-
+        int lengthIndex;
+        //return original;
+        
         //Get length of 0, 1, 2, 3
         if (percentage <= swipeBuffer) {
-            return new Vector2(0, 0);
+            return (new Vector2(0, 0), 0);
         }
         float length;
         //Get the percentage 
 
         float adjustedPercentage = (percentage - swipeBuffer) / (1 - swipeBuffer);
-        if (adjustedPercentage >= 0.3) length = 3.5f;
-        else if (adjustedPercentage >= 0.1) length = 2.3f;
-        else length = 1.5f;
+        if (adjustedPercentage >= 0.3) { 
+            length = 3.5f;
+            lengthIndex = 3;
+        }
+        else if (adjustedPercentage >= 0.1)
+        {
+            length = 2.5f;
+            lengthIndex = 2;
+        }
+        else
+        {
+            length = 1.5f;
+            lengthIndex = 1;
+        }
 
+        return (original * ((float)length / 3f), lengthIndex);
+
+        /*
         //Group the X from 1-5, group the Y from 1-5, pick a direction based on the coordinates
         int x_cat;
         if (original.x > 0.92388f) x_cat = 1;
@@ -369,6 +406,7 @@ public class NewMovement : MonoBehaviour
 
         Debug.LogError("Direction Vector Invalid: " + coordinates);
         return new Vector2(0, 0);
+        */
     }
 
     //TODO: Time Slowdown should be moved??
@@ -450,6 +488,13 @@ public class NewMovement : MonoBehaviour
             trajCirArray[i].transform.localPosition = Vector3.zero;
             trajCirArray[i].SetActive(false);
         }
+
+        T1.SetActive(false);
+        T2.SetActive(false);
+        T3.SetActive(false);
+        T1S.SetActive(false);
+        T2S.SetActive(false);
+        T3S.SetActive(false);
     }
 
 
@@ -505,7 +550,9 @@ public class NewMovement : MonoBehaviour
 
             if(speed > 1700f) {
                 Vector2 direction = swipeEndPos - swipeStartPos;
-                direction = clampedDirection(direction);
+                //direction = clampedDirection(direction);
+                int dMag;
+                (direction, dMag) = clampedDirection(direction);
                 if (direction != Vector2.zero) rb.AddForce(direction * (speed / 2 * -1));   
             }
 

@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     public ScoreManager scores;
     public int activeLevelIndex = 0;
 
+    //Settings
+    public bool eightDirMovementEnabled = false;
+
     private void Awake()
     {
         if (G != null && G != this)

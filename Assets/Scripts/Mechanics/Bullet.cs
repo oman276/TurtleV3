@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float force = 1f; 
+    public float force = 1f;
+
+    public bool immuneToWall = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -19,8 +21,14 @@ public class Bullet : MonoBehaviour
             GameManager.G.audio.Play("hit");
             rb.AddForce(newVector * (nm.speed * force + 1));
         }
-        if (collision.tag != "Enemy" && collision.tag != "Lava" && collision.tag != "Bumper") {
+        if (collision.tag == "World Boundary" && immuneToWall) { /* do nothing */ }
+        else if (collision.tag != "Enemy" && collision.tag != "Lava" && collision.tag != "Bumper") {
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "World Boundary") immuneToWall = false;
     }
 }
