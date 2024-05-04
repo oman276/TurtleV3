@@ -2,9 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum BRIDGE_STATE { 
+    UNBROKEN = 0,
+    DMG1 = 1,
+    DMG2 = 2,
+    DMG3 = 3,
+    BROKE = 4
+};
+
 public class ShakeBridge : MonoBehaviour
 {
     // river stuff
+    /*
     public GameObject[] rivers;
 
     public float speed = 30.0f; //how fast it shakes
@@ -17,29 +26,32 @@ public class ShakeBridge : MonoBehaviour
     bool start_timer = false;
 
     bool start_respawn = false;
+    */
 
     public GameObject sprite;
-
     bool isCurrentlyColliding = true;
+    Animator sprAnim;
+    BRIDGE_STATE state = BRIDGE_STATE.UNBROKEN;
+    public float timeToBreak;
+    public float timeToRespawn;
+    bool destroying = false;
 
     void Start()
     {
         sprite = transform.GetChild(0).gameObject;
-        rivers = GameObject.FindGameObjectsWithTag("Water");
+        //rivers = GameObject.FindGameObjectsWithTag("Water");
+        sprAnim = sprite.gameObject.GetComponent<Animator>();
+        sprAnim.SetInteger("damage_state", 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Player") {
-            start_timer = true;
             isCurrentlyColliding = true;
             GameManager.G.currentLevel.BridgeEnter();
-            /*
-            Debug.Log("Activate - Enter");
-            LayerMask mask = LayerMask.GetMask("Nothing");
-            foreach (GameObject river in rivers) {
-                river.GetComponent<AreaEffector2D>().colliderMask = mask;
+            if (!destroying) {
+                destroying = true;
+                StartCoroutine(DestroyCoroutine()); 
             }
-            */
         }
     }
 
@@ -48,55 +60,71 @@ public class ShakeBridge : MonoBehaviour
         if (collision.gameObject.tag == "Player") {
             isCurrentlyColliding = false;
             GameManager.G.currentLevel.BridgeExit();
-            /*
-            LayerMask mask = LayerMask.GetMask("Player");
-            Debug.Log("Deactivate - Exit");
-            foreach (GameObject river in rivers) {
-                river.GetComponent<AreaEffector2D>().colliderMask = mask;
-            }
-            */
         }
     }
 
-    // Update is called once per frame
+    IEnumerator DestroyCoroutine() {
+        sprAnim.SetInteger("damage_state", 1);
+        yield return new WaitForSeconds(timeToBreak / 3f);
+        sprAnim.SetInteger("damage_state", 2);
+        yield return new WaitForSeconds(timeToBreak / 3f);
+        sprAnim.SetInteger("damage_state", 3);
+        yield return new WaitForSeconds(timeToBreak / 3f);
+        FallDown();
+    }
 
-    private IEnumerator Fall()
-    {
-        // Play the animation for getting suck in
-        sprite.GetComponent<Animator>().SetInteger("bridgeState", 1);
+    void FallDown() { 
+        if(isCurrentlyColliding) GameManager.G.currentLevel.BridgeExit();
+        //sprite.gameObject.SetActive(false);
+        GetComponent<BoxCollider2D>().enabled = false;
+        if (Vector2.Distance(this.transform.position, GameManager.G.player.movement.transform.position) <= 25f)
+        {
+            GameManager.G.audio.Play("glass_break");
+        }
+        sprAnim.SetBool("is_active", false);
+        Invoke("Reactivate", timeToRespawn);
+        //sprAnim.SetInteger("damage_state", 0);
+        destroying = false;
+    }
 
-        yield return new WaitForSeconds(0.25f);
+    void Reactivate() {
+        sprAnim.SetInteger("damage_state", 0);
+        sprAnim.SetBool("is_active", true);
+        sprite.gameObject.SetActive(true);
+        GetComponent<BoxCollider2D>().enabled = true;
+        if (isCurrentlyColliding) {
+            destroying = true;
+        }
+    }
 
+    int StateToInt(BRIDGE_STATE b) {
+        if (b == BRIDGE_STATE.UNBROKEN) return 0;
+        else if (b == BRIDGE_STATE.DMG1) return 1;
+        else if (b == BRIDGE_STATE.DMG2) return 2;
+        else if (b == BRIDGE_STATE.DMG3) return 3;
+        else return 4;
     }
 
     void Update()
     {
 
+        //TODO REPLACE W UPDATE VERSION IF THIS IS TOO HARD
+        /*
         if (start_respawn) {
         
             if (crumble_timer > until_crumble) { //comes back
-
-                sprite.GetComponent<Animator>().SetInteger("bridgeState", 0);
                 
                 start_respawn = false;
 
                 sprite.transform.localPosition = new Vector3(0,0,0);
 
                 crumble_timer = 0f;
-                amount = 0.7f;
 
                 if(isCurrentlyColliding) {
                     start_timer = true;
                 }
                 GetComponent<BoxCollider2D>().enabled = true;
                 GameManager.G.currentLevel.BridgeExit();
-                /*
-                LayerMask mask = LayerMask.GetMask("Player");
-                Debug.Log("Deactivate - Respawn");
-                foreach (GameObject river in rivers) {
-                    river.GetComponent<AreaEffector2D>().colliderMask = mask;
-                }
-                */
                 
             } else {
                 crumble_timer += Time.deltaTime;
@@ -104,12 +132,7 @@ public class ShakeBridge : MonoBehaviour
 
         } else if(start_timer) {
 
-            Vector3 shaker = new Vector3(Mathf.Sin(Time.time * speed) * amount * 0.75f, sprite.transform.localPosition.y, sprite.transform.localPosition.z);
-            sprite.transform.localPosition = shaker;
-
             if (crumble_timer > until_crumble) { //crumbled
-
-                StartCoroutine(Fall());
                 
                 start_timer = false;
                 start_respawn = true;
@@ -125,21 +148,11 @@ public class ShakeBridge : MonoBehaviour
                 }
                 
                 GameManager.G.currentLevel.BridgeEnter();
-                /*
-                LayerMask mask = LayerMask.GetMask("Nothing");
-                foreach (GameObject river in rivers) {
-                    river.GetComponent<AreaEffector2D>().colliderMask = mask;
-                }
-                */
 
             } else {
                 crumble_timer += Time.deltaTime;
             }
-
-            amount += 0.001f;
-            
         }
-
-
+        */
     }
 }
