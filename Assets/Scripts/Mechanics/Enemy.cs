@@ -46,24 +46,32 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player" && alive && !invFrames) {
             health--;
             GameManager.G.audio.Play("enemy_hit");
-            StartCoroutine(Invulnerability());
             if (health == 0) {
                 GameManager.G.player.ReduceVelocity(0.5f);
+                FindObjectOfType<CameraShake>().ShakeCamera(3.5f, 1f);
                 Die(); 
             }
             else
             {
+                StartCoroutine(Invulnerability());
+                FindObjectOfType<CameraShake>().ShakeCamera(2f, 0.25f);
                 GameManager.G.player.BounceBack(0.85f);
             }
         }
     }
 
     IEnumerator Invulnerability() {
+        Time.timeScale = 0;
         invFrames = true;
         this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.3f);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSecondsRealtime(0.05f);
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        yield return new WaitForSecondsRealtime(0.05f);
+        this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.3f);
+        yield return new WaitForSecondsRealtime(0.05f);
         invFrames = false;
         this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        Time.timeScale = 1;
     }
 
     void Die()

@@ -55,6 +55,7 @@ public class LevelManager : MonoBehaviour
 
     public void BridgeExit() {
         bridgeCount--;
+        if (bridgeCount < 0) bridgeCount = 0;
         if (bridgeCount == 0) BridgeOnOff(false);
     }
 

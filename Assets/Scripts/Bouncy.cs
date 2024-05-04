@@ -21,7 +21,10 @@ public class Bouncy : MonoBehaviour
             Vector2 newVector = (collision.ClosestPoint(collision.gameObject.transform.position)
                 - thisPos).normalized;
 
-            if (collision.gameObject.tag == "Player") GameManager.G.audio.Play("boing");
+            if (collision.gameObject.tag == "Player") { 
+                GameManager.G.audio.Play("boing");
+                FindObjectOfType<CameraShake>().ShakeCamera(1.5f, 0.25f);
+            }
             if (!isMoving)
             {
                 

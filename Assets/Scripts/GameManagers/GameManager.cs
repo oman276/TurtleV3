@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
     public void SwapState(GameState newState)
     {
         if (newState == state) return;
-
         
         //Outgoing State setup
         switch (state)

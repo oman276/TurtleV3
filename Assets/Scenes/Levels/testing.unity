@@ -25924,6 +25924,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 753314739}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &673121944
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -28200,6 +28202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 139431716}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &963982773
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -28810,6 +28814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 149225671}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!1 &1132047322
 GameObject:
   m_ObjectHideFlags: 0
@@ -29898,6 +29904,7 @@ GameObject:
   - component: {fileID: 1382993237}
   - component: {fileID: 1382993236}
   - component: {fileID: 1382993235}
+  - component: {fileID: 1382993239}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -30005,6 +30012,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382993239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382993234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd3ecfb424380a478615f00657f8a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 0}
+  virtualCameraNoise: {fileID: 0}
+  noiseProfile: {fileID: 11400000, guid: ed1eefb7468e1ac489574b8a2e42b957, type: 2}
 --- !u!1 &1392710588
 GameObject:
   m_ObjectHideFlags: 0
@@ -31261,6 +31283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 384625118}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &1638748462
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -48060,6 +48084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCam: {fileID: 448079171}
   whereIsTurtleCamera: 0
+  containsWater: 0
+  containsLava: 0
 --- !u!60 &2114039829
 PolygonCollider2D:
   m_ObjectHideFlags: 0
