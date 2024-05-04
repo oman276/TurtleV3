@@ -72,8 +72,8 @@ public class NewMovement : MonoBehaviour
     public GameObject Mud3;
 
     public GameObject FireParticles;
-
     public GameObject LavaTears;
+    bool lavaAnimOn = false;
     // ANIMATION END
 
     public GameObject T1;
@@ -212,7 +212,7 @@ public class NewMovement : MonoBehaviour
                 //direction = direction.normalized;
                 int dMag;
                 (direction, dMag) = clampedDirection(direction);
-                Debug.Log(dMag);
+                //Debug.Log(dMag);
                 if (direction != Vector2.zero) {
                     GameManager.G.audio.Play("player_release");
                     if (waterCount > 0 && riverActive) {
@@ -413,6 +413,18 @@ public class NewMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
+        if (!lavaAnimOn && GameManager.G.player.health.lavaCount > 0 && GameManager.G.player.health.bridgeCount == 0)
+        {
+            lavaAnimOn = true;
+            FireParticles.SetActive(true);
+            LavaTears.SetActive(true);
+        }
+        else if (lavaAnimOn) {
+            lavaAnimOn = false;
+            StartCoroutine(ShowAndHide(FireParticles, 1.5f));
+            StartCoroutine(ShowAndHide(LavaTears, 1.5f));
+        }
+
         if (GameManager.G.player.isHeld())
         {
             //Speed
@@ -565,10 +577,7 @@ public class NewMovement : MonoBehaviour
             StartCoroutine(ShowAndHide(Mud3, 0.5f));
         }
 
-        if (GameManager.G.player.health.lavaCount > 0 ) {
-            FireParticles.SetActive(true);
-            LavaTears.SetActive(true);
-        }
+        
 
         if (collision.gameObject.tag == "CrumbleBlock") {
             crumbleBlocks_colliding += 1;
@@ -603,8 +612,7 @@ public class NewMovement : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Lava") {
-            StartCoroutine(ShowAndHide(FireParticles, 1.5f));
-            StartCoroutine(ShowAndHide(LavaTears, 1.5f));
+            
         }
 
         if (collision.gameObject.tag == "CrumbleBlock") {

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1093000715}
   - component: {fileID: 1093000714}
+  - component: {fileID: 1118898542677139818}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1118898542677139818
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093000713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0edeefc752878884bb66fc6d02d95690, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &757748663116995355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,7 +216,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 32810605994984337, guid: 890c3ea38ff862b4da5cee7c2de1d290, type: 3}
   m_PrefabInstance: {fileID: 757748663116995355}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1794995502
+--- !u!114 &4216816395489040655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,13 +225,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 788272280562030730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a99bba8674dc804b93cadb5bcb19e92, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f1655d18138fe941a7c8c3e82f8b97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteObj: {fileID: 1093000713}
-  pm: {fileID: 0}
-  playerInTrigger: 0
-  shakeIntensity: 0.1
-  shakeDuration: 2
-  shakeIncrease: 0.1
-  regenTime: 5
+  sprite: {fileID: 1093000713}
+  timeToBreak: 3
+  timeToRespawn: 3
