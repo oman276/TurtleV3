@@ -602,6 +602,7 @@ public class NewMovement : MonoBehaviour
     {
         setTurtleAnimation = 1;
         GameManager.G.audio.Play("hit");
+        FindObjectOfType<CameraShake>().ShakeCamera(2f, 0.1f + 0.1f * (rb.velocity.magnitude / maxVelocity));
     }
 
     private void OnTriggerExit2D(Collider2D collision)
