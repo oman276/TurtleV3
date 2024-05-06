@@ -6,6 +6,7 @@ using TMPro;
 public class LevelSelectManager : MonoBehaviour
 {
     public GameObject selectables;
+    public GameObject[] buttons;
 
     public TextMeshProUGUI titleCard;
     string levelTag = "";
@@ -33,6 +34,13 @@ public class LevelSelectManager : MonoBehaviour
     private void OnDisable()
     {
         selectables.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        foreach (GameObject g in buttons) {
+            g.SetActive(true);
+        }
     }
 
     //Level Select Buttons

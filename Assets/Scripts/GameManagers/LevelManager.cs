@@ -8,7 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     public int numberOfEnemies = 1;
     public string levelName = "test 1";
-    public int levelNum = 0;
+    public string nextLevel;
+    public int levelIndex;
     public Transform playerSpawn;
     public Transform cameraSpawn;
 
@@ -24,6 +25,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.G.activeLevelIndex = levelIndex;
         rivers = GameObject.FindGameObjectsWithTag("Water");
         effectors = new List<AreaEffector2D>();
         foreach (GameObject river in rivers)

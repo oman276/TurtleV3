@@ -78826,6 +78826,14 @@ PrefabInstance:
       value: spotlight
       objectReference: {fileID: 0}
     - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: nextLevel
+      value: darts
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
+      propertyPath: levelIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064998288271949705, guid: 472df116754b8174ebee68f2756e60f6, type: 3}
       propertyPath: startingCamZone
       value: 
       objectReference: {fileID: 0}
