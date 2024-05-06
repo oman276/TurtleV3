@@ -27,7 +27,31 @@ public class LoadManager : MonoBehaviour
             SetupEndedSignal();
         }
     }
-    
+
+    IEnumerator LoadInCoroutine(int index, bool isLevel)
+    {
+        GameManager.G.objectFade.FadeIn(levelFadeTime, fadeSprite);
+        yield return new WaitForSeconds(levelFadeTime);
+        yield return new WaitForSeconds(0.1f);
+        GameManager.G.audio.waterPlaying = false;
+        GameManager.G.audio.Stop("running_water");
+        GameManager.G.audio.lavaPlaying = false;
+        GameManager.G.audio.Stop("lava_sizzle");
+        SceneManager.LoadScene(index);
+        /*
+        if (!isLevel)
+        {
+            switch (tag)
+            {
+                case "Menu":
+                    GameManager.G.SwapState(GameState.MainMenu);
+                    break;
+            }
+            SetupEndedSignal();
+        }
+        */
+    }
+
     IEnumerator LoadOutCoroutine() {
         GameManager.G.objectFade.FadeOut(levelFadeTime, fadeSprite);
         yield return new WaitForSeconds(levelFadeTime);
@@ -41,6 +65,13 @@ public class LoadManager : MonoBehaviour
         Time.timeScale = 1;
         GameManager.G.audio.Play("load_theme");
         StartCoroutine(LoadInCoroutine(tag, isLevel));
+    }
+
+    public void LoadLevel(int index, bool isLevel = true)
+    {
+        Time.timeScale = 1;
+        GameManager.G.audio.Play("load_theme");
+        StartCoroutine(LoadInCoroutine(index, isLevel));
     }
 
     /*

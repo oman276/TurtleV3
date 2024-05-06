@@ -133,7 +133,7 @@ public class NewMovement : MonoBehaviour
         shadowBuffer = shadowFadeFactor * lerpBuffer;
 
         //Maximum Screen Size
-        maxMagnitude = (new Vector2(Screen.width, Screen.height) - Vector2.zero).magnitude;
+        maxMagnitude = (new Vector2(Screen.width - (Screen.width * 0.3f), Screen.height - (Screen.height * 0.3f)) - Vector2.zero).magnitude;
         baseLine = new Color(1, 1, 1, 0.6f);
         inactiveLine = new Color(0.5f, 0.5f, 0.5f, 0.6f);
 
@@ -437,12 +437,14 @@ public class NewMovement : MonoBehaviour
             //Debug.Log(Time.time - GameManager.G.player.lastHeldTime);
 
             //Shadow
+            /*
             if (((shadowFadeFactor - currentFade) > shadowBuffer) && 
                 (Time.time - GameManager.G.player.lastHeldTime) > 0.4f)
             {
                 currentFade = Mathf.Lerp(currentFade, shadowFadeFactor, shadowLerp);
                 shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
             }
+            */
 
             swipeEndPos = Input.mousePosition;
             Vector2 direction = swipeEndPos - swipeStartPos;
@@ -462,6 +464,7 @@ public class NewMovement : MonoBehaviour
                 Time.timeScale = currentTime;
             }
 
+            /*
             //Shadow
             if ((currentFade) > shadowFadeFactor * 0.02f)
             {
@@ -473,6 +476,7 @@ public class NewMovement : MonoBehaviour
                 shadow.color = new Color(shadow.color.r, shadow.color.g, shadow.color.b, currentFade);
 
             }
+            */
         }
 
         if (directionGlobal != Vector2.zero) {
