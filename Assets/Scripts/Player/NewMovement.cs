@@ -133,7 +133,7 @@ public class NewMovement : MonoBehaviour
         shadowBuffer = shadowFadeFactor * lerpBuffer;
 
         //Maximum Screen Size
-        maxMagnitude = (new Vector2(Screen.width, Screen.height) - Vector2.zero).magnitude;
+        maxMagnitude = (new Vector2(Screen.width - (Screen.width * 0.3f), Screen.height - (Screen.height * 0.3f)) - Vector2.zero).magnitude;
         baseLine = new Color(1, 1, 1, 0.6f);
         inactiveLine = new Color(0.5f, 0.5f, 0.5f, 0.6f);
 

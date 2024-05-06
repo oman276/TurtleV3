@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,12 +18,18 @@ public class Enemy : MonoBehaviour
     public int startHealth = 3;
     bool invFrames = false;
     bool alive = true;
+
+    float startTime;
+    SpriteRenderer sr;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        InvokeRepeating("FireProjectile", projectileDelay, projectileDelay);
+        //InvokeRepeating("FireProjectile", projectileDelay, projectileDelay);
         player = GameManager.G.player.playerObject;
         health = startHealth;
+        startTime = Time.time;
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -39,6 +45,29 @@ public class Enemy : MonoBehaviour
         float step = rotateSpeed * Time.deltaTime;
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation,
             Quaternion.Euler(new Vector3(0, 0, angle)), step);
+        /*
+        if ((Vector3.Distance(player.transform.position, this.transform.position) <= 25f &&
+            GameManager.G.player.state != PlayerState.Dead && GameManager.G.state == GameState.Playing) &&
+            (projectileDelay - (Time.time - startTime) <= 0.5f) && Time.timeScale != 0)
+        {
+            Debug.Log(0.3f + Mathf.Abs((projectileDelay - (Time.time - startTime) / 0.5f)) * 0.7f);
+            sr.color = new Color(0.3f + Mathf.Abs((projectileDelay - (Time.time - startTime) / 0.5f)) * 0.7f,
+                0.3f + (Mathf.Abs((projectileDelay - (Time.time - startTime) / 0.5f)))*0.7f, 1f);
+        }
+        else if (Time.timeScale != 1) {
+            sr.color = new Color(1, 1, 1);
+        }
+        */
+
+        if (Time.time - startTime >= projectileDelay - 0.5f && Time.time != 0) {
+            sr.color = new Color(0.4f, 1, 1);
+        }
+
+        if (Time.time - startTime >= projectileDelay && Time.time != 0) {
+            startTime = Time.time;
+            FireProjectile();
+            sr.color = new Color(1, 1, 1);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,14 +92,14 @@ public class Enemy : MonoBehaviour
     IEnumerator Invulnerability() {
         Time.timeScale = 0;
         invFrames = true;
-        this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.3f);
+        sr.color = new Color(1, 0.3f, 0.3f);
         yield return new WaitForSecondsRealtime(0.05f);
-        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        sr.color = new Color(1, 1, 1);
         yield return new WaitForSecondsRealtime(0.05f);
-        this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.3f);
+        sr.color = new Color(1, 0.3f, 0.3f);
         yield return new WaitForSecondsRealtime(0.05f);
         invFrames = false;
-        this.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+        sr.color = new Color(1, 1, 1);
         Time.timeScale = 1;
     }
 
